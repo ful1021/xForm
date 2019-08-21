@@ -1,3 +1,158 @@
-.x-form-design{
+.x-form-designer{
   display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+}
+
+.x-form-designer-fields{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  
+  width: 300px;
+  padding: 0 10px 10px 10px;
+
+  background-color: #fff;
+  user-select: none;
+}
+
+.x-form-designer-main{
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  user-select: none;
+}
+
+.x-form-designer-setting{
+  width: 320px;
+  height: 100%;
+}
+
+.x-form-designer-setting.x-form-is-active{
+  background-color: #fff;
+}
+
+.x-form-field{
+  margin: 10px 0 0 0;
+  height: 32px;
+}
+
+.x-form-field-content{
+  position: relative;
+  width: 135px;
+  line-height: 24px;
+  padding: 3px 24px 3px 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  color: #454545;
+
+  border: 1px solid #bbb;
+  border-radius: 2px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  cursor: move;
+  transition: background-color ease .15s;
+}
+
+.x-form-field-content:hover{
+  background-color: #f0f0f0;
+}
+
+.x-form-field-content > i.iconfont{
+  position: absolute;
+  font-size: 18px;
+  top: 3px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  
+}
+
+.x-form-designer-list{
+  width: 375px;
+  height: 100%;
+  overflow: auto;
+  margin: 0 auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+
+.x-form-field-preview{
+  position: relative;
+  border: 1px dashed transparent;
+}
+
+.x-form-field-preview:hover{
+  border-color: red;
+}
+
+.x-form-field-preview:hover .x-form-designer-delete{
+  display: block;
+}
+
+.x-form-field-preview.x-form-is-selected{
+  border-color: red;
+  border-style: solid;
+}
+
+.x-form-designer-cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  cursor: move;
+}
+
+.x-form-designer-delete{
+  position: absolute;
+  z-index: 9;
+  display: none;
+  top: -1px;
+  right: -1px;
+  border: none;
+  background-color: red;
+  color: #fff;
+  outline: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.x-form-designer-delete > i{
+  font-size: 14px;
+}
+
+
+.x-form-designer-ghost{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  cursor: move !important;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
+}
+
+.x-form-preview-group{
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 10px;
+}
+
+.x-form-is-dragging{
+  opacity: .65;
+}
+
+.x-form-preview-tip p{
+  margin: 0;
 }

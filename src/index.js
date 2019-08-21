@@ -1,11 +1,12 @@
 import './index.css';
 
-import XFormDesign from './components/XFormDesign';
+import XFormDesigner from './components/XFormDesigner';
 import XFormBuilder from './components/XFormBuilder';
 import XFormView from './components/XFormView';
 import XFormItem from './components/XFormItem';
+import store from './util/store';
 
-export const components = {XFormDesign, XFormBuilder, XFormView, XFormItem};
+export const components = {XFormDesigner, XFormBuilder, XFormView, XFormItem};
 
 const install = function(Vue){
   Object.keys(components).forEach(key => {
@@ -17,7 +18,8 @@ const install = function(Vue){
 const XForm = {
   name: 'xForm',
   version: '0.0.1',
-  install
+  install,
+  store
 } 
 
 if (typeof window !== 'undefined' && window.Vue) {

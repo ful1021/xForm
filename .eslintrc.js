@@ -27,6 +27,7 @@ module.exports = {
     // Variables
     "no-unused-vars": ["error", { "argsIgnorePattern": "h|event"}],
     "no-delete-var": ["error"],
+    "no-multi-spaces": "off",
 
     // Vue
     "vue/max-attributes-per-line": "off",

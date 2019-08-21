@@ -5,11 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(baseConfig,{
   mode: 'development',
-  entry: './example/index.js',
+  entry: ['./example/index.js'],
   devServer: {
-    port: 9000,
+    port: 8000,
     publicPath: '/',
-    hot: true
+    hot: true,
+    hotOnly: true
   },
   plugins: [
     new HtmlWebpackPlugin({
