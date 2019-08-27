@@ -1,22 +1,22 @@
 <template>
   <div class="example">
     <div class="header">
-      <div>
-        <label>
+      <div class="header-left">
+        <label class="radio-btn">
           <input type="radio" name="component" value="designer" v-model="component"> 
           <span>designer</span>
         </label>
-        <label>
+        <label class="radio-btn">
           <input type="radio" name="component" value="builder" v-model="component"> 
           <span>builder</span>
         </label>
-        <label>
+        <label class="radio-btn">
           <input type="radio" name="component" value="preview" v-model="component"> 
           <span>preview</span>
         </label>
       </div>
-      <div>
-        <button type="button" v-if="component == 'designer'" @click="save">保存</button>
+      <div class="header-right">
+        <button type="button" v-if="component == 'designer'" @click="previewDesignerValue">查看</button>
       </div>
     </div>
 
@@ -39,15 +39,12 @@ export default {
     }
   },
   methods: {
-    save(){
+    previewDesignerValue(){
       let component = this.$refs.component;
-      let data = [];
 
-      if(typeof component.submit == 'function') {
-        data = component.submit();
+      if(typeof component.preview == 'function') {
+        component.preview();
       }
-
-      console.log(data)
     }
   },
   components: {
@@ -81,6 +78,28 @@ html{
 .header{
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
   height: 40px;
+  background-color: #e5e5e5;
+}
+
+.header-left{
+  padding-left: 10px;
+}
+
+.header-right{
+  padding-right: 10px;
+}
+
+.radio-btn{
+  display: inline-block;
+  width: 100px;
+  cursor: pointer;
+}
+
+.radio-btn > input[type="radio"]{
+  margin: 0;
 }
 </style>

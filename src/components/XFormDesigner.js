@@ -1,3 +1,5 @@
+import XFormTip from '../assets/img/x-form-tip.png'
+
 import NonReactive from '../mixins/non-reactive';
 import FieldStore from '../util/store';
 import XFormField from '../model/XFormField';
@@ -223,7 +225,8 @@ const XFormDesigner = {
         this.isEmpty 
           ? (
             <div class="x-form-preview-tip">
-              <p>选择左侧控件拖动到此处</p>
+              <img src={XFormTip}/>
+              <p>请将左侧控件拖动到此处</p>
             </div>
           )
           : this.value.map(this.renderFieldPreview)

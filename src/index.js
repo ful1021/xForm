@@ -1,4 +1,4 @@
-import './index.css';
+import './assets/css/index.css';
 
 import XFormDesigner from './components/XFormDesigner';
 import XFormBuilder from './components/XFormBuilder';
