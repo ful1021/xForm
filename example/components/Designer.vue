@@ -8,25 +8,46 @@
 </template>
 
 <script>
+import XForm from '../../src/index';
+
 export default {
   name: 'designer',
+  inject: ['storageKey'],
   data(){
+    const fields = XForm.adapter.toDesignFields(this.getLocalData())
+
     return {
       show: false,
-      fields: []
+      fields
     }
   },
   computed: {
     json(){
-      return JSON.stringify(this.fields, null ,' ');
+      const fields = XForm.adapter.toFields(this.fields)
+      return JSON.stringify(fields, null ,' ');
     }
   },
   methods: {
     update(value){
       this.fields = value;
+
+      // 本地存储
+      const key = this.storageKey;
+      const data = XForm.adapter.toFields(value)
+      localStorage.setItem(key, JSON.stringify(data));
     },
     preview(){
       this.show = true;
+    },
+    getLocalData(){
+      const key = this.storageKey;
+      const str = localStorage.getItem(key);
+      
+      try {
+        return JSON.parse(str)
+      } catch (error) {
+        return []
+      }
     }
   }
 }

@@ -10,6 +10,9 @@ Vue.use(XForm);
 Vue.prototype.$xform = {};
 
 const app = new Vue({
+  provide: {
+    storageKey: '__x_form_storage_key__'
+  },
   render(h){
     return h(App);
   }

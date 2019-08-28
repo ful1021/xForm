@@ -20,7 +20,7 @@
 .x-form-designer-main{
   flex: 1;
   height: 100%;
-  padding: 10px 0;
+  padding: 10px;
   overflow: auto;
   user-select: none;
 }
@@ -73,7 +73,6 @@
   width: 24px;
   height: 24px;
   text-align: center;
-  
 }
 
 .x-form-designer-list{

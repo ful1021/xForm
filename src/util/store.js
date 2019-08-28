@@ -8,11 +8,11 @@ const data = {
   }
 }
 
-function register(){
-  if(arguments.length <= 0) return;
-  const args = Array.from(arguments).reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, []);
+function register(...args){
+  if(args.length <= 0) return;
+  const arr = Array.from(arguments).reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, []);
 
-  for(let fc of args){
+  for(let fc of arr){
     const preview = fc.components.preview;
     const setting = fc.components.setting;
   

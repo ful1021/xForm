@@ -2,7 +2,7 @@ import XFormTip from '../assets/img/x-form-tip.png'
 
 import NonReactive from '../mixins/non-reactive';
 import FieldStore from '../util/store';
-import XFormField from '../model/XFormField';
+import XDesignField from '../model/XDesignField';
 
 import * as dom from '../util/dom';
 
@@ -70,7 +70,7 @@ const XFormDesigner = {
     },
     /** 快速插入字段 */
     quickInsert(event, options){
-      const field = new XFormField(options);
+      const field = new XDesignField(options);
       const value = this.value.concat(field);
       
       this.selectedField = field;
@@ -82,7 +82,7 @@ const XFormDesigner = {
       const ghost = this.$static.ghost;
       const index = dom.computeIndex(dragEvent.direction, distance, this.$refs.list, ghost)
       
-      const field = new XFormField(dragEvent.data);
+      const field = new XDesignField(dragEvent.data);
       this.value.splice(index, 0, field);
       this.$emit('input', this.value);
 
@@ -119,7 +119,7 @@ const XFormDesigner = {
       dragEvent.offsetTop = event.clientY - rect.top;
       dragEvent.data = data;
 
-      if(data instanceof XFormField) this.selectedField = data;
+      if(data instanceof XDesignField) this.selectedField = data;
 
       // 监听鼠标移动事件
       document.addEventListener('mousemove', this.dragging);
@@ -136,7 +136,7 @@ const XFormDesigner = {
         ghost.style.width = `${dragEvent.target.offsetWidth}px`;
 
         dragEvent.init = true;
-        if(dragEvent.data instanceof XFormField){
+        if(dragEvent.data instanceof XDesignField){
           dragEvent.data.dragging = true;
         }
       }
@@ -172,7 +172,7 @@ const XFormDesigner = {
       dragEvent.init = false;
       dragEvent.inserted = null;
 
-      if(dragEvent.data instanceof XFormField){
+      if(dragEvent.data instanceof XDesignField){
         dragEvent.data.dragging = false;
       }
 
