@@ -45,5 +45,10 @@
   },
   "dependencies": {
     "core-js": "^3.2.1"
-  }
+  },
+  "browserslist": [
+    "> 1% in CN",
+    "ie >= 11",
+    "chrome >= 49"
+  ]
 }

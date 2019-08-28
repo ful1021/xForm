@@ -184,7 +184,7 @@ const XFormDesigner = {
       return (
         <div class="x-form-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
           <div class="x-form-field-content x-form-template">
-            <i class="iconfont icon-xform-text"></i>
+            <i class={['iconfont',`icon-xform-${field.type}`]}></i>
             <span>{field.name}</span>
           </div>
         </div>

@@ -1,5 +1,7 @@
 # xForm
-基于Vue2.x的自定义表单轮子。
+基于Vue2.x的自定义表单轮子。此项目的灵感来源于以下两个项目：
+- 钉钉审批管理中的表单设计器
+- [formbuilder](https://github.com/dobtco/formbuilder)
 
 ## todo list
 - [ ] [XFormDesigner] 调整样式
