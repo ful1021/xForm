@@ -6,8 +6,7 @@ import Modal from './components/Modal.vue'
 import XForm from '../src/base';
 
 Vue.component(Modal.name, Modal);
-Vue.use(XForm);
-Vue.prototype.$xform = {};
+Vue.use(XForm, {o: 'o'});
 
 const app = new Vue({
   provide: {

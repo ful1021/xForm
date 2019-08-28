@@ -1,6 +1,6 @@
 import XFormTip from '../assets/img/x-form-tip.png'
 
-import NonReactive from '../mixins/non-reactive';
+import NonReactive from '../mixin/non-reactive';
 import FieldStore from '../util/store';
 import XDesignField from '../model/XDesignField';
 
@@ -44,7 +44,7 @@ const XFormDesigner = {
     }
   },
   data(){
-    const fields = FieldStore.findFields('all', this.$xform);
+    const fields = FieldStore.findFieldDefs('all', this.$xform);
     
     return {
       fields,
@@ -180,6 +180,7 @@ const XFormDesigner = {
       document.removeEventListener('mousemove', this.dragging);
       document.removeEventListener('mouseup', this.dragend);
     },
+    
     renderField(field){
       return (
         <div class="x-form-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
@@ -191,9 +192,9 @@ const XFormDesigner = {
       )
     },
     renderFieldPreview(field){
-      const formField = FieldStore.findField(field.type);
+      const formField = FieldStore.findFieldDef(field.type);
       if(formField == null){
-        console.warn(`[not implement]: ${formField.name}: ${formField.type}. `)
+        console.warn(`[not implement]: ${field.name}(${field.type}) `)
         return null;
       }
 
@@ -242,11 +243,19 @@ const XFormDesigner = {
     renderSetting(){
       if(null == this.selectedField) return null;
 
-      const formField = FieldStore.findField(this.selectedField.type);
       const field = this.selectedField;
-      return this.$createElement(formField.components.setting, {props: {field}, on: {input: e => {
-        field.name = e
-      }}});
+      const fd = FieldStore.findFieldDef(field.type);
+      const props = {field}
+      const on = {
+        update: event => {
+          const {prop, value} = event;
+          field[prop] = value;
+
+          this.$emit('input', this.value);
+        }
+      }
+
+      return this.$createElement(fd.components.setting, {props, on});
     }
   },
   render(h){
@@ -270,6 +279,8 @@ const XFormDesigner = {
   },
   mounted(){
     this.$static.ghost = this.$el.querySelector('.x-form-designer-ghost');
+
+    console.log(this.$xform)
   },
   components: {
     ...FieldStore.findComponents('preview'),

@@ -1,3 +1,5 @@
+import XFieldDef from '../model/XFieldDef'
+
 const data = {
   fields: {},   // 字段
   components: {
@@ -10,7 +12,9 @@ const data = {
 
 function register(...args){
   if(args.length <= 0) return;
-  const arr = Array.from(arguments).reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, []);
+  const arr = Array.from(arguments)
+    .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
+    .filter(f => f instanceof XFieldDef);
 
   for(let fc of arr){
     const preview = fc.components.preview;
@@ -22,11 +26,11 @@ function register(...args){
   }
 }
 
-function findField(type){
+function findFieldDef(type){
   return data.fields[type]
 }
 
-function findFields(mode){
+function findFieldDefs(mode){
   const types = Object.keys(data.fields);
   return types.map(t => data.fields[t]);
 }
@@ -37,8 +41,8 @@ function findComponents(type){
 
 const Store = {
   register,
-  findField,
-  findFields,
+  findFieldDef,
+  findFieldDefs,
   findComponents
 };
 

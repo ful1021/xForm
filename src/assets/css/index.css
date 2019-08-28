@@ -212,8 +212,65 @@
   width: 100%;
   border: 1px solid #aaa;
   border-radius: 2px;
+  padding: 5px;
+  overflow: hidden;
 }
 
 input.x-form-preview-mock{
   height: 30px;
+}
+
+.x-form-setting{
+  padding: 10px;
+}
+
+.x-form-setting-head{
+  margin: 0;
+  line-height: 24px;
+  font-size: 16px;
+}
+
+.x-form-setting-group{
+  margin-top: 10px;
+}
+
+.x-form-setting-group > header{
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.x-form-setting-control{
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  padding: 5px;
+  line-height: 20px;
+  word-break: break-all;
+}
+
+input.x-form-setting-control{
+  height: 30px;
+}
+
+textarea.x-form-setting-control{
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 240px;
+}
+
+.x-form-setting-checkbox{
+  margin: 0;
+  line-height: 20px;
+}
+
+.x-form-setting-checkbox > span{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.x-form-setting-checkbox > input[type="checkbox"]{
+  margin: 0;
+  vertical-align: middle;
 }
