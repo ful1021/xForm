@@ -1,11 +1,11 @@
 <template>
   <div>
-    <x-form-view/>
+    <x-form-viewer/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'preview'
+  name: 'viewer'
 }
 </script>

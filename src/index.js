@@ -2,27 +2,23 @@ import './assets/css/index.css';
 
 import XFormDesigner from './components/XFormDesigner';
 import XFormBuilder from './components/XFormBuilder';
-import XFormView from './components/XFormView';
+import XFormViewer from './components/XFormViewer';
 import XFormItem from './components/XFormItem';
 
 import store from './util/store';
 import adapter from './util/adapter';
-import config from './config';
 import mixin from './mixin';
 import model from './model';
 
-import {cloneDeep} from 'lodash'
-
-const components = {XFormDesigner, XFormBuilder, XFormView, XFormItem};
+const components = {XFormDesigner, XFormBuilder, XFormViewer, XFormItem};
 const install = function(Vue, options = {}){
-  Vue.prototype.$xform = Object.assign(Vue.prototype.$xform || {}, config, cloneDeep(options));
+  store.setConfig(options);
 
   Object.keys(components).forEach(key => {
     const component = components[key];
     Vue.component(component.name, component);
   })
 }
-
 
 const XForm = {
   name: 'xForm',

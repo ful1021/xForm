@@ -10,3 +10,7 @@ textarea{
   height: 100%;
   padding: 10px;
 }
+
+input, textarea{
+  font-family: Arial, Helvetica, sans-serif;
+}

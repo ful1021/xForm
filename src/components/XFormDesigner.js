@@ -15,6 +15,10 @@ const XFormDesigner = {
       default(){
         return []
       }
+    },
+    mode: {
+      type: String,
+      default: 'all'
     }
   },
   static(){
@@ -44,7 +48,7 @@ const XFormDesigner = {
     }
   },
   data(){
-    const fields = FieldStore.findFieldDefs('all', this.$xform);
+    const fields = FieldStore.findFieldDefs(this.mode, this.$xform);
     
     return {
       fields,
@@ -279,8 +283,6 @@ const XFormDesigner = {
   },
   mounted(){
     this.$static.ghost = this.$el.querySelector('.x-form-designer-ghost');
-
-    console.log(this.$xform)
   },
   components: {
     ...FieldStore.findComponents('preview'),

@@ -6,7 +6,7 @@ import XDesignField from '../model/XDesignField';
  * @param {*} data 
  * @param {*} fn 
  */
-function toFields(data, fn){
+export function toFields(data, fn){
   if(!Array.isArray(data)) return [];
 
   return data.map(f => {
@@ -20,7 +20,7 @@ function toFields(data, fn){
  * @param {*} data 
  * @param {*} fn 
  */
-function toDesignFields(data, fn){
+export function toDesignFields(data, fn){
   if(!Array.isArray(data)) return [];
 
   return data.map(f => {

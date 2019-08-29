@@ -1,5 +1,5 @@
 const XFormView = {
-  name: 'x-form-view',
+  name: 'x-form-viewer',
   render(){
     return <div>x-form-view</div>
   }

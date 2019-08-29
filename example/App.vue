@@ -11,8 +11,8 @@
           <span>builder</span>
         </label>
         <label class="radio-btn">
-          <input type="radio" name="component" value="preview" v-model="component"> 
-          <span>preview</span>
+          <input type="radio" name="component" value="viewer" v-model="component"> 
+          <span>viewer</span>
         </label>
       </div>
       <div class="header-right">
@@ -29,7 +29,7 @@
 <script>
 import Designer from './components/Designer.vue';
 import Builder from './components/Builder.vue';
-import Preview from './components/Preview.vue'
+import Viewer from './components/Viewer.vue'
 
 export default {
   name: 'app',
@@ -50,7 +50,7 @@ export default {
   components: {
     [Designer.name]: Designer,
     [Builder.name]: Builder,
-    [Preview.name]: Preview
+    [Viewer.name]: Viewer
   }
 }
 </script>

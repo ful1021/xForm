@@ -10,4 +10,4 @@
 - [x] [XFormDesigner] 完善Text组件和Textarea组件
 - [ ] [XFormBuilder] 初步实现
 - [ ] [XFormItem] 初步实现
-- [ ] [XFormView] 初步实现
+- [ ] [XFormViewer] 初步实现
