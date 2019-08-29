@@ -12,7 +12,8 @@ Vue.use(XForm, {
 
 const app = new Vue({
   provide: {
-    storageKey: '__x_form_storage_key__'
+    fieldKey: '__x_form_field_key__',
+    modelKey: '__x_form_model_key__'
   },
   render(h){
     return h(App);

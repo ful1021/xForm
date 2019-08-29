@@ -9,13 +9,7 @@ const state = {
       all: []
     }
   },
-  fields: {},   // 字段
-  components: {
-    preview: {},  // 预览组件
-    setting: {},  // 设置组件
-    build: {},    // 表单组件
-    view: {}      // 展示组件
-  }
+  fields: {}   // 字段
 }
 
 /** 设置组件配置 */
@@ -26,18 +20,11 @@ function setConfig(o = {}){
 /** 注册字段 */
 function register(...args){
   if(args.length <= 0) return;
-  const arr = Array.from(arguments)
-    .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
-    .filter(f => f instanceof XFieldDef);
 
-  for(let fc of arr){
-    const preview = fc.components.preview;
-    const setting = fc.components.setting;
-  
-    state.components.preview[preview.name] = preview;
-    state.components.setting[setting.name] = setting;
-    state.fields[fc.type] = fc;
-  }
+  Array.from(arguments)
+    .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
+    .filter(f => f instanceof XFieldDef)
+    .forEach(def => state.fields[def.type] = def);
 }
 
 /** 查询某字段的字段配置 */
@@ -63,21 +50,11 @@ function findFieldDefs(mode){
   return all.map(t => state.fields[t]);
 }
 
-/**
- * 查询注册的组件
- * @param {string} type - 组件的类型
- * @returns {object} 组件对象 
- */
-function findComponents(type){
-  return state.components[type] || {};
-}
-
 const Store = {
   register,
   setConfig,
   findFieldDef,
-  findFieldDefs,
-  findComponents
+  findFieldDefs
 };
 
 export default Store;

@@ -8,6 +8,6 @@
 - [x] [XFormDesigner] 输出值格式转换为XField
 - [x] [XFormDesigner] 完善组件设置部分
 - [x] [XFormDesigner] 完善Text组件和Textarea组件
-- [ ] [XFormBuilder] 初步实现
+- [x] [XFormBuilder] 初步实现
 - [ ] [XFormItem] 初步实现
 - [ ] [XFormViewer] 初步实现

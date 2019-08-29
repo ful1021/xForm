@@ -16,7 +16,7 @@
         </label>
       </div>
       <div class="header-right">
-        <button type="button" v-if="component == 'designer'" @click="previewDesignerValue">查看</button>
+        <button type="button" @click="previewDesignerValue">预览</button>
       </div>
     </div>
 
@@ -35,7 +35,7 @@ export default {
   name: 'app',
   data(){
     return {
-      component: 'designer'
+      component: 'builder'
     }
   },
   methods: {

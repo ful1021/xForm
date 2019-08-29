@@ -1,7 +1,7 @@
 export default class XFormFieldDef{
   constructor(options = {}){
     this.type = options.type;
-    this.name = options.name;
+    this.title = options.title;
     this.components = options.components
   }
 }

@@ -177,31 +177,27 @@
   flex-flow: row nowrap;
 }
 
-.x-form-preview-group.x-form-not-null .x-form-preview-label > strong{
+.x-form-preview-group.x-form-not-null .x-form-star{
+  display: inline;
+}
+
+.x-form-preview-group.x-form-not-null .x-form-preview-label{
   font-weight: 700;
 }
 
-.x-form-preview-group.x-form-not-null .x-form-preview-star{
-  display: inline;
+.x-form-star{
+  vertical-align: middle;
+  line-height: 1;
+  display: none;
   font-weight: 700;
   color: red;
   font-size: 18px;
   margin-left: 2px;
 }
 
-.x-form-preview-star{
-  vertical-align: middle;
-  line-height: 1;
-  display: none;
-}
-
 .x-form-preview-label{
   width: 100px;
   line-height: 30px;
-}
-
-.x-form-preview-label > strong{
-  font-weight: 400;
 }
 
 .x-form-preview-content{
@@ -273,4 +269,43 @@ textarea.x-form-setting-control{
 .x-form-setting-checkbox > input[type="checkbox"]{
   margin: 0;
   vertical-align: middle;
+}
+
+.x-form-builder{
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 14px;
+}
+
+.x-form-builder-main{
+  width: 640px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.x-form-item{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.x-form-item.x-form-not-null .x-form-star{
+  display: inline;
+}
+
+.x-form-item.x-form-not-null .x-form-item-label{
+  font-weight: 700;
+}
+
+.x-form-item-label{
+  width: 100px;
+}
+
+.x-form-item-content{
+  flex: 1;
+}
+
+.x-form-item-error-message{
+  color: red;
+  font-size: 12px;
+  line-height: 20px;
 }

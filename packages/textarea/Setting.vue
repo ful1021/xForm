@@ -3,7 +3,7 @@
     <h3 class="x-form-setting-head">多行文本</h3>
     <section class="x-form-setting-group">
       <header>标题：</header>
-      <input type="text" class="x-form-setting-control" data-prop="name" :value="field.name" @input="updateProp">
+      <input type="text" class="x-form-setting-control" data-prop="title" :value="field.title" @input="updateProp">
     </section>
     <section class="x-form-setting-group">
       <header>提示：</header>

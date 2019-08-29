@@ -190,7 +190,7 @@ const XFormDesigner = {
         <div class="x-form-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
           <div class="x-form-field-content x-form-template">
             <i class={['iconfont',`icon-xform-${field.type}`]}></i>
-            <span>{field.name}</span>
+            <span>{field.title}</span>
           </div>
         </div>
       )
@@ -198,7 +198,7 @@ const XFormDesigner = {
     renderFieldPreview(field){
       const formField = FieldStore.findFieldDef(field.type);
       if(formField == null){
-        console.warn(`[not implement]: ${field.name}(${field.type}) `)
+        console.warn(`[not implement]: ${field.title}(${field.type}) `)
         return null;
       }
 
@@ -283,10 +283,6 @@ const XFormDesigner = {
   },
   mounted(){
     this.$static.ghost = this.$el.querySelector('.x-form-designer-ghost');
-  },
-  components: {
-    ...FieldStore.findComponents('preview'),
-    ...FieldStore.findComponents('setting')
   }
 }
 
