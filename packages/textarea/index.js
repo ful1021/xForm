@@ -1,4 +1,4 @@
-import {model} from '../../src/index';
+import {model} from '../../src/core';
 
 import setting from './Setting.vue';
 import preview from './Preview.vue';

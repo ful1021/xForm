@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {mixin} from '../../src/index';
+import {mixin} from '../../src/core';
 
 export default {
   name: 'x-form-textarea',

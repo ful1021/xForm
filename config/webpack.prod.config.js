@@ -12,7 +12,7 @@ const version = process.env.RELEASE_VERSION;
 module.exports = merge(baseConfig, {
   entry: {
     'xform': ['./src/index.js'],
-    'xform.base': ['./src/base.js']
+    'xform.core': ['./src/core.js']
   },
   output: {
     publicPath: '/dist/',
