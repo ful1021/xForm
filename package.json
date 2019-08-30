@@ -1,9 +1,10 @@
 {
   "name": "@dongls/xform",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.0.4",
+  "description": "基于Vue2.x的自定义表单轮子。",
   "main": "dist/xform.js",
-  "module": "src/index.js",
+  "module": "dist/xform.js",
+  "style": "dist/css/xform.css",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js",
     "lint": "eslint --fix --ext .js,.vue .",
@@ -14,7 +15,14 @@
     "url": "https://github.com/dongls/xForm.git"
   },
   "homepage": "https://github.com/dongls/xForm",
-  "author": "dongls",
+  "keywords": [
+    "vue",
+    "form"
+  ],
+  "author": {
+    "name": "dongls",
+    "email": "173110115@qq.com"
+  },
   "license": "MIT",
   "peerDependencies": {
     "vue": "^2.5.17"

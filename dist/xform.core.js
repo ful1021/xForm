@@ -1,5 +1,5 @@
 /*!
- * xForm v0.0.3 (https://github.com/dongls/xForm)
+ * xForm v0.0.4 (https://github.com/dongls/xForm)
  * Copyright 2019 dongls
  * Released under the MIT License
  */
