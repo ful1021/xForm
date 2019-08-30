@@ -35,7 +35,7 @@ export default {
   name: 'app',
   data(){
     return {
-      component: 'viewer'
+      component: 'designer'
     }
   },
   methods: {

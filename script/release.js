@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'production';
+process.env.RELEASE_VERSION = require('../package.json').version;
 
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.prod.config');
