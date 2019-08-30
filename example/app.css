@@ -13,3 +13,8 @@ textarea{
 input, textarea{
   font-family: Arial, Helvetica, sans-serif;
 }
+
+textarea.example-value{
+  height: 480px;
+  resize: none;
+}

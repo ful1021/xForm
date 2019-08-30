@@ -8,6 +8,17 @@ const XFormItem = {
       }
     }
   },
+  methods: {
+    renderErrorMessage(){
+      if(Math.random() > 0) return null;
+
+      return (
+        <div class="x-form-item-error-message">
+          error message. 错误信息。
+        </div>
+      )
+    }
+  },
   render(){
     return (
       <div class={['x-form-item', this.field.notNull ? 'x-form-not-null' : null]}>
@@ -17,9 +28,7 @@ const XFormItem = {
         </label>
         <div class="x-form-item-content">
           {this.$slots.default}
-          <div class="x-form-item-error-message">
-            error message. 错误信息。
-          </div>
+          {this.renderErrorMessage()}
         </div>
       </div>
     )

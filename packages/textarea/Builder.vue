@@ -1,5 +1,5 @@
 <template>
-  <textarea :name="field.name" :value="value" @input="inputForDom"/>
+  <textarea :name="field.name" class="x-form-textarea" :placeholder="placeholder" :value="value" @input="inputForDom"/>
 </template>
 
 <script>

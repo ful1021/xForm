@@ -1,5 +1,5 @@
 <template>
-  <input type="text" :name="field.name" :value="value" @input="inputForDom">
+  <input type="text" :name="field.name" class="x-form-text" :placeholder="placeholder" :value="value" @input="inputForDom">
 </template>
 
 <script>

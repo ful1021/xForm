@@ -275,6 +275,7 @@ textarea.x-form-setting-control{
   display: flex;
   flex-flow: row nowrap;
   font-size: 14px;
+  background-color: #fff;
 }
 
 .x-form-builder-main{
@@ -288,6 +289,10 @@ textarea.x-form-setting-control{
   flex-flow: row nowrap;
 }
 
+.x-form-item + .x-form-item{
+  margin-top: 5px;
+}
+
 .x-form-item.x-form-not-null .x-form-star{
   display: inline;
 }
@@ -298,6 +303,8 @@ textarea.x-form-setting-control{
 
 .x-form-item-label{
   width: 100px;
+  padding-top: 5px;
+  line-height: 20px;
 }
 
 .x-form-item-content{
@@ -308,4 +315,52 @@ textarea.x-form-setting-control{
   color: red;
   font-size: 12px;
   line-height: 20px;
+}
+
+.x-form-text,
+.x-form-textarea{
+  width: 100%;
+  line-height: 20px;
+  padding: 4px 5px;
+  border: 1px solid #aaa;
+}
+
+.x-form-textarea{
+  resize: vertical;
+}
+
+.x-form-viewer{
+  font-size: 14px;
+  
+  background-color: #fff;
+}
+
+.x-form-viewer-main{
+  width: 640px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.x-form-viewer-item{
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 20px;
+}
+
+.x-form-viewer-item + .x-form-viewer-item{
+  margin-top: 5px;
+}
+
+.x-form-viewer-item.x-form-not-null > .x-form-viewer-label{
+  font-weight: 700;
+}
+
+.x-form-viewer-label{
+  width: 100px;
+  padding-top: 5px;
+}
+
+.x-form-viewer-content{
+  padding: 5px 10px;
+  flex: 1;
 }

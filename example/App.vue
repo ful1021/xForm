@@ -16,7 +16,7 @@
         </label>
       </div>
       <div class="header-right">
-        <button type="button" @click="previewDesignerValue">预览</button>
+        <button type="button" @click="submit" v-if="component != 'viewer'">提交</button>
       </div>
     </div>
 
@@ -35,15 +35,15 @@ export default {
   name: 'app',
   data(){
     return {
-      component: 'builder'
+      component: 'viewer'
     }
   },
   methods: {
-    previewDesignerValue(){
+    submit(){
       let component = this.$refs.component;
 
-      if(typeof component.preview == 'function') {
-        component.preview();
+      if(typeof component.submit == 'function') {
+        component.submit();
       }
     }
   },
@@ -73,6 +73,7 @@ html{
 .main{
   flex: 1;
   height: 0;
+  overflow: auto;
 }
 
 .header{

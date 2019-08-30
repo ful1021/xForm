@@ -16,9 +16,12 @@ const XFormBuilder = {
       }
     }
   },
+  data(){
+    return {}
+  },
   methods: {
     submit(){
-
+      return 
     },
     create(field){
       const def = store.findFieldDef(field.type);
@@ -45,12 +48,6 @@ const XFormBuilder = {
       <div class="x-form-builder">
         <div class="x-form-builder-main">
           {this.fields.map(this.renderFormItem)}
-        </div>
-        <div style="flex: 1;">
-          
-          <div>{JSON.stringify(this.fields)}</div>
-          <hr/>
-          <div>{JSON.stringify(this.value)}</div>
         </div>
       </div>
     )

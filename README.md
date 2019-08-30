@@ -4,10 +4,7 @@
 - [formbuilder](https://github.com/dobtco/formbuilder)
 
 ## todo list
-- [ ] [XFormDesigner] 调整样式
-- [x] [XFormDesigner] 输出值格式转换为XField
-- [x] [XFormDesigner] 完善组件设置部分
-- [x] [XFormDesigner] 完善Text组件和Textarea组件
-- [x] [XFormBuilder] 初步实现
-- [ ] [XFormItem] 初步实现
-- [ ] [XFormViewer] 初步实现
+- [ ] 改用`SCSS`编写样式
+- [ ] [XFormItem] 添加对验证的支持
+- [ ] [XFormViewer] 支持通过`slot`实现字段自定义
+- [ ] [XFormBuilder] 支持通过`slot`实现字段自定义

@@ -7,6 +7,11 @@ export default {
       }
     }
   },
+  computed: {
+    placeholder(){
+      return this.field.placeholder;
+    }
+  },
   methods: {
     inputForDom(event){
       this.input(event.target.value)

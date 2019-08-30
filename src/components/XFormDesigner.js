@@ -48,7 +48,7 @@ const XFormDesigner = {
     }
   },
   data(){
-    const fields = FieldStore.findFieldDefs(this.mode, this.$xform);
+    const fields = FieldStore.findFieldDefs(this.mode);
     
     return {
       fields,

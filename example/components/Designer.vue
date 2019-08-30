@@ -1,8 +1,8 @@
 <template>
   <div class="designer">
     <x-form-designer :value="fields" @input="update" ref="designer"/>
-    <modal title="designer value" :show.sync="show">
-      <textarea :value="json" class="designer-value"/>
+    <modal title="field value" :show.sync="show">
+      <textarea :value="json" class="example-value"/>
     </modal>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
       const data = XForm.adapter.toFields(value)
       localStorage.setItem(key, JSON.stringify(data));
     },
-    preview(){
+    submit(){
       this.show = true;
     },
     getLocalFields(){
@@ -50,9 +50,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.designer-value{
-  height: 480px;
-}
-</style>

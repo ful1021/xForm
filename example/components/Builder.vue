@@ -1,8 +1,8 @@
 <template>
-  <div class="buider">
+  <div class="builder">
     <x-form-builder :fields="fields" :value="model" @input="update"/>
-    <modal title="designer value" :show.sync="show">
-      <textarea :value="json" class="designer-value"/>
+    <modal title="form value" :show.sync="show">
+      <textarea :value="json" class="example-value"/>
     </modal>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
       const key = this.modelKey;
       localStorage.setItem(key, JSON.stringify(this.model));
     },
-    preview(){
+    submit(){
       this.show = true;
     },
     getLocalFields(){
@@ -56,6 +56,16 @@ export default {
         return []
       }
     }
+  },
+  activated(){
+    this.fields = XForm.adapter.toFields(this.getLocalFields())
   }
 }
 </script>
+
+
+<style>
+.builder .x-form-builder{
+  padding: 10px 0;
+}
+</style>
