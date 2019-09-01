@@ -6,10 +6,11 @@
   "module": "dist/xform.js",
   "style": "dist/css/xform.css",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.config.js",
+    "build:production": "node script/build.production.js",
+    "build:example": "node script/build.example.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.development.config.js",
     "lint": "eslint --fix --ext .js,.vue .",
-    "release": "node script/release.js",
-    "example": "cross-env NODE_ENV=production webpack --config config/webpack.example.config.js"
+    "release": "script/release.sh"
   },
   "repository": {
     "type": "git",
