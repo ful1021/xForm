@@ -18,10 +18,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          IS_PRODUCTION ? MiniCssExtractPlugin.loader : 'vue-style-loader',
-          'css-loader'
-        ]
+        use(){
+          const loaders = [
+            IS_PRODUCTION ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+            'css-loader'
+          ]
+
+          if(IS_PRODUCTION) loaders.push('postcss-loader');
+          return loaders;
+        }
       },
       { // 处理字体,gif
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,

@@ -1,5 +1,3 @@
-require('./utils');
-
 const webpack = require('webpack')
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config');
@@ -26,7 +24,7 @@ module.exports = merge(baseConfig, {
     new CleanWebpackPlugin(),
     new LodashModuleReplacementPlugin(),
     new webpack.BannerPlugin({
-      banner: `xForm v${process.env.RELEASE_VERSION} (https://github.com/dongls/xForm)\nCopyright 2019 dongls\nReleased under the MIT License`
+      banner: `[name] v${process.env.RELEASE_VERSION} (https://github.com/dongls/xForm)\nCopyright 2019 dongls\nReleased under the MIT License`
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
