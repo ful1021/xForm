@@ -1,0 +1,264 @@
+.x-form-designer{
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+
+  font-size: 14px;
+  color: $--xform-text-color-primary;
+}
+
+.x-form-designer-field-panel{
+  border-right: 1px solid #eee;
+  background-color: #fff;
+  user-select: none;
+  overflow: auto;
+}
+
+.x-form-designer-fields{
+  width: 320px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  
+  padding: 0 10px 10px 10px;
+}
+
+.x-form-designer-main{
+  flex: 1;
+  height: 100%;
+  padding: 10px;
+  overflow: auto;
+  user-select: none;
+}
+
+.x-form-designer-list{
+  min-height: 320px;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 2px;
+  background-color: #fff;
+  border: 1px dashed #ccc;
+
+  .x-form-item{
+    padding: 10px;
+  }
+}
+
+.x-form-designer-setting{
+  min-width: 320px;
+  height: 100%;
+  overflow: auto;
+  border-left: 1px solid transparent;
+}
+
+.x-form-designer-setting.x-form-is-active{
+  background-color: #fff;
+  border-color: #eee;
+}
+
+.x-form-designer-field{
+  margin: 10px 0 0 0;
+  height: 32px;
+}
+
+.x-form-designer-field-content{
+  position: relative;
+  width: 145px;
+  line-height: 24px;
+  padding: 4px 24px 4px 8px;
+
+  font-size: 13px;
+  text-align: left;
+
+  border-radius: 2px;
+  border: 1px solid $--xform-color-primary-lighten;
+  background-color: $--xform-color-primary-lighten;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  cursor: move;
+  transition: border-color ease .3s;
+
+  & > span{
+    font-weight: 600;
+  }
+
+  & > i.iconfont{
+    position: absolute;
+    font-size: 18px;
+    top: 4px;
+    right: 2px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+  }
+
+  &:hover{
+    border-style: dashed;
+    border-color: $--xform-color-primary;
+  }
+}
+
+.x-form-designer-preview{
+  position: relative;
+  border: 1px dashed transparent;
+
+  &:hover{
+    border-color: $--xform-color-primary;
+
+    .x-form-designer-delete{
+      display: block;
+    }
+  }
+
+  &.x-form-is-selected{
+    border-color: $--xform-color-primary;
+    border-style: solid;
+  }
+
+  & + .x-form-designer-preview{
+    margin-top: 2px;
+  }
+}
+
+.x-form-designer-cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  cursor: move;
+}
+
+.x-form-designer-delete{
+  display: none;
+
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  z-index: 9;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  background-color: $--xform-color-primary;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+
+  & > i{
+    font-size: 14px;
+  }
+}
+
+.x-form-designer-ghost{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  cursor: move !important;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(125, 125, 125, 0.125);
+
+  .x-form-item{
+    padding: 10px;
+  }
+}
+
+.x-form-is-dragging{
+  opacity: .65;
+}
+
+.x-form-designer-preview-tip{
+  padding: 100px 0;
+
+  & > img{
+    display: block;
+    width: 320px;
+    margin: 0 auto;
+  }
+
+  & > p{
+    margin: 10px 0 0 0;
+    text-align: center;
+    color: #9a9a9a;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
+.x-form-designer-preview-mock{
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+input.x-form-designer-preview-mock{
+  height: 30px;
+}
+
+.x-form-setting{
+  width: 320px;
+  padding: 10px;
+}
+
+.x-form-setting-head{
+  margin: 0;
+  line-height: 24px;
+  font-size: 16px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #aaa;
+}
+
+.x-form-setting-group{
+  margin-top: 10px;
+}
+
+.x-form-setting-group > header{
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.x-form-setting-control{
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  padding: 5px;
+  line-height: 20px;
+  word-break: break-all;
+}
+
+input.x-form-setting-control{
+  height: 30px;
+}
+
+textarea.x-form-setting-control{
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 240px;
+}
+
+.x-form-setting-checkbox{
+  margin: 0;
+  line-height: 20px;
+}
+
+.x-form-setting-checkbox > span{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.x-form-setting-checkbox > input[type="checkbox"]{
+  margin: 0;
+  vertical-align: middle;
+}

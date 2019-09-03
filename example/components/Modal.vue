@@ -45,7 +45,7 @@ export default {
 }
 
 .modal{
-  width: 640px;
+  width: 720px;
   margin: 50px auto;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,.3);

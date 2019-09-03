@@ -1,0 +1,66 @@
+.x-form-builder{
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: #fff;
+  
+  font-size: 14px;
+  color: $--xform-text-color-primary;
+}
+
+.x-form-builder-main{
+  width: 640px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.x-form-star{
+  vertical-align: middle;
+  line-height: 1;
+  font-weight: 700;
+  color: $--xform-color-danger;
+  font-size: 18px;
+  margin-left: 2px;
+}
+
+.x-form-item{
+  display: flex;
+  flex-flow: row nowrap;
+
+  & + .x-form-item{
+    margin-top: 5px;
+  }
+
+  &.x-form-is-required .x-form-item-label{
+    font-weight: 700;
+  }
+}
+
+.x-form-item-label{
+  width: 100px;
+  padding-top: 5px;
+  line-height: 20px;
+}
+
+.x-form-item-content{
+  flex: 1;
+}
+
+.x-form-item-error-message{
+  color: $--xform-color-danger;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.x-form-text,
+.x-form-textarea{
+  width: 100%;
+  line-height: 20px;
+  padding: 4px 5px;
+  border: 1px solid #aaa;
+}
+
+.x-form-textarea{
+  resize: vertical;
+}
+

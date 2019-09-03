@@ -1,11 +1,11 @@
 <template>
-  <div :class="['x-form-preview-group', field.required ? 'x-form-is-required' : null]">
-    <label class="x-form-preview-label">
+  <div :class="['x-form-item', field.required ? 'x-form-is-required' : null]">
+    <label class="x-form-item-label">
       <span>{{ field.title }}</span>
-      <sup class="x-form-star">*</sup>
+      <sup class="x-form-star" v-if="field.required">*</sup>
     </label>
-    <div class="x-form-preview-content">
-      <textarea rows="3" class="x-form-preview-mock" :placeholder="field.placeholder"/>   
+    <div class="x-form-item-content">
+      <textarea rows="3" class="x-form-designer-preview-mock" :placeholder="field.placeholder"/>   
     </div>
   </div>
 </template>

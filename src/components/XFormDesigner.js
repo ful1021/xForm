@@ -187,8 +187,8 @@ const XFormDesigner = {
     
     renderField(field){
       return (
-        <div class="x-form-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
-          <div class="x-form-field-content x-form-template">
+        <div class="x-form-designer-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
+          <div class="x-form-designer-field-content x-form-template">
             <i class={['iconfont',`icon-xform-${field.type}`]}></i>
             <span>{field.title}</span>
           </div>
@@ -208,7 +208,7 @@ const XFormDesigner = {
       })
 
       const className = {
-        'x-form-field-preview': true,
+        'x-form-designer-preview': true,
         'x-form-draggable': true,
         'x-form-is-selected': this.selectedField == field,
         'x-form-is-dragging': field.dragging
@@ -229,7 +229,7 @@ const XFormDesigner = {
       const content = (
         this.isEmpty 
           ? (
-            <div class="x-form-preview-tip">
+            <div class="x-form-designer-preview-tip">
               <img src={XFormTip}/>
               <p>请将左侧控件拖动到此处</p>
             </div>
@@ -265,8 +265,10 @@ const XFormDesigner = {
   render(h){
     return (
       <div class="x-form-designer">
-        <div class="x-form-designer-fields">
-          {this.fields.map(this.renderField)}
+        <div class="x-form-designer-field-panel">
+          <div class="x-form-designer-fields">
+            {this.fields.map(this.renderField)}
+          </div>     
         </div>
         <div class="x-form-designer-main">
           {this.renderPreview()}

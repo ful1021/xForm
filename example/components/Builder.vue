@@ -1,8 +1,8 @@
 <template>
   <div class="builder">
     <x-form-builder :fields="fields" :value="model" @input="update" ref="builder"/>
-    <modal title="form value" :show.sync="show">
-      <textarea :value="json" class="example-value"/>
+    <modal title="form json value" :show.sync="show">
+      <textarea :value="json" class="example-value" rows="45" readonly/>
     </modal>
   </div>
 </template>

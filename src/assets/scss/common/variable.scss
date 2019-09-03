@@ -1,0 +1,6 @@
+$--xform-color-primary: #409EFF !default;
+$--xform-color-danger: #F56C6C !default;
+
+$--xform-color-primary-lighten: mix($--xform-color-primary, #fff, 12%);
+
+$--xform-text-color-primary: #303133 !default;

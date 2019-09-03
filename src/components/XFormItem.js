@@ -93,7 +93,7 @@ const XFormItem = {
       <div class={['x-form-item', this.field.required ? 'x-form-is-required' : null]}>
         <label class="x-form-item-label">
           <span>{this.field.title}</span>
-          <sup class="x-form-star">*</sup>
+          {this.field.required ? <sup class="x-form-star">*</sup> : null}
         </label>
         <div class="x-form-item-content">
           {this.$slots.default}

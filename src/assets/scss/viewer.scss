@@ -1,0 +1,36 @@
+.x-form-viewer{
+  font-size: 14px;
+  color: $--xform-text-color-primary;
+  
+  background-color: #fff;
+}
+
+.x-form-viewer-main{
+  width: 640px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.x-form-viewer-item{
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 20px;
+}
+
+.x-form-viewer-item + .x-form-viewer-item{
+  margin-top: 5px;
+}
+
+.x-form-viewer-item.x-form-is-required > .x-form-viewer-label{
+  font-weight: 700;
+}
+
+.x-form-viewer-label{
+  width: 100px;
+  padding-top: 5px;
+}
+
+.x-form-viewer-content{
+  padding: 5px 10px;
+  flex: 1;
+}

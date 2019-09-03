@@ -16,7 +16,7 @@
         </label>
       </div>
       <div class="header-right">
-        <button type="button" @click="submit" v-if="component != 'viewer'">提交</button>
+        <button type="button" @click="submit" v-if="component != 'viewer'">查看JSON</button>
       </div>
     </div>
 
@@ -55,13 +55,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 *{
   box-sizing: border-box;
-}
-
-html{
-  background-color: #f2f2f2;
 }
 
 .example{
@@ -82,8 +78,12 @@ html{
   justify-content: space-between;
   align-items: center;
 
+  position: relative;
+  z-index: 99;
+
   height: 40px;
   background-color: #e5e5e5;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .125);
 }
 
 .header-left{
@@ -102,5 +102,9 @@ html{
 
 .radio-btn > input[type="radio"]{
   margin: 0;
+}
+
+.radio-btn > input[type="radio"]:checked ~ span{
+  color: $--xform-color-primary;
 }
 </style>

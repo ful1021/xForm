@@ -1,7 +1,7 @@
 const IS_PRODUCTION = process.env.NODE_ENV == 'production';
 
+const util = require('./util');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
@@ -18,15 +18,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use(){
-          const loaders = [
-            IS_PRODUCTION ? MiniCssExtractPlugin.loader : 'vue-style-loader',
-            'css-loader'
-          ]
-
-          if(IS_PRODUCTION) loaders.push('postcss-loader');
-          return loaders;
-        }
+        use: util.genCssLoader(IS_PRODUCTION)
+      },
+      {
+        test: /\.scss$/,
+        use: util.genScssLoader(IS_PRODUCTION)
       },
       { // 处理字体,gif
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
