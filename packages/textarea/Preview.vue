@@ -1,5 +1,5 @@
 <template>
-  <div :class="['x-form-preview-group', field.notNull ? 'x-form-not-null' : null]">
+  <div :class="['x-form-preview-group', field.required ? 'x-form-is-required' : null]">
     <label class="x-form-preview-label">
       <span>{{ field.title }}</span>
       <sup class="x-form-star">*</sup>

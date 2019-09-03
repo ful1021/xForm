@@ -5,6 +5,6 @@
 
 ## todo list
 - [ ] 改用`SCSS`编写样式
-- [ ] [XFormItem] 添加对验证的支持
+- [x] [XFormItem] 添加对验证的支持
 - [ ] [XFormViewer] 支持通过`slot`实现字段自定义
 - [ ] [XFormBuilder] 支持通过`slot`实现字段自定义

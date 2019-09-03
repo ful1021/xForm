@@ -9,26 +9,28 @@ const state = {
       all: []
     }
   },
-  fields: {}   // 字段
+  fields: {}     // 字段
 }
 
 /** 设置组件配置 */
-function setConfig(o = {}){
+export function setConfig(o = {}){
   state.config = Object.assign(state.config, cloneDeep(config), cloneDeep(o))
 }
 
 /** 注册字段 */
-function register(...args){
+export function register(...args){
   if(args.length <= 0) return;
 
   Array.from(arguments)
     .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
     .filter(f => f instanceof XFieldDef)
-    .forEach(def => state.fields[def.type] = def);
+    .forEach(def => {
+      state.fields[def.type] = def;
+    });
 }
 
 /** 查询某字段的字段配置 */
-function findFieldDef(type){
+export function findFieldDef(type){
   return state.fields[type]
 }
 
@@ -38,8 +40,14 @@ function findModeTypes(mode){
   return Array.isArray(types) ? types : [];
 }
 
+/** 获取某字段的验证器 */
+export function findFieldValidator(field){
+  const def = state.fields[field.type];
+  return def.validator;
+}
+
 /** 查询某mode下所有字段的配置 */
-function findFieldDefs(mode){
+export function findFieldDefs(mode){
   let types = findModeTypes(mode);
   let all = Object.keys(state.fields);
 
@@ -54,7 +62,8 @@ const Store = {
   register,
   setConfig,
   findFieldDef,
-  findFieldDefs
+  findFieldDefs,
+  findFieldValidator
 };
 
 export default Store;

@@ -26,7 +26,7 @@ const XFormView = {
     renderItem(field){
       const value = this.formatter(field, this.value);
       return (
-        <div class={['x-form-viewer-item', field.notNull ? 'x-form-not-null' : null]}>
+        <div class={['x-form-viewer-item', field.required ? 'x-form-not-null' : null]}>
           <label class="x-form-viewer-label">{field.title}</label>
           <div class="x-form-viewer-content">{value}</div>
         </div>

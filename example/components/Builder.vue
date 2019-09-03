@@ -1,6 +1,6 @@
 <template>
   <div class="builder">
-    <x-form-builder :fields="fields" :value="model" @input="update"/>
+    <x-form-builder :fields="fields" :value="model" @input="update" ref="builder"/>
     <modal title="form value" :show.sync="show">
       <textarea :value="json" class="example-value"/>
     </modal>
@@ -34,7 +34,11 @@ export default {
       localStorage.setItem(key, JSON.stringify(this.model));
     },
     submit(){
-      this.show = true;
+      this.$refs.builder.validate().then(result => {
+        if(result.status) this.show = true;
+      }).catch(err => {
+        console.log(err)
+      })
     },
     getLocalFields(){
       const key = this.fieldKey;

@@ -12,7 +12,7 @@
     <section class="x-form-setting-group">
       <header>验证：</header>
       <label class="x-form-setting-checkbox">
-        <input type="checkbox" data-prop="notNull" :checked="field.notNull" @input="updateProp">
+        <input type="checkbox" data-prop="required" :checked="field.required" @input="updateProp">
         <span>必填</span>
       </label>
     </section>

@@ -1,27 +1,96 @@
+import store from '../util/store';
+import NonReactive from '../mixin/non-reactive'
+
 const XFormItem = {
   name: 'x-form-item',
+  mixins: [NonReactive],
   props: {
     field: {
       type: Object,
       default(){
         return {}
       }
+    },
+    validation: {
+      type: [Boolean, Function],
+      default: true
+    }
+  },
+  static(){
+    return {
+      field: null,
+      value: null
+    }
+  },
+  data(){
+    return {
+      message: null
+    };
+  },
+  computed: {
+    isNeedValidation(){
+      const validation = this.validation;
+      return (typeof validation == 'boolean' && validation) || typeof validation == 'function';
     }
   },
   methods: {
     renderErrorMessage(){
-      if(Math.random() > 0) return null;
+      if(this.message == null) return null;
 
       return (
-        <div class="x-form-item-error-message">
-          error message. 错误信息。
-        </div>
+        <p class="x-form-item-error-message">{this.message}</p>
       )
+    },
+    validate(event){
+      if(!this.isNeedValidation){
+        return event.stopPropagation();
+      }
+
+      const field = event && event.detail && event.detail.field || this.$static.field || this.field;
+      if(null == field) return Promise.resolve();
+
+      const validator = store.findFieldValidator(field);
+      if(null == validator) return Promise.resolve();
+
+      const value = typeof this.$static.value == 'function' ? this.$static.value() : this.$static.value;
+      return validator(field, value)
+        .then(() => {
+          this.message = null;
+          return true;
+        })
+        .catch(error => {
+          this.message = this.parseError(error);
+          return this.message
+        })
+    },
+    addField(event){
+      if(!this.isNeedValidation){
+        return event.stopPropagation();
+      }
+
+      event.detail.validate = this.validate;
+
+      this.$static.value = event.detail.value;
+      this.$static.field = event.detail.field;
+    },
+    removeField(event){
+      if(!this.isNeedValidation){
+        return event.stopPropagation();
+      }
+
+      this.$static.value = null;
+      this.$static.field = null;
+    },
+    parseError(error){
+      if(null == error) return null;
+      if(error instanceof Error) return error.message;
+
+      return error;
     }
   },
   render(){
     return (
-      <div class={['x-form-item', this.field.notNull ? 'x-form-not-null' : null]}>
+      <div class={['x-form-item', this.field.required ? 'x-form-is-required' : null]}>
         <label class="x-form-item-label">
           <span>{this.field.title}</span>
           <sup class="x-form-star">*</sup>
@@ -32,6 +101,17 @@ const XFormItem = {
         </div>
       </div>
     )
+  },
+  mounted(){
+    this.$el.addEventListener('xform.builder.validate', this.validate);
+    this.$el.addEventListener('xform.builder.field.add', this.addField);
+    this.$el.addEventListener('xform.builder.field.remove', this.removeField);
+
+  },
+  beforeDestroy(){
+    this.$el.removeEventListener('xform.builder.validate', this.validate);
+    this.$el.removeEventListener('xform.builder.field.add', this.addField);
+    this.$el.removeEventListener('xform.builder.field.remove', this.removeField);
   }
 }
 

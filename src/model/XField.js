@@ -5,7 +5,6 @@ export default class XField{
     this.title = options.title;
     this.placeholder = options.placeholder;
 
-    
-    this.notNull = options.notNull === true;
+    this.required = options.required === true;
   }
 }

@@ -1,7 +1,9 @@
 import store from '../util/store';
+import NonReactive from '../mixin/non-reactive';
 
 const XFormBuilder = {
   name: 'x-form-builder',
+  mixins: [NonReactive],
   props: {
     fields: {
       type: Array,
@@ -16,12 +18,24 @@ const XFormBuilder = {
       }
     }
   },
+  static(){
+    return {
+      validators: {}
+    }
+  },
   data(){
     return {}
   },
   methods: {
-    submit(){
-      return 
+    validate(){
+      const validators = this.$static.validators;
+      const promises = Object.keys(validators).map(key => validators[key]());
+
+      return Promise.all(promises)
+        .then(function(messages){
+          return {messages, status: messages.every(m => m === true)}
+        })
+        .catch(err => console.error('xform validate error', err))
     },
     create(field){
       const def = store.findFieldDef(field.type);
@@ -41,6 +55,14 @@ const XFormBuilder = {
           {this.create(field)}
         </x-form-item>
       )
+    },
+    addField(event){
+      let {field, validate} = event.detail;
+      this.$static.validators[field.name] = validate;
+    },
+    removeField(){
+      let {field} = event.detail;
+      delete this.$static.validators[field.name];
     }
   },
   render(){
@@ -51,6 +73,14 @@ const XFormBuilder = {
         </div>
       </div>
     )
+  },
+  mounted(){
+    this.$el.addEventListener('xform.builder.field.add', this.addField);
+    this.$el.addEventListener('xform.builder.field.remove', this.removeField);
+  },
+  beforeDestroy(){
+    this.$el.removeEventListener('xform.builder.field.add', this.addField);
+    this.$el.removeEventListener('xform.builder.field.remove', this.removeField);
   }
 }
 
