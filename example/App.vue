@@ -1,27 +1,18 @@
 <template>
   <div class="example">
     <div class="header">
-      <div class="header-left">
-        <label class="radio-btn">
-          <input type="radio" name="component" value="designer" v-model="component"> 
-          <span>designer</span>
-        </label>
-        <label class="radio-btn">
-          <input type="radio" name="component" value="builder" v-model="component"> 
-          <span>builder</span>
-        </label>
-        <label class="radio-btn">
-          <input type="radio" name="component" value="viewer" v-model="component"> 
-          <span>viewer</span>
-        </label>
-      </div>
+      <nav class="nav">
+        <router-link to="/designer" class="nav-link">designer</router-link>
+        <router-link to="/builder" class="nav-link">builder</router-link>
+        <router-link to="/viewer" class="nav-link">viewer</router-link>
+      </nav>
       <div class="header-right">
         <button type="button" @click="submit" v-if="component != 'viewer'">查看JSON</button>
       </div>
     </div>
 
     <keep-alive>
-      <component :is="component" class="main" ref="component"/>
+      <router-view class="main" ref="component"/>
     </keep-alive>
   </div>
 </template>
@@ -45,6 +36,11 @@ export default {
       if(typeof component.submit == 'function') {
         component.submit();
       }
+    }
+  },
+  watch: {
+    component(value){
+      this.$router.push(`/${value}`)
     }
   },
   components: {
@@ -82,29 +78,37 @@ export default {
   z-index: 99;
 
   height: 40px;
-  background-color: #e5e5e5;
-  box-shadow: 0 0 4px rgba(0, 0, 0, .125);
+  background-color: $--xform-color-primary;
+  box-shadow: 0 1px 8px rgba($--xform-color-primary, .5)
 }
 
-.header-left{
-  padding-left: 10px;
+.nav{
+  padding-left: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.nav-link{
+  display: block;
+  line-height: 20px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+  transition: all ease .3s;
+
+  &:hover,
+  &.router-link-active{
+    background-color: #fff;
+    color: $--xform-color-primary;
+  }
+
+  & + .nav-link{
+    margin-left: 10px;
+  }
 }
 
 .header-right{
   padding-right: 10px;
-}
-
-.radio-btn{
-  display: inline-block;
-  width: 100px;
-  cursor: pointer;
-}
-
-.radio-btn > input[type="radio"]{
-  margin: 0;
-}
-
-.radio-btn > input[type="radio"]:checked ~ span{
-  color: $--xform-color-primary;
 }
 </style>

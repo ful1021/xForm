@@ -10,7 +10,8 @@ module.exports = merge(baseConfig,{
     port: 8000,
     publicPath: '/',
     hot: true,
-    hotOnly: true
+    hotOnly: true,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
