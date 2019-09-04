@@ -10,7 +10,9 @@ import App from './App.vue';
 
 Vue.component(Modal.name, Modal);
 Vue.use(XForm, {
-  
+  label: {
+    position: 'left'
+  }
 });
 
 const app = new Vue({

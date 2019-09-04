@@ -1,6 +1,12 @@
 <template>
   <div class="builder">
-    <x-form-builder :fields="fields" :value="model" @input="update" ref="builder"/>
+    <x-form-builder :fields="fields" :value="model" @input="update" ref="builder">
+      <template slot="top">
+        <x-form-item :field="customField" :validation="validateCustomFiled">
+          <c-text :field="customField" v-model="model.no"/>
+        </x-form-item>
+      </template>
+    </x-form-builder>
     <modal title="form json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>
     </modal>
@@ -15,6 +21,11 @@ export default {
   inject: ['fieldKey', 'modelKey'],
   data(){
     return {
+      customField: {
+        name: 'no',
+        type: 'text',
+        title: '编号'
+      },
       show: false,
       fields: XForm.adapter.toFields(this.getLocalFields()),
       model: this.getLocalModel()
@@ -26,6 +37,17 @@ export default {
     }
   },
   methods: {
+    validateCustomFiled(field, value, changeTip){
+      return new Promise((resolve, reject) => {
+        //return value == null || value.length < 10 ? resolve() : reject('长度过长')
+        changeTip()
+        setTimeout(() => {
+          changeTip(null)
+          value == null || value.length < 10 ? resolve() : reject('长度过长')
+        }, 2500);
+      
+      })
+    },
     update(value){
       this.model = value;
 
@@ -37,7 +59,7 @@ export default {
       this.$refs.builder.validate().then(result => {
         if(result.status) this.show = true;
       }).catch(err => {
-        console.log(err)
+        console.error(err)
       })
     },
     getLocalFields(){
@@ -63,10 +85,31 @@ export default {
   },
   activated(){
     this.fields = XForm.adapter.toFields(this.getLocalFields())
+  },
+  components: {
+    'c-text': {
+      name: 'c-text',
+      mixins: [XForm.mixin.builder],
+      props: {
+        value: {
+          type: String,
+          default: null
+        }
+      },
+      render(){
+        const field = this.field;
+
+        return (
+          <input 
+            type="text" id={field.name} name={field.name} 
+            class="x-form-text x-form-item-control" placeholder={this.placeholder} 
+            value={this.value} onInput={this.inputForDom}/>
+        )
+      }
+    }
   }
 }
 </script>
-
 
 <style>
 .builder .x-form-builder{

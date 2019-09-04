@@ -17,6 +17,27 @@
   line-height: 20px;
 }
 
+.x-form-viewer-item-left .x-form-viewer-label{
+  text-align: left;
+}
+
+.x-form-viewer-item-right .x-form-viewer-label{
+  text-align: right;
+}
+
+.x-form-viewer-item-top{
+  flex-direction: column;
+
+  & .x-form-viewer-label{
+    width: auto !important;
+    padding: 8px 0 5px 0;
+  }
+  & .x-form-viewer-content{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .x-form-viewer-item + .x-form-viewer-item{
   margin-top: 5px;
 }
@@ -26,8 +47,8 @@
 }
 
 .x-form-viewer-label{
-  width: 100px;
-  padding-top: 5px;
+  width: $--xform-viewer-item-label-width;
+  padding: 5px 10px 0 0;  
 }
 
 .x-form-viewer-content{

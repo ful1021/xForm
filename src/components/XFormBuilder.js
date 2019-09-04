@@ -24,10 +24,16 @@ const XFormBuilder = {
     }
   },
   data(){
-    return {}
+    return {
+      pending: false
+    }
   },
   methods: {
     validate(){
+      if(this.pending) return Promise.reject('[xform error]: validate pending...');
+
+      this.pending = true;
+
       const validators = this.$static.validators;
       const promises = Object.keys(validators).map(key => validators[key]());
 
@@ -35,7 +41,12 @@ const XFormBuilder = {
         .then(function(messages){
           return {messages, status: messages.every(m => m === true)}
         })
-        .catch(err => console.error('xform validate error', err))
+        .catch(err => {
+          console.error('[xform error]: ', err)
+        })
+        .finally(() => {
+          this.pending = false
+        })
     },
     create(field){
       const def = store.findFieldDef(field.type);
@@ -69,7 +80,9 @@ const XFormBuilder = {
     return (
       <div class="x-form-builder">
         <div class="x-form-builder-main">
+          {this.$slots.top}
           {this.fields.map(this.renderFormItem)}
+          {this.$slots.bottom}
         </div>
       </div>
     )

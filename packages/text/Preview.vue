@@ -1,13 +1,5 @@
 <template>
-  <div :class="['x-form-item', field.required ? 'x-form-is-required' : null]">
-    <label class="x-form-item-label">
-      <span>{{ field.title }}</span>
-      <sup class="x-form-star" v-if="field.required">*</sup>
-    </label>
-    <div class="x-form-item-content">
-      <input type="text" class="x-form-designer-preview-mock" :placeholder="field.placeholder">
-    </div>
-  </div>
+  <input type="text" class="x-form-designer-preview-mock" :placeholder="field.placeholder">
 </template>
 
 <script>

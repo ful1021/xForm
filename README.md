@@ -8,6 +8,7 @@
 - [x] [XFormItem] 添加对验证的支持
 - [ ] [XFormViewer] 支持通过`slot`实现字段自定义
 - [ ] [XFormBuilder] 支持通过`slot`实现字段自定义
+- [ ] [XFormDesigner] 支持对输出字段的验证
 
 ## License
 [MIT](LICENSE)

@@ -216,7 +216,7 @@ const XFormDesigner = {
 
       return (
         <div class={className}>
-          {preview}
+          <x-form-item field={field} validation={false}>{preview}</x-form-item>
           <button type="button" class="x-form-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-close"></i>
           </button>

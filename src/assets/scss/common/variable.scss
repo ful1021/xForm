@@ -4,3 +4,7 @@ $--xform-color-danger: #F56C6C !default;
 $--xform-color-primary-lighten: mix($--xform-color-primary, #fff, 12%);
 
 $--xform-text-color-primary: #303133 !default;
+$--xform-text-color-secondary: #606266 !default;
+
+$--xform-item-label-width: 120px !default;
+$--xform-viewer-item-label-width: 120px !default;

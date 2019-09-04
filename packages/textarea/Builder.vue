@@ -1,5 +1,5 @@
 <template>
-  <textarea :name="field.name" class="x-form-textarea" :placeholder="placeholder" :value="value" @input="inputForDom"/>
+  <textarea :id="field.name" :name="field.name" class="x-form-textarea x-form-item-control" :placeholder="placeholder" :value="value" @input="inputForDom"/>
 </template>
 
 <script>
@@ -16,3 +16,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.x-form-textarea{
+  width: 100%;
+  min-height: 30px;
+  line-height: 20px;
+  padding: 4px 5px;
+  border: 1px solid #aaa;
+}
+
+.x-form-textarea{
+  resize: vertical;
+}
+</style>

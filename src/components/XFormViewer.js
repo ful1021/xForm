@@ -1,3 +1,5 @@
+import store from '../util/store';
+
 function formatter(field, value){
   return value[field.name];
 }
@@ -20,14 +22,40 @@ const XFormView = {
     formatter: {
       type: Function,
       default: formatter
+    },
+    /** label 宽度 */
+    labelWidth: {
+      type: String,
+      default(){
+        return store.findConfigProp('viewer.label.width', 'label.width');
+      }
+    },
+    /** label位置 */
+    labelPosition: {
+      type: String,
+      default(){
+        const params = ['left', 'right', 'top']
+        const position = store.findConfigProp('viewer.label.position', 'label.position');
+        return params.indexOf(position) >= 0 ? position : params[0];
+      }
     }
   },
   methods: {
     renderItem(field){
       const value = this.formatter(field, this.value);
+      const className = {
+        'x-form-viewer-item': true,
+        [`x-form-viewer-item-${this.labelPosition}`]: true,
+        'x-form-is-required': field.required
+      }
+
+      const labelStyle = {
+        width: this.labelWidth
+      };
+
       return (
-        <div class={['x-form-viewer-item', field.required ? 'x-form-not-null' : null]}>
-          <label class="x-form-viewer-label">{field.title}</label>
+        <div class={className}>
+          <label class="x-form-viewer-label" style={labelStyle}>{field.title}</label>
           <div class="x-form-viewer-content">{value}</div>
         </div>
       )

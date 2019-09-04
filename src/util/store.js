@@ -4,17 +4,38 @@ import XFieldDef from '../model/XFieldDef'
 import config from '../config';
 
 const state = {
-  config: {
-    modes: {
-      all: []
-    }
-  },
+  config: {},    // 配置
   fields: {}     // 字段
 }
 
 /** 设置组件配置 */
 export function setConfig(o = {}){
   state.config = Object.assign(state.config, cloneDeep(config), cloneDeep(o))
+}
+
+function findProp(target, path){
+  if(null == path || '' == path) return null;
+
+  let value = target;
+  let props = path.split('.');
+  for(let i = 0; i < props.length; i++){
+    let prop = props[i];
+    if(null == value[prop]) return null;
+    value = value[prop];
+  }
+
+  return value;
+}
+
+export function findConfigProp(...paths){
+  for(let i = 0; i < paths.length; i++){
+    const path = paths[i];
+    const value = findProp(state.config, path);
+
+    if(null != value) return value;
+  }
+
+  return null;
 }
 
 /** 注册字段 */
@@ -41,8 +62,8 @@ function findModeTypes(mode){
 }
 
 /** 获取某字段的验证器 */
-export function findFieldValidator(field){
-  const def = state.fields[field.type];
+export function findFieldValidator(type, field){
+  const def = state.fields[type];
   return def.validator;
 }
 
@@ -61,6 +82,7 @@ export function findFieldDefs(mode){
 const Store = {
   register,
   setConfig,
+  findConfigProp,
   findFieldDef,
   findFieldDefs,
   findFieldValidator

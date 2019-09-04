@@ -121,6 +121,10 @@
   & + .x-form-designer-preview{
     margin-top: 2px;
   }
+
+  & .x-form-item-top .x-form-item-label{
+    padding-top: 0;
+  }
 }
 
 .x-form-designer-cover{

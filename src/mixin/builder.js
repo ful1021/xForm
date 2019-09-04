@@ -6,8 +6,16 @@ export default {
         return {}
       }
     },
-    placeholder(){
-      return this.field.placeholder || '';
+    placeholder: {
+      type: String,
+      default(){
+        const field = this.field;
+        if(null == field) return '';
+
+        const prefix = field.required ? '[必填] ' : '';
+        const placeholder = field.placeholder || '';
+        return `${prefix}${placeholder}` || null;
+      }
     }
   },
   methods: {
