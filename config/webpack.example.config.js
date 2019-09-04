@@ -5,6 +5,8 @@ const baseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = merge(baseConfig, {
@@ -12,22 +14,20 @@ module.exports = merge(baseConfig, {
     'example': ['./example/index.js']
   },
   output: {
-    path: path.resolve(__dirname, '../example/dist'),
-    filename: '[name].js'
+    path: path.resolve(__dirname, '../docs'),
+    filename: '[name].[hash:8].js'
   },
   plugins: [
     new CleanWebpackPlugin(),
     new LodashModuleReplacementPlugin(),
+    new OptimizeCSSPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css'
+      filename: '[name].[hash:8].css',
+      chunkFilename: '[name].[hash:8].css'
     }),
-    new OptimizeCSSPlugin({
-      cssProcessorPluginOptions: {
-        preset: ['default', { 
-          discardComments: { removeAll: true } 
-        }]
-      }
+    new HtmlWebpackPlugin({
+      template: './example/index.html',
+      filename: 'index.html',
     })
   ]
 })

@@ -23,19 +23,13 @@ module.exports = merge(baseConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new LodashModuleReplacementPlugin(),
-    new webpack.BannerPlugin({
-      banner: `[name] v${process.env.RELEASE_VERSION} (https://github.com/dongls/xForm)\nCopyright 2019 dongls\nReleased under the MIT License`
-    }),
+    new OptimizeCSSPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/[name].css'
     }),
-    new OptimizeCSSPlugin({
-      cssProcessorPluginOptions: {
-        preset: ['default', { 
-          discardComments: { removeAll: true } 
-        }]
-      }
+    new webpack.BannerPlugin({
+      banner: `[name] v${process.env.RELEASE_VERSION} (https://github.com/dongls/xForm)\nCopyright 2019 dongls\nReleased under the MIT License`
     })
   ]
 })

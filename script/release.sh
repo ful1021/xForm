@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# git checkout master
+git checkout master
 
 # read current version number
 CURRENT_VERSION=$(cat ./package.json | grep 'version' | sed 's/.*"\(.*\).*",/\1/g')

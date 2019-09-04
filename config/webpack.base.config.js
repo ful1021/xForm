@@ -24,11 +24,11 @@ module.exports = {
         test: /\.scss$/,
         use: util.genScssLoader(IS_PRODUCTION)
       },
-      { // 处理字体,gif
+      { // 处理字体
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader',
         options: IS_PRODUCTION ? {
-          name:'font/[name].[hash:8].[ext]'
+          name:'font/[name].[ext]'
         } : undefined
       },
       {
@@ -37,7 +37,7 @@ module.exports = {
         options: IS_PRODUCTION ? {
           limit: 4096,
           path:'',
-          name: 'img/[name].[hash:8].[ext]',
+          name: 'img/[name].[ext]',
         } : undefined
       }
     ]

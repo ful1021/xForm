@@ -7,14 +7,14 @@ module.exports = {
     return [
       isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
       'css-loader',
-      isProduction ? null : 'postcss-loader'
+      isProduction ? 'postcss-loader' : null,
     ].filter(loader => null != loader);
   },
   genScssLoader(isProduction){
     return [
       isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
       'css-loader',
-      isProduction ? null : 'postcss-loader',
+      isProduction ? 'postcss-loader' : null,
       'sass-loader',
       {
         loader: 'sass-resources-loader',

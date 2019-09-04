@@ -59,8 +59,9 @@ const XFormItem = {
           return true;
         })
         .catch(error => {
-          this.message = this.parseError(error);
-          return this.message
+          const message = this.parseError(error);
+          this.message = message;
+          return message;
         })
     },
     addField(event){
