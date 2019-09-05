@@ -62,20 +62,20 @@
   flex: 1;
 }
 
-.x-form-is-error .x-form-item-control{
-  border-color: $--xform-color-danger;
+.x-form-is-error {
+  .x-form-item-control{
+    border-color: $--xform-color-danger;
+  }
+ 
+  .x-form-item-message{
+    color: $--xform-color-danger;
+  }
 }
 
-.x-form-item-error-message{
-  color: $--xform-color-danger;
-  font-size: 12px;
-  line-height: 20px;
-  margin: 0;
-}
-
-.x-form-item-tip{
+.x-form-item-message{
   color: $--xform-text-color-secondary;
   font-size: 12px;
   line-height: 20px;
   margin: 0;
 }
+

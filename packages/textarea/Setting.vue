@@ -10,6 +10,10 @@
       <textarea class="x-form-setting-control" data-prop="placeholder" :value="field.placeholder" @input="updateProp" rows="3" placeholder="请输入提示信息..."/>
     </section>
     <section class="x-form-setting-group">
+      <header>默认值：</header>
+      <input type="text" class="x-form-setting-control" data-prop="defaultValue" :value="field.defaultValue" @input="updateProp">
+    </section>
+    <section class="x-form-setting-group">
       <header>验证：</header>
       <label class="x-form-setting-checkbox">
         <input type="checkbox" data-prop="required" :checked="field.required" @input="updateProp">

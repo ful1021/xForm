@@ -63,7 +63,7 @@ function findModeTypes(mode){
 
 /** 获取某字段的验证器 */
 export function findFieldValidator(type, field){
-  const def = state.fields[type];
+  const def = state.fields[type] || {};
   return def.validator;
 }
 

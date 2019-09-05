@@ -6,8 +6,10 @@ export default class XDesignField{
     this.name = options.name;
     this.title = options.title;
     this.placeholder = options.placeholder;
-    this.required = options.required === true;
+    this.defaultValue = options.defaultValue;
     
+    this.required = options.required === true;
+
     this.dragging = false;
   }
 

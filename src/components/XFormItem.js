@@ -1,3 +1,5 @@
+import * as lang from '../util/lang';
+
 import store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
 
@@ -48,7 +50,7 @@ const XFormItem = {
   data(){
     return {
       message: null,
-      tip: null
+      status: null
     };
   },
   computed: {
@@ -68,24 +70,14 @@ const XFormItem = {
     },
     getValidator(type){
       if(typeof this.validation == 'function') return this.validation;
-
       return store.findFieldValidator(type);
     },
     renderErrorMessage(){
-      let message = null;
-
-      if(null != this.tip) message = (
-        <p class="x-form-item-tip">{this.tip}</p>
-      )
-
-      if(null != this.message) message = (
-        <p class="x-form-item-error-message">{this.message}</p>
-      );
-
-      return message;
+      if(null == this.message) return null;
+      return <p class='x-form-item-message'>{this.message}</p>;
     },
-    changeTip(tip = '正在验证...'){
-      this.tip = tip;
+    changeMessage(message){
+      this.message = lang.isEmptyStr(message) ? null : message;
     },
     validate(event){
       if(!this.isNeedValidation){
@@ -95,18 +87,23 @@ const XFormItem = {
       const field = this.getField(event);
       if(null == field) return Promise.resolve();
 
-      const validator = this.getValidator(field);
+      const validator = this.getValidator(field.type);
       if(null == validator) return Promise.resolve();
 
       const value = typeof this.$static.value == 'function' ? this.$static.value() : this.$static.value;
-      return validator(field, value, this.changeTip)
+      return validator(field, value, this.changeMessage)
         .then(() => {
           this.message = null;
+          this.status = null;
+
           return true;
         })
         .catch(error => {
           const message = this.parseError(error);
+
           this.message = message;
+          this.status = 'error';
+
           return message;
         })
     },
@@ -142,7 +139,7 @@ const XFormItem = {
       'x-form-item': true,
       [`x-form-item-${this.labelPosition}`]: true,
       'x-form-is-required': field.required,
-      'x-form-is-error': this.message != null
+      [`x-form-is-${this.status}`]: null != this.status
     }
 
     const labelStyle = {

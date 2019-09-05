@@ -3,12 +3,24 @@
 - 钉钉审批管理中的表单设计器
 - [formbuilder](https://github.com/dobtco/formbuilder)
 
+# 特性
+- 灵活度高，除核心组件外皆可自行替换
+- 自带可视化设计器
+- 提供多样化的配置
+
+# 核心组件
+- XFormDesigner   可视化的表单设计组件
+- XFormBuilder    基于JSON的表单构建组件
+- XFormViewer     基于JSON的表单展示组件
+- XFormItem       提供验证和布局机制的表单项组件
+
 ## todo list
-- [x] 改用`SCSS`编写样式
-- [x] [XFormItem] 添加对验证的支持
-- [ ] [XFormViewer] 支持通过`slot`实现字段自定义
-- [ ] [XFormBuilder] 支持通过`slot`实现字段自定义
+- [ ] 合并`XField`和`XDesignField`
+- [ ] [XFormDesigner] 支持`mode`字段
 - [ ] [XFormDesigner] 支持对输出字段的验证
+- [ ] [XFormBuilder] 支持`mode`字段
+- [ ] [XFormBuilder] 支持通过`slot`实现字段自定义
+- [ ] [XFormViewer] 支持通过`slot`实现字段自定义
 
 ## License
 [MIT](LICENSE)

@@ -37,26 +37,23 @@ export default {
     }
   },
   methods: {
-    validateCustomFiled(field, value, changeTip){
+    validateCustomFiled(field, value, changeMessage){
       return new Promise((resolve, reject) => {
-        //return value == null || value.length < 10 ? resolve() : reject('长度过长')
-        changeTip()
+        changeMessage('正在验证...')
         setTimeout(() => {
-          changeTip(null)
+          changeMessage()
           value == null || value.length < 10 ? resolve() : reject('长度过长')
         }, 2500);
-      
       })
     },
     update(value){
       this.model = value;
 
-      // 本地存储
-      const key = this.modelKey;
-      localStorage.setItem(key, JSON.stringify(this.model));
+      
     },
     submit(){
       this.$refs.builder.validate().then(result => {
+        console.log(result)
         if(result.status) this.show = true;
       }).catch(err => {
         console.error(err)
@@ -85,6 +82,16 @@ export default {
   },
   activated(){
     this.fields = XForm.adapter.toFields(this.getLocalFields())
+  },
+  watch: {
+    model: {
+      deep: true,
+      handler(){
+        // 本地存储
+        const key = this.modelKey;
+        localStorage.setItem(key, JSON.stringify(this.model));
+      }
+    }
   },
   components: {
     'c-text': {

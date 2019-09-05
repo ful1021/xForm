@@ -12,6 +12,7 @@ export default new model.XFieldDef({
     return new Promise((resolve, reject) => {
       if(value != null && value.toString().length > this.maxLength) return reject(`${field.title}长度不能超过${this.maxLength}个字符`);
       if(field.required && (value == null || value.toString().length == 0)) return reject(`请输入${field.title}`);
+      
       return resolve();
     })
   },

@@ -1,6 +1,8 @@
 import store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
 
+import {isEmptyStr} from '../util/lang';
+
 const XFormBuilder = {
   name: 'x-form-builder',
   mixins: [NonReactive],
@@ -33,7 +35,6 @@ const XFormBuilder = {
       if(this.pending) return Promise.reject('[xform error]: validate pending...');
 
       this.pending = true;
-
       const validators = this.$static.validators;
       const promises = Object.keys(validators).map(key => validators[key]());
 
@@ -74,7 +75,24 @@ const XFormBuilder = {
     removeField(){
       let {field} = event.detail;
       delete this.$static.validators[field.name];
+    },
+    fillDefaultValue(value, fields){
+      if(null == value) return {};
+      
+      fields.forEach(field => {
+        const prop = field.name;
+        if(!Object.prototype.hasOwnProperty.call(value, prop) && !isEmptyStr(field.defaultValue)){
+          value[prop] = field.defaultValue;
+        }
+      })
+
+      return value;
     }
+  },
+  created(){
+    // 补全默认值
+    const value = this.fillDefaultValue(this.value, this.fields);
+    this.$emit('input', value)
   },
   render(){
     return (
