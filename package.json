@@ -1,6 +1,6 @@
 {
   "name": "@dongls/xform",
-  "version": "0.0.8",
+  "version": "0.1.1",
   "description": "基于Vue2.x的自定义表单轮子。",
   "main": "dist/xform.js",
   "module": "dist/xform.js",
