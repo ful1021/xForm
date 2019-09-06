@@ -18,6 +18,10 @@ const XFormBuilder = {
       default(){
         return {}
       }
+    },
+    mode: {
+      type: String,
+      default: null
     }
   },
   static(){
@@ -49,8 +53,13 @@ const XFormBuilder = {
           this.pending = false
         })
     },
-    create(field){
-      const def = store.findFieldDef(field.type);
+    createComponent(field){
+      const fieldDef = store.findFieldDef(field.type);
+      if(fieldDef == null){
+        console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
+        return null;
+      }
+      
       const props = {field, value: this.value[field.name]};
       const on = {
         input: val => {
@@ -59,12 +68,13 @@ const XFormBuilder = {
         }
       }
       
-      return this.$createElement(def.components.builder, {props, on})
+      const component = fieldDef.extension[`${this.mode}_builder`] || fieldDef.component.builder;
+      return this.$createElement(component, {props, on})
     },
     renderFormItem(field){
       return (
         <x-form-item field={field}>
-          {this.create(field)}
+          {this.createComponent(field)}
         </x-form-item>
       )
     },

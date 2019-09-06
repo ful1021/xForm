@@ -14,11 +14,11 @@
 - XFormViewer     基于JSON的表单展示组件
 - XFormItem       提供验证和布局机制的表单项组件
 
-## todo list
-- [ ] 合并`XField`和`XDesignField`
-- [ ] [XFormDesigner] 支持`mode`字段
+## 待处理事项
+- [x] 合并`XField`和`XDesignField`
+- [x] [XFormDesigner] 支持`mode`字段
 - [ ] [XFormDesigner] 支持对输出字段的验证
-- [ ] [XFormBuilder] 支持`mode`字段
+- [x] [XFormBuilder] 支持`mode`字段
 - [ ] [XFormBuilder] 支持通过`slot`实现字段自定义
 - [ ] [XFormViewer] 支持通过`slot`实现字段自定义
 

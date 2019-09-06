@@ -4,7 +4,6 @@ import store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
 
 import XField from '../model/XField';
-import XDesignField from '../model/XDesignField';
 
 const XFormItem = {
   name: 'x-form-item',
@@ -61,12 +60,8 @@ const XFormItem = {
   },
   methods: {
     getField(event){
-      const field = event && event.detail && event.detail.field || this.$static.field || this.field;
-
-      if(field instanceof XField) return field;
-      if(field instanceof XDesignField) return field.toXField();
-      
-      return new XField(field);
+      const field = event && event.detail && event.detail.field || this.$static.field || this.field;      
+      return field instanceof XField ? field : new XField(field);
     },
     getValidator(type){
       if(typeof this.validation == 'function') return this.validation;

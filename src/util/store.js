@@ -56,13 +56,11 @@ export function findFieldDef(type){
 }
 
 function findModeTypes(mode){  
-  const modes = state.config.modes || {};
-  const types = modes[mode];
-  return Array.isArray(types) ? types : [];
+  return findProp(state.config, `modes.${mode}`)
 }
 
 /** 获取某字段的验证器 */
-export function findFieldValidator(type, field){
+export function findFieldValidator(type){
   const def = state.fields[type] || {};
   return def.validator;
 }
@@ -72,7 +70,7 @@ export function findFieldDefs(mode){
   let types = findModeTypes(mode);
   let all = Object.keys(state.fields);
 
-  if(types.length > 0){
+  if(Array.isArray(types)){
     all = all.filter(i => types.includes(i))
   }
 

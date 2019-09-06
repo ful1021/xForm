@@ -6,7 +6,9 @@ export default class XFormFieldDef{
     this.title = options.title;
 
     this.maxLength = options.maxLength;
-    this.components = options.components;
+
+    this.component = options.component || {};
+    this.extension = options.extension || {};
 
     this.validator = function(){
       if(typeof options.validator != 'function') return Promise.resolve();

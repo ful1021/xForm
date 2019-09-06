@@ -13,9 +13,7 @@ const builder = {
 }
 
 const config = {
-  modes: {
-    all: []
-  },
+  modes: {},
   label,
   builder
 };

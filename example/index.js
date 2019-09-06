@@ -10,8 +10,11 @@ import App from './App.vue';
 
 Vue.component(Modal.name, Modal);
 Vue.use(XForm, {
+  modes: {
+    
+  },
   label: {
-    position: 'left'
+    position: 'top'
   }
 });
 

@@ -2,7 +2,7 @@ import XFormTip from '../assets/img/x-form-tip.png'
 
 import NonReactive from '../mixin/non-reactive';
 import FieldStore from '../util/store';
-import XDesignField from '../model/XDesignField';
+import XField from '../model/XField';
 
 import * as dom from '../util/dom';
 
@@ -18,7 +18,7 @@ const XFormDesigner = {
     },
     mode: {
       type: String,
-      default: 'all'
+      default: null
     }
   },
   static(){
@@ -74,7 +74,7 @@ const XFormDesigner = {
     },
     /** 快速插入字段 */
     quickInsert(event, options){
-      const field = new XDesignField(options);
+      const field = new XField(options);
       const value = this.value.concat(field);
       
       this.selectedField = field;
@@ -86,7 +86,7 @@ const XFormDesigner = {
       const ghost = this.$static.ghost;
       const index = dom.computeIndex(dragEvent.direction, distance, this.$refs.list, ghost)
       
-      const field = new XDesignField(dragEvent.data);
+      const field = new XField(dragEvent.data);
       this.value.splice(index, 0, field);
       this.$emit('input', this.value);
 
@@ -123,7 +123,7 @@ const XFormDesigner = {
       dragEvent.offsetTop = event.clientY - rect.top;
       dragEvent.data = data;
 
-      if(data instanceof XDesignField) this.selectedField = data;
+      if(data instanceof XField) this.selectedField = data;
 
       // 监听鼠标移动事件
       document.addEventListener('mousemove', this.dragging);
@@ -140,8 +140,8 @@ const XFormDesigner = {
         ghost.style.width = `${dragEvent.target.offsetWidth}px`;
 
         dragEvent.init = true;
-        if(dragEvent.data instanceof XDesignField){
-          dragEvent.data.dragging = true;
+        if(dragEvent.data instanceof XField){
+          dragEvent.data.designer.dragging = true;
         }
       }
 
@@ -176,8 +176,8 @@ const XFormDesigner = {
       dragEvent.init = false;
       dragEvent.inserted = null;
 
-      if(dragEvent.data instanceof XDesignField){
-        dragEvent.data.dragging = false;
+      if(dragEvent.data instanceof XField){
+        dragEvent.data.designer.dragging = false;
       }
 
       // 清空鼠标事件
@@ -196,27 +196,17 @@ const XFormDesigner = {
       )
     },
     renderFieldPreview(field){
-      const formField = FieldStore.findFieldDef(field.type);
-      if(formField == null){
-        console.warn(`[not implement]: ${field.title}(${field.type}) `)
-        return null;
-      }
-
-      const preview = this.$createElement(formField.components.preview, {
-        'class': ['x-form-template'],
-        props: {field}
-      })
-
+      const preview = this.createComponent('preview', field, {props: {field}})
       const className = {
         'x-form-designer-preview': true,
         'x-form-draggable': true,
         'x-form-is-selected': this.selectedField == field,
-        'x-form-is-dragging': field.dragging
+        'x-form-is-dragging': field.designer.dragging
       }
 
       return (
         <div class={className}>
-          <x-form-item field={field} validation={false}>{preview}</x-form-item>
+          <x-form-item class="x-form-template" field={field} validation={false}>{preview}</x-form-item>
           <button type="button" class="x-form-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-close"></i>
           </button>
@@ -248,7 +238,6 @@ const XFormDesigner = {
       if(null == this.selectedField) return null;
 
       const field = this.selectedField;
-      const fd = FieldStore.findFieldDef(field.type);
       const props = {field}
       const on = {
         update: event => {
@@ -259,7 +248,18 @@ const XFormDesigner = {
         }
       }
 
-      return this.$createElement(fd.components.setting, {props, on});
+      return this.createComponent('setting', field, {props, on});
+    },
+    createComponent(target, field, attrs){
+      const fieldDef = FieldStore.findFieldDef(field.type);
+
+      if(fieldDef == null){
+        console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
+        return null;
+      }
+
+      const component = fieldDef.extension[`${this.mode}_${target}`] || fieldDef.component[target];
+      return this.$createElement(component, attrs);
     }
   },
   render(h){

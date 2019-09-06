@@ -16,7 +16,7 @@ export default {
   data(){
     return {
       show: false,
-      fields: XForm.adapter.toDesignFields(this.getLocalFields())
+      fields: XForm.adapter.toFields(this.getLocalFields())
     }
   },
   computed: {

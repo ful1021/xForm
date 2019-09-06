@@ -8,6 +8,19 @@ export default new model.XFieldDef({
   type: 'text',
   title: '单行文本',
   maxLength: 20,
+  component: {
+    setting,
+    preview,
+    builder
+  },
+  extension: {
+    'ext_builder': {
+      name: 'ext_preview',
+      render(){
+        return <div>ext preview</div>
+      }
+    }
+  },
   validator(field, value){
     return new Promise((resolve, reject) => {
       if(value != null && value.toString().length > this.maxLength) return reject(`${field.title}长度不能超过${this.maxLength}个字符`);
@@ -15,10 +28,5 @@ export default new model.XFieldDef({
       
       return resolve();
     })
-  },
-  components: {
-    setting,
-    preview,
-    builder
   }
 })
