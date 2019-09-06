@@ -3,6 +3,7 @@ import {model} from '../../src/core';
 import setting from './Setting.vue';
 import preview from './Preview.vue';
 import builder from './Builder.vue';
+import viewer from './Viewer.vue';
 
 export default new model.XFieldDef({
   type: 'textarea',
@@ -11,7 +12,8 @@ export default new model.XFieldDef({
   component: {
     setting,
     preview,
-    builder
+    builder,
+    viewer
   },
 
   validator(field, value){

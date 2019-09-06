@@ -14,10 +14,10 @@ export default new model.XFieldDef({
     builder
   },
   extension: {
-    'ext_builder': {
-      name: 'ext_preview',
+    'ext_viewer': {
+      name: 'ext-viewer',
       render(){
-        return <div>ext preview</div>
+        return <div>ext text viewer</div>
       }
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="builder">
     <x-form-builder :fields="fields" :value="model" @input="update" ref="builder">
-      <template slot="top">
+      <template #top>
         <x-form-item :field="customField" :validation="validateCustomFiled">
           <c-text :field="customField" v-model="model.no"/>
         </x-form-item>

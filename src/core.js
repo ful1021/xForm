@@ -22,7 +22,6 @@ const install = function(Vue, options = {}){
 
 const XForm = {
   name: 'xForm',
-  version: '0.0.1',
   install,
   store,
   adapter,

@@ -15,7 +15,13 @@ const builder = {
 const config = {
   modes: {},
   label,
-  builder
+  formatter(field, model){
+    return model[field.name]
+  },
+
+  designer: {},
+  builder,
+  viewer: {}
 };
 
 export default config;

@@ -1,6 +1,8 @@
 <template>
   <div class="viewer">
-    <x-form-viewer :fields="fields" :value="model"/>
+    <x-form-viewer :fields="fields" :value="model">
+      <!-- slot -->
+    </x-form-viewer>
   </div>
 </template>
 

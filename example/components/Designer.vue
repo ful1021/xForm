@@ -1,6 +1,8 @@
 <template>
   <div class="designer">
-    <x-form-designer :value="fields" @input="update" ref="designer"/>
+    <x-form-designer :value="fields" @input="update" ref="designer">
+      <!-- slot-->
+    </x-form-designer>
     <modal title="field json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>
     </modal>

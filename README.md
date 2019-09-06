@@ -15,12 +15,7 @@
 - XFormItem       提供验证和布局机制的表单项组件
 
 ## 待处理事项
-- [x] 合并`XField`和`XDesignField`
-- [x] [XFormDesigner] 支持`mode`字段
 - [ ] [XFormDesigner] 支持对输出字段的验证
-- [x] [XFormBuilder] 支持`mode`字段
-- [ ] [XFormBuilder] 支持通过`slot`实现字段自定义
-- [ ] [XFormViewer] 支持通过`slot`实现字段自定义
 
 ## License
 [MIT](LICENSE)

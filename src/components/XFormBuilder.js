@@ -1,4 +1,4 @@
-import store from '../util/store';
+import Store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
 
 import {isEmptyStr} from '../util/lang';
@@ -53,31 +53,6 @@ const XFormBuilder = {
           this.pending = false
         })
     },
-    createComponent(field){
-      const fieldDef = store.findFieldDef(field.type);
-      if(fieldDef == null){
-        console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
-        return null;
-      }
-      
-      const props = {field, value: this.value[field.name]};
-      const on = {
-        input: val => {
-          this.$set(this.value, field.name, val);
-          this.$emit('input', this.value);
-        }
-      }
-      
-      const component = fieldDef.extension[`${this.mode}_builder`] || fieldDef.component.builder;
-      return this.$createElement(component, {props, on})
-    },
-    renderFormItem(field){
-      return (
-        <x-form-item field={field}>
-          {this.createComponent(field)}
-        </x-form-item>
-      )
-    },
     addField(event){
       let {field, validate} = event.detail;
       this.$static.validators[field.name] = validate;
@@ -97,12 +72,53 @@ const XFormBuilder = {
       })
 
       return value;
+    },
+    renderFormItem(field){
+      return (
+        <x-form-item field={field}>
+          {this.createComponent(field)}
+        </x-form-item>
+      )
+    },
+    /**
+     * 根据字段对象创建对应的组件
+     * 
+     * 组件按以下顺序匹配，如有任一情况匹配，则创建对应组件：
+     * 1. 检索是否有名为`name_${field.name}`的作用域插槽
+     * 2. 检索是否有名为`type_{field.type}`的作用域插槽
+     * 3. 检索是否有名为`${mode}_builder`的扩展组件
+     * 4. 检索默认的`builder`组件
+     * 
+     * @param {XField} field -- 字段
+     * @returns 组件 
+     */
+    createComponent(field){
+      const namedSlot = `name_${field.name}`;
+      if(this.$scopedSlots[namedSlot]) {
+        return this.$scopedSlots[namedSlot]({field});
+      }
+
+      const typedSlot = `type_${field.type}`;
+      if(this.$scopedSlots[typedSlot]) {
+        return this.$scopedSlots[typedSlot]({field});
+      }
+
+      const fieldDef = Store.findFieldDef(field.type);
+      if(fieldDef == null){
+        return console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
+      }
+      
+      const props = {field, value: this.value[field.name]};
+      const on = {
+        input: val => {
+          this.$set(this.value, field.name, val);
+          this.$emit('input', this.value);
+        }
+      }
+      
+      const component = fieldDef.extension[`${this.mode}_builder`] || fieldDef.component.builder;
+      return null == component ? null : this.$createElement(component, {props, on});
     }
-  },
-  created(){
-    // 补全默认值
-    const value = this.fillDefaultValue(this.value, this.fields);
-    this.$emit('input', value)
   },
   render(){
     return (
@@ -114,6 +130,11 @@ const XFormBuilder = {
         </div>
       </div>
     )
+  },
+  created(){
+    // 补全默认值
+    const value = this.fillDefaultValue(this.value, this.fields);
+    this.$emit('input', value)
   },
   mounted(){
     this.$el.addEventListener('xform.builder.field.add', this.addField);
