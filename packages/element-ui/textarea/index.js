@@ -1,11 +1,9 @@
-import {model} from '../../../src';
+import setting from './setting.vue';
+import preview from './preview.vue';
+import builder from './builder.vue';
+import viewer from './viewer.vue';
 
-import setting from './Setting.vue';
-import preview from './Preview.vue';
-import builder from './Builder.vue';
-import viewer from './Viewer.vue';
-
-export default new model.XFieldDef({
+export default {
   type: 'textarea',
   title: '多行文本',
   icon: 'iconfont icon-xform-textarea',
@@ -16,7 +14,6 @@ export default new model.XFieldDef({
     builder,
     viewer
   },
-
   validator(field, value){
     return new Promise((resolve, reject) => {
       if(value != null && value.toString().length > this.maxLength) return reject(`${field.title}长度不能超过${this.maxLength}个字符`);
@@ -25,4 +22,4 @@ export default new model.XFieldDef({
       return resolve();
     })
   }
-})
+}

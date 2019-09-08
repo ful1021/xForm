@@ -16,5 +16,9 @@ export default class XFormFieldDef{
       return options.validator.apply(ctx, arguments)
     };
   }
+
+  hasRequiredAttrs(){
+    return this.type != null;
+  }
 }
 

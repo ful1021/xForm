@@ -1,10 +1,8 @@
-import {model} from '../../../src';
+import setting from './setting.vue';
+import preview from './preview.vue';
+import builder from './builder.vue';
 
-import setting from './Setting.vue';
-import preview from './Preview.vue';
-import builder from './Builder.vue';
-
-export default new model.XFieldDef({
+export default {
   type: 'text',
   title: '单行文本',
   icon: 'iconfont icon-xform-text',
@@ -30,4 +28,4 @@ export default new model.XFieldDef({
       return resolve();
     })
   }
-})
+}

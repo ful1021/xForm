@@ -1,5 +1,6 @@
 const IS_PRODUCTION = process.env.NODE_ENV == 'production';
 
+const path = require('path');
 const util = require('./util');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -44,7 +45,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@src': path.join(__dirname, '../src')
     }
   },
   plugins: [

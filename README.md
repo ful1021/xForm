@@ -16,6 +16,8 @@
 
 ## 待处理事项
 - [ ] [XFormDesigner] 支持对输出字段的验证
+- [ ] 集成`ElementUI`
+- [ ] 集成`iView`
 
 ## License
 [MIT](LICENSE)

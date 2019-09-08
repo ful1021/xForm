@@ -1,11 +1,11 @@
 <template>
   <div class="builder">
     <x-form-builder :fields="fields" :value="model" @input="update" ref="builder">
-      <template #top>
+      <!-- <template #top>
         <x-form-item :field="customField" :validation="validateCustomFiled">
           <c-text :field="customField" v-model="model.no"/>
         </x-form-item>
-      </template>
+      </template> -->
     </x-form-builder>
     <modal title="form json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>
@@ -43,7 +43,7 @@ export default {
         setTimeout(() => {
           changeMessage()
           value == null || value.length < 10 ? resolve() : reject('长度过长')
-        }, 2500);
+        }, 500);
       })
     },
     update(value){

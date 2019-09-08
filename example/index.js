@@ -3,22 +3,17 @@ import './app.css';
 import Vue from 'vue';
 import router from './router';
 
+import ElementUI from 'element-ui';
+
 import Modal from './components/Modal.vue'
-import XForm from '../src';
+import XForm from '../packages/element-ui';
 import App from './App.vue';
 
-import Text from './packages/text';
-import Textarea from './packages/textarea';
-
+Vue.use(ElementUI, {size: 'small'});
 Vue.component(Modal.name, Modal);
-XForm.store.register(Text, Textarea);
 Vue.use(XForm, {
-  iconPrefix: 'icon-xform-',
   modes: {
     
-  },
-  label: {
-    position: 'top'
   }
 });
 

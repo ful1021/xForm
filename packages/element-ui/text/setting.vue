@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import {mixin} from '../../../src';
+import {mixin} from '@src/index';
 
 export default {
-  name: 'x-form-text-setting',
+  name: 'xform-el-text-setting',
   mixins: [mixin.setting]
 }
 </script>

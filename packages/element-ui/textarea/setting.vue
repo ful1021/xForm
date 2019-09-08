@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {mixin} from '../../../src';
+import {mixin} from '@src/index';
 
 export default {
   name: 'x-form-textarea-setting',

@@ -1,9 +1,14 @@
 <template>
-  <textarea :id="field.name" :name="field.name" class="x-form-textarea x-form-item-control" :placeholder="placeholder" :value="value" @input="inputForDom"/>
+  <el-input
+    type="textarea"
+    :name="field.name" :placeholder="placeholder"
+    :value="value" @input="input" 
+    :autosize="{minRows: 3, maxRows: 10}"
+  />
 </template>
 
 <script>
-import {mixin} from '../../../src';
+import {mixin} from '@src/index';
 
 export default {
   name: 'x-form-textarea',

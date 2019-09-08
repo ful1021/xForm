@@ -1,10 +1,10 @@
 <template>
-  <input type="text" class="x-form-designer-preview-mock" :placeholder="field.placeholder">
+  <textarea rows="3" class="xform-el-preview-mock" :placeholder="field.placeholder"/>   
 </template>
 
 <script>
 export default {
-  name: 'x-form-text-preview',
+  name: 'x-form-textarea-preview',
   props: {
     field: {
       type: Object,

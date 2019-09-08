@@ -55,7 +55,8 @@ export function register(...args){
 
   Array.from(arguments)
     .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
-    .filter(f => f instanceof XFieldDef)
+    .map(o => new XFieldDef(o))
+    .filter(f => f.hasRequiredAttrs())
     .forEach(def => {
       state.fields[def.type] = def;
     });
