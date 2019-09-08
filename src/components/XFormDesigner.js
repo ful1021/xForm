@@ -85,12 +85,12 @@ const XFormDesigner = {
       const dragEvent = this.$static.dragEvent;
       const ghost = this.$static.ghost;
       const index = dom.computeIndex(dragEvent.direction, distance, this.$refs.list, ghost)
-      
       const field = new XField(dragEvent.data);
+
       this.value.splice(index, 0, field);
       this.$emit('input', this.value);
-
       this.selectedField = field;
+
       dragEvent.mode = 'sort';
       dragEvent.inserted = field;
     },
@@ -101,7 +101,6 @@ const XFormDesigner = {
      
       const a = this.value.findIndex(v => v == this.selectedField);
       const b = dom.computeIndex(dragEvent.direction, distance, this.$refs.list, ghost, a)
-      
       const max = this.value.length;
       if(a < 0 || b < 0 || a > max || b > max || a == b) return;
 
@@ -187,9 +186,13 @@ const XFormDesigner = {
     
     renderField(field){
       return (
-        <div class="x-form-designer-field x-form-draggable" onMousedown={e => this.dragstart(e, field, 'insert')} onClick={e => this.quickInsert(e, field)}>
+        <div 
+          class="x-form-designer-field x-form-draggable" 
+          onMousedown={e => this.dragstart(e, field, 'insert')} 
+          onClick={e => this.quickInsert(e, field)}
+        >
           <div class="x-form-designer-field-content x-form-template">
-            <i class={['iconfont',`icon-xform-${field.type}`]}></i>
+            <i class={field.icon}></i>
             <span>{field.title}</span>
           </div>
         </div>
@@ -208,7 +211,7 @@ const XFormDesigner = {
         <div class={className}>
           <x-form-item class="x-form-template" field={field} validation={false}>{preview}</x-form-item>
           <button type="button" class="x-form-designer-delete" onClick={e => this.remove(e, field)}>
-            <i class="iconfont icon-xform-close"></i>
+            <i class="iconfont icon-xform-remove"></i>
           </button>
           <div class="x-form-designer-cover" onMousedown={e => this.dragstart(e, field, 'sort')}></div>
         </div>
@@ -279,7 +282,7 @@ const XFormDesigner = {
       return this.$createElement(component, attrs);
     }
   },
-  render(h){
+  render(){
     return (
       <div class="x-form-designer">
         <div class="x-form-designer-field-panel">

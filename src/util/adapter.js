@@ -3,7 +3,7 @@ import XField from '../model/XField';
 /**
  * 将数据转换为XField数组
  * @param {*} data 
- * @param {*} fn 
+ * @param {Function} fn 
  */
 export function toFields(data, fn){
   if(!Array.isArray(data)) return [];
@@ -18,3 +18,4 @@ export function toFields(data, fn){
 
 const adapter = {toFields};
 export default adapter;
+

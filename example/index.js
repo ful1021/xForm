@@ -7,9 +7,13 @@ import Modal from './components/Modal.vue'
 import XForm from '../src';
 import App from './App.vue';
 
+import Text from './packages/text';
+import Textarea from './packages/textarea';
 
 Vue.component(Modal.name, Modal);
+XForm.store.register(Text, Textarea);
 Vue.use(XForm, {
+  iconPrefix: 'icon-xform-',
   modes: {
     
   },

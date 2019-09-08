@@ -4,6 +4,7 @@ export default class XFormFieldDef{
 
     this.type = options.type;
     this.title = options.title;
+    this.icon = options.icon;
 
     this.maxLength = options.maxLength;
 

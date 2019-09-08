@@ -13,6 +13,12 @@ export function setConfig(o = {}){
   state.config = Object.assign(state.config, cloneDeep(config), cloneDeep(o))
 }
 
+/**
+ * 根据属性路径查找对应的值
+ * @param {*} target -- 待查询的目标对象
+ * @param {*} path -- 待查询属性的路径 `xxx[.xxx]*`
+ * @returns 如果有任一值不存在则返回null
+ */
 function findProp(target, path){
   if(null == path || '' == path) return null;
 
@@ -27,6 +33,11 @@ function findProp(target, path){
   return value;
 }
 
+/**
+ * 查询多个路径下的属性
+ * @param  {...string} paths -- 任一个属性路径
+ * @returns 返回第一个不为null的值
+ */
 export function findConfigProp(...paths){
   for(let i = 0; i < paths.length; i++){
     const path = paths[i];
@@ -38,7 +49,7 @@ export function findConfigProp(...paths){
   return null;
 }
 
-/** 注册字段 */
+/** 注册任意个字段 */
 export function register(...args){
   if(args.length <= 0) return;
 
@@ -50,7 +61,11 @@ export function register(...args){
     });
 }
 
-/** 查询某字段的字段配置 */
+/** 
+ * 查询某字段的字段配置
+ * @param {string} type -- 字段类型
+ * @returns {XFieldDef} 字段类型配置
+ */
 export function findFieldDef(type){
   return state.fields[type]
 }

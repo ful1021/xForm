@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {mixin} from '../../src/core';
+import {mixin} from '../../../src';
 
 export default {
   name: 'x-form-textarea',
@@ -28,5 +28,6 @@ export default {
 
 .x-form-textarea{
   resize: vertical;
+  max-height: 360px;
 }
 </style>

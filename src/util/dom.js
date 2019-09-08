@@ -60,8 +60,7 @@ export function computeIndex(direction, distance, container, ghost, currentIndex
     for (let i = 0; i < doms.length; i++) {
       let dom = doms[i];
       if (dom.offsetTop + (dom.offsetHeight / 2) > offsetTop) {
-        // 如果前一位置是当前位置，直接返回前一位置
-        return i - 1 == currentIndex ? currentIndex : i;
+        return i;
       }
     }
   }
@@ -69,16 +68,13 @@ export function computeIndex(direction, distance, container, ghost, currentIndex
   // 如果是向下移动
   if (direction > 0) {
     const offsetTop = distance - rect.top + container.scrollTop + ghost.offsetHeight;
-    let index = -1;
-    
-    for (let i = 0; i < doms.length; i++) {
+
+    for (let i = doms.length - 1; i >= 0; i--) {
       let dom = doms[i];
       if (dom.offsetTop + (dom.offsetHeight / 2) < offsetTop) {
-        index = i;
+        return i
       }
     }
-    // 如果后一位置是当前位置，直接返回后一位置
-    return index + 1 == currentIndex ? currentIndex : index;
   }
   
   return -1;
