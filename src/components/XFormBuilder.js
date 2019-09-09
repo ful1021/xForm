@@ -4,7 +4,7 @@ import NonReactive from '../mixin/non-reactive';
 import {isEmptyStr} from '../util/lang';
 
 const XFormBuilder = {
-  name: 'x-form-builder',
+  name: 'xform-builder',
   mixins: [NonReactive],
   props: {
     fields: {
@@ -75,9 +75,9 @@ const XFormBuilder = {
     },
     renderFormItem(field){
       return (
-        <x-form-item field={field}>
+        <xform-item field={field}>
           {this.createComponent(field)}
-        </x-form-item>
+        </xform-item>
       )
     },
     /**
@@ -122,8 +122,8 @@ const XFormBuilder = {
   },
   render(){
     return (
-      <div class="x-form-builder">
-        <div class="x-form-builder-main">
+      <div class="xform-builder">
+        <div class="xform-builder-main">
           {this.$slots.top}
           {this.fields.map(this.renderFormItem)}
           {this.$slots.bottom}

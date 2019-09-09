@@ -1,21 +1,21 @@
 <template>
-  <div class="x-form-setting">
-    <h3 class="x-form-setting-head">多行文本</h3>
-    <section class="x-form-setting-group">
+  <div class="xform-setting">
+    <h3 class="xform-setting-head">多行文本</h3>
+    <section class="xform-setting-group">
       <header>标题：</header>
-      <input type="text" class="x-form-setting-control" data-prop="title" :value="field.title" @input="updateProp">
+      <input type="text" class="xform-setting-control" data-prop="title" :value="field.title" @input="updateProp">
     </section>
-    <section class="x-form-setting-group">
+    <section class="xform-setting-group">
       <header>提示：</header>
-      <textarea class="x-form-setting-control" data-prop="placeholder" :value="field.placeholder" @input="updateProp" rows="3" placeholder="请输入提示信息..."/>
+      <textarea class="xform-setting-control" data-prop="placeholder" :value="field.placeholder" @input="updateProp" rows="3" placeholder="请输入提示信息..."/>
     </section>
-    <section class="x-form-setting-group">
+    <section class="xform-setting-group">
       <header>默认值：</header>
-      <input type="text" class="x-form-setting-control" data-prop="defaultValue" :value="field.defaultValue" @input="updateProp">
+      <input type="text" class="xform-setting-control" data-prop="defaultValue" :value="field.defaultValue" @input="updateProp">
     </section>
-    <section class="x-form-setting-group">
+    <section class="xform-setting-group">
       <header>验证：</header>
-      <label class="x-form-setting-checkbox">
+      <label class="xform-setting-checkbox">
         <input type="checkbox" data-prop="required" :checked="field.required" @input="updateProp">
         <span>必填</span>
       </label>
@@ -27,7 +27,7 @@
 import {mixin} from '@src/index';
 
 export default {
-  name: 'x-form-textarea-setting',
+  name: 'xform-textarea-setting',
   mixins: [mixin.setting]
 }
 </script>

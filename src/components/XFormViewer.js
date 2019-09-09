@@ -1,7 +1,7 @@
 import Store from '../util/store';
 
 const XFormView = {
-  name: 'x-form-viewer',
+  name: 'xform-viewer',
   props: {
     fields: {
       type: Array,
@@ -46,9 +46,9 @@ const XFormView = {
     renderItem(field){
       const content = this.createComponent(field)
       const className = {
-        'x-form-viewer-item': true,
-        [`x-form-viewer-item-${this.labelPosition}`]: true,
-        'x-form-is-required': field.required
+        'xform-viewer-item': true,
+        [`xform-viewer-item-${this.labelPosition}`]: true,
+        'xform-is-required': field.required
       }
 
       const labelStyle = {
@@ -57,8 +57,8 @@ const XFormView = {
 
       return (
         <div class={className}>
-          <label class="x-form-viewer-label" style={labelStyle}>{field.title}</label>
-          <div class="x-form-viewer-content">{content}</div>
+          <label class="xform-viewer-label" style={labelStyle}>{field.title}</label>
+          <div class="xform-viewer-content">{content}</div>
         </div>
       )
     },
@@ -103,8 +103,8 @@ const XFormView = {
   },
   render(){
     return (
-      <div class="x-form-viewer">
-        <div class="x-form-viewer-main">
+      <div class="xform-viewer">
+        <div class="xform-viewer-main">
           {this.fields.map(this.renderItem)}
         </div>
       </div>

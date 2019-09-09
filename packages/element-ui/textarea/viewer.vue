@@ -1,11 +1,11 @@
 <template>
-  <pre class="x-form-textarea-viewer">{{ value }}</pre>
+  <pre class="xform-textarea-viewer">{{ value }}</pre>
 </template>
 
 <script>
 
 export default {
-  name: 'x-form-text-viewer',
+  name: 'xform-text-viewer',
   props: {
     field: {
       type: Object,
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-pre.x-form-textarea-viewer{
+pre.xform-textarea-viewer{
   margin: 0;
 }
 </style>

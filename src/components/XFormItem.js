@@ -6,7 +6,7 @@ import NonReactive from '../mixin/non-reactive';
 import XField from '../model/XField';
 
 const XFormItem = {
-  name: 'x-form-item',
+  name: 'xform-item',
   mixins: [NonReactive],
   props: {
     field: {
@@ -69,7 +69,7 @@ const XFormItem = {
     },
     renderErrorMessage(){
       if(null == this.message) return null;
-      return <p class='x-form-item-message'>{this.message}</p>;
+      return <p class='xform-item-message'>{this.message}</p>;
     },
     changeMessage(message){
       this.message = lang.isEmptyStr(message) ? null : message;
@@ -131,10 +131,10 @@ const XFormItem = {
     const field = this.getField();
 
     const className = {
-      'x-form-item': true,
-      [`x-form-item-${this.labelPosition}`]: true,
-      'x-form-is-required': field.required,
-      [`x-form-is-${this.status}`]: null != this.status
+      'xform-item': true,
+      [`xform-item-${this.labelPosition}`]: true,
+      'xform-is-required': field.required,
+      [`xform-is-${this.status}`]: null != this.status
     }
 
     const labelStyle = {
@@ -143,11 +143,11 @@ const XFormItem = {
 
     return (
       <div class={className}>
-        <label class="x-form-item-label" style={labelStyle} for={field.name}>
+        <label class="xform-item-label" style={labelStyle} for={field.name}>
           <span>{field.title}</span>
-          {field.required ? <sup class="x-form-star">*</sup> : null}
+          {field.required ? <sup class="xform-star">*</sup> : null}
         </label>
-        <div class="x-form-item-content">
+        <div class="xform-item-content">
           {this.$slots.default}
           {this.renderErrorMessage()}
         </div>

@@ -1,57 +1,57 @@
-.x-form-viewer{
+.xform-viewer{
   font-size: 14px;
   color: $--xform-text-color-primary;
   
   background-color: #fff;
 }
 
-.x-form-viewer-main{
+.xform-viewer-main{
   width: 640px;
   margin: 0 auto;
   padding: 0 10px;
 }
 
-.x-form-viewer-item{
+.xform-viewer-item{
   display: flex;
   flex-flow: row nowrap;
   line-height: 20px;
 }
 
-.x-form-viewer-item-left .x-form-viewer-label{
+.xform-viewer-item-left .xform-viewer-label{
   text-align: left;
 }
 
-.x-form-viewer-item-right .x-form-viewer-label{
+.xform-viewer-item-right .xform-viewer-label{
   text-align: right;
 }
 
-.x-form-viewer-item-top{
+.xform-viewer-item-top{
   flex-direction: column;
 
-  & .x-form-viewer-label{
+  & .xform-viewer-label{
     width: auto !important;
     padding: 8px 0 5px 0;
   }
-  & .x-form-viewer-content{
+  & .xform-viewer-content{
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.x-form-viewer-item + .x-form-viewer-item{
+.xform-viewer-item + .xform-viewer-item{
   margin-top: 5px;
 }
 
-.x-form-viewer-item.x-form-is-required > .x-form-viewer-label{
+.xform-viewer-item.xform-is-required > .xform-viewer-label{
   font-weight: 700;
 }
 
-.x-form-viewer-label{
+.xform-viewer-label{
   width: $--xform-viewer-item-label-width;
   padding: 5px 10px 0 0;  
 }
 
-.x-form-viewer-content{
+.xform-viewer-content{
   padding: 5px 10px;
   flex: 1;
 }

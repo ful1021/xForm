@@ -1,4 +1,4 @@
-import XFormTip from '../assets/img/x-form-tip.png'
+import XFormTip from '../assets/img/xform-tip.png'
 
 import NonReactive from '../mixin/non-reactive';
 import Store from '../util/store';
@@ -7,7 +7,7 @@ import XField from '../model/XField';
 import * as dom from '../util/dom';
 
 const XFormDesigner = {
-  name: 'x-form-designer',
+  name: 'xform-designer',
   mixins:[NonReactive],
   props: {
     value: {
@@ -113,7 +113,7 @@ const XFormDesigner = {
       if(event.button !== 0) return;
     
       const dragEvent = this.$static.dragEvent;
-      const target = event.target.closest('.x-form-draggable');
+      const target = event.target.closest('.xform-draggable');
       const rect = target.getBoundingClientRect();
 
       dragEvent.mode = mode;
@@ -135,7 +135,7 @@ const XFormDesigner = {
 
       if(!dragEvent.init){
         ghost.style.display = 'block';
-        ghost.querySelector('.x-form-designer-template').innerHTML = dom.getOuterHTML(dragEvent.target)
+        ghost.querySelector('.xform-designer-template').innerHTML = dom.getOuterHTML(dragEvent.target)
         ghost.style.width = `${dragEvent.target.offsetWidth}px`;
 
         dragEvent.init = true;
@@ -187,11 +187,11 @@ const XFormDesigner = {
     renderField(field){
       return (
         <div 
-          class="x-form-designer-field x-form-draggable" 
+          class="xform-designer-field xform-draggable" 
           onMousedown={e => this.dragstart(e, field, 'insert')} 
           onClick={e => this.quickInsert(e, field)}
         >
-          <div class="x-form-designer-field-content x-form-template">
+          <div class="xform-designer-field-content xform-template">
             <i class={field.icon}></i>
             <span>{field.title}</span>
           </div>
@@ -201,19 +201,19 @@ const XFormDesigner = {
     renderFieldPreview(field){
       const preview = this.createComponent('preview', field, {props: {field}})
       const className = {
-        'x-form-designer-preview': true,
-        'x-form-draggable': true,
-        'x-form-is-selected': this.selectedField == field,
-        'x-form-is-dragging': field.designer.dragging
+        'xform-designer-preview': true,
+        'xform-draggable': true,
+        'xform-is-selected': this.selectedField == field,
+        'xform-is-dragging': field.designer.dragging
       }
 
       return (
         <div class={className}>
-          <x-form-item class="x-form-template" field={field} validation={false}>{preview}</x-form-item>
-          <button type="button" class="x-form-designer-delete" onClick={e => this.remove(e, field)}>
+          <xform-item class="xform-template" field={field} validation={false}>{preview}</xform-item>
+          <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-remove"></i>
           </button>
-          <div class="x-form-designer-cover" onMousedown={e => this.dragstart(e, field, 'sort')}></div>
+          <div class="xform-designer-cover" onMousedown={e => this.dragstart(e, field, 'sort')}></div>
         </div>
       )
     },
@@ -222,7 +222,7 @@ const XFormDesigner = {
       const content = (
         this.isEmpty 
           ? (
-            <div class="x-form-designer-preview-tip">
+            <div class="xform-designer-preview-tip">
               <img src={XFormTip}/>
               <p>请将左侧控件拖动到此处</p>
             </div>
@@ -231,7 +231,7 @@ const XFormDesigner = {
       );
 
       return (
-        <div class="x-form-designer-list" ref="list">
+        <div class="xform-designer-list" ref="list">
           {content}
         </div>
       )
@@ -284,27 +284,27 @@ const XFormDesigner = {
   },
   render(){
     return (
-      <div class="x-form-designer">
-        <div class="x-form-designer-field-panel">
-          <div class="x-form-designer-fields">
+      <div class="xform-designer">
+        <div class="xform-designer-field-panel">
+          <div class="xform-designer-fields">
             {this.fields.map(this.renderField)}
           </div>     
         </div>
-        <div class="x-form-designer-main">
+        <div class="xform-designer-main">
           {this.renderPreview()}
         </div>
-        <div class={['x-form-designer-setting', null == this.selectedField ? null : 'x-form-is-active']}>
+        <div class={['xform-designer-setting', null == this.selectedField ? null : 'xform-is-active']}>
           {this.renderSetting()}
         </div>
-        <div class="x-form-designer-ghost" key="x-form-designer-ghost">
-          <div class="x-form-designer-template"></div>
-          <div class="x-form-designer-cover"></div>
+        <div class="xform-designer-ghost" key="xform-designer-ghost">
+          <div class="xform-designer-template"></div>
+          <div class="xform-designer-cover"></div>
         </div>
       </div>
     )
   },
   mounted(){
-    this.$static.ghost = this.$el.querySelector('.x-form-designer-ghost');
+    this.$static.ghost = this.$el.querySelector('.xform-designer-ghost');
   }
 }
 

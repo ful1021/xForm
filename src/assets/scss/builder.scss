@@ -1,4 +1,4 @@
-.x-form-builder{
+.xform-builder{
   display: flex;
   flex-flow: row nowrap;
   background-color: #fff;
@@ -7,13 +7,13 @@
   color: $--xform-text-color-primary;
 }
 
-.x-form-builder-main{
+.xform-builder-main{
   width: 640px;
   margin: 0 auto;
   padding: 0 10px;
 }
 
-.x-form-star{
+.xform-star{
   vertical-align: middle;
   line-height: 1;
   font-weight: 700;
@@ -22,57 +22,57 @@
   margin-left: 2px;
 }
 
-.x-form-item{
+.xform-item{
   display: flex;
   flex-flow: row nowrap;
 
-  & + .x-form-item{
+  & + .xform-item{
     margin-top: 10px;
   }
 
-  &.x-form-is-required .x-form-item-label{
+  &.xform-is-required .xform-item-label{
     font-weight: 700;
   }
 }
 
-.x-form-item-left .x-form-item-label{
+.xform-item-left .xform-item-label{
   text-align: left;
 }
 
-.x-form-item-right .x-form-item-label{
+.xform-item-right .xform-item-label{
   text-align: right;
 }
 
-.x-form-item-top{
+.xform-item-top{
   flex-direction: column;
 
-  & .x-form-item-label{
+  & .xform-item-label{
     width: auto !important;
     padding: 8px 0 5px 0;
   }
 }
 
-.x-form-item-label{
+.xform-item-label{
   width: $--xform-item-label-width;
   padding: 5px 10px 0 0;  
   line-height: 20px;
 }
 
-.x-form-item-content{
+.xform-item-content{
   flex: 1;
 }
 
-.x-form-is-error {
-  .x-form-item-control{
+.xform-is-error {
+  .xform-item-control{
     border-color: $--xform-color-danger;
   }
  
-  .x-form-item-message{
+  .xform-item-message{
     color: $--xform-color-danger;
   }
 }
 
-.x-form-item-message{
+.xform-item-message{
   color: $--xform-text-color-secondary;
   font-size: 12px;
   line-height: 20px;

@@ -7,7 +7,7 @@ const label = {
 }
 
 const builder = {
-  // 自定义x-form-builder的class
+  // 自定义xform-builder的class
   className: null,
   label: cloneDeep(label)
 }

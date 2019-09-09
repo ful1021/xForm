@@ -1,8 +1,8 @@
 <template>
   <div class="viewer">
-    <x-form-viewer :fields="fields" :value="model">
+    <xform-viewer :fields="fields" :value="model">
       <!-- slot -->
-    </x-form-viewer>
+    </xform-viewer>
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style>
-.viewer .x-form-viewer{
+.viewer .xform-viewer{
   padding: 10px 0;
 }
 </style>

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'x-form-textarea-preview',
+  name: 'xform-textarea-preview',
   props: {
     field: {
       type: Object,

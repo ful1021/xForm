@@ -1,4 +1,4 @@
-.x-form-designer{
+.xform-designer{
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
@@ -7,14 +7,14 @@
   color: $--xform-text-color-primary;
 }
 
-.x-form-designer-field-panel{
+.xform-designer-field-panel{
   border-right: 1px solid #eee;
   background-color: #fff;
   user-select: none;
   overflow: auto;
 }
 
-.x-form-designer-fields{
+.xform-designer-fields{
   width: 320px;
   display: flex;
   flex-flow: row wrap;
@@ -23,7 +23,7 @@
   padding: 0 10px 10px 10px;
 }
 
-.x-form-designer-main{
+.xform-designer-main{
   flex: 1;
   height: 100%;
   padding: 10px;
@@ -31,7 +31,7 @@
   user-select: none;
 }
 
-.x-form-designer-list{
+.xform-designer-list{
   position: relative;
   max-width: 640px;
   min-height: 320px;
@@ -41,29 +41,29 @@
   background-color: #fff;
   border: 1px dashed #ccc;
 
-  .x-form-item{
+  .xform-item{
     padding: 8px;
   }
 }
 
-.x-form-designer-setting{
+.xform-designer-setting{
   min-width: 360px;
   height: 100%;
   overflow: auto;
   border-left: 1px solid transparent;
 }
 
-.x-form-designer-setting.x-form-is-active{
+.xform-designer-setting.xform-is-active{
   background-color: #fff;
   border-color: #eee;
 }
 
-.x-form-designer-field{
+.xform-designer-field{
   margin: 10px 0 0 0;
   height: 32px;
 }
 
-.x-form-designer-field-content{
+.xform-designer-field-content{
   position: relative;
   width: 145px;
   line-height: 24px;
@@ -103,33 +103,33 @@
   }
 }
 
-.x-form-designer-preview{
+.xform-designer-preview{
   position: relative;
   border: 1px dashed transparent;
 
   &:hover{
     border-color: $--xform-color-primary;
 
-    .x-form-designer-delete{
+    .xform-designer-delete{
       display: block;
     }
   }
 
-  &.x-form-is-selected{
+  &.xform-is-selected{
     border-color: $--xform-color-primary;
     border-style: solid;
   }
 
-  & + .x-form-designer-preview{
+  & + .xform-designer-preview{
     margin-top: 2px;
   }
 
-  & .x-form-item-top .x-form-item-label{
+  & .xform-item-top .xform-item-label{
     padding-top: 0;
   }
 }
 
-.x-form-designer-cover{
+.xform-designer-cover{
   position: absolute;
   top: 0;
   left: 0;
@@ -139,7 +139,7 @@
   cursor: move;
 }
 
-.x-form-designer-delete{
+.xform-designer-delete{
   display: none;
 
   position: absolute;
@@ -163,7 +163,7 @@
   }
 }
 
-.x-form-designer-ghost{
+.xform-designer-ghost{
   position: fixed;
   top: 0;
   left: 0;
@@ -172,16 +172,16 @@
   background-color: #fff;
   box-shadow: 0 0 8px rgba(125, 125, 125, 0.125);
 
-  .x-form-item{
+  .xform-item{
     padding: 8px;
   }
 }
 
-.x-form-is-dragging{
+.xform-is-dragging{
   opacity: .65;
 }
 
-.x-form-designer-preview-tip{
+.xform-designer-preview-tip{
   padding: 100px 0;
 
   & > img{
@@ -199,12 +199,12 @@
   }
 }
 
-.x-form-setting{
+.xform-setting{
   width: 360px;
   padding: 10px;
 }
 
-.x-form-setting-head{
+.xform-setting-head{
   margin: 0;
   line-height: 24px;
   font-size: 16px;
@@ -212,17 +212,17 @@
   border-bottom: 1px solid #aaa;
 }
 
-.x-form-setting-group{
+.xform-setting-group{
   margin-top: 10px;
 }
 
-.x-form-setting-group > header{
+.xform-setting-group > header{
   font-weight: 700;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.x-form-setting-control{
+.xform-setting-control{
   width: 100%;
   border: 1px solid #aaa;
   border-radius: 2px;
@@ -231,28 +231,28 @@
   word-break: break-all;
 }
 
-input.x-form-setting-control{
+input.xform-setting-control{
   height: 30px;
 }
 
-textarea.x-form-setting-control{
+textarea.xform-setting-control{
   min-width: 100%;
   max-width: 100%;
   max-height: 240px;
 }
 
-.x-form-setting-checkbox{
+.xform-setting-checkbox{
   margin: 0;
   line-height: 20px;
 }
 
-.x-form-setting-checkbox > span{
+.xform-setting-checkbox > span{
   display: inline-block;
   vertical-align: middle;
   margin-left: 3px;
 }
 
-.x-form-setting-checkbox > input[type="checkbox"]{
+.xform-setting-checkbox > input[type="checkbox"]{
   margin: 0;
   vertical-align: middle;
 }

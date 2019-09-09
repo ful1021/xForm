@@ -1,12 +1,12 @@
 <template>
   <div class="builder">
-    <x-form-builder :fields="fields" :value="model" @input="update" ref="builder">
+    <xform-builder :fields="fields" :value="model" @input="update" ref="builder">
       <!-- <template #top>
-        <x-form-item :field="customField" :validation="validateCustomFiled">
+        <xform-item :field="customField" :validation="validateCustomFiled">
           <c-text :field="customField" v-model="model.no"/>
-        </x-form-item>
+        </xform-item>
       </template> -->
-    </x-form-builder>
+    </xform-builder>
     <modal title="form json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>
     </modal>
@@ -109,7 +109,7 @@ export default {
         return (
           <input 
             type="text" id={field.name} name={field.name} 
-            class="x-form-text x-form-item-control" placeholder={this.placeholder} 
+            class="xform-text xform-item-control" placeholder={this.placeholder} 
             value={this.value} onInput={this.inputForDom}/>
         )
       }
@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style>
-.builder .x-form-builder{
+.builder .xform-builder{
   padding: 10px 0;
 }
 </style>

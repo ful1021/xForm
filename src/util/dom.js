@@ -4,7 +4,7 @@
  * @param {string} selector - 选择器
  * @returns {string} html字符串
  */
-export function getOuterHTML(el, selector = '.x-form-template'){
+export function getOuterHTML(el, selector = '.xform-template'){
   if(el.matches(selector)) return el.outerHTML;
   
   const dom = el.querySelector(selector);
