@@ -1,5 +1,6 @@
+import {mixin} from '@src/index'
+
 import setting from './setting.vue';
-import preview from './preview.vue';
 import builder from './builder.vue';
 
 export default {
@@ -9,8 +10,14 @@ export default {
   maxLength: 20,
   component: {
     setting,
-    preview,
-    builder
+    builder,
+    preview: {
+      name: 'xform-el-text-preview',
+      mixins: [mixin.preview],
+      render(){
+        return <input type="text" class="xform-el-mock" placeholder={this.prettyPlaceholder}/>
+      }
+    }
   },
   extension: {
     'ext_viewer': {

@@ -1,11 +1,12 @@
 import nonReactive from './non-reactive'
 import setting from './setting';
 import builder from './builder';
+import preview from './preview';
 
-const mixins = {
+
+export default {
   nonReactive,
   setting,
-  builder
+  builder,
+  preview
 };
-
-export default mixins;

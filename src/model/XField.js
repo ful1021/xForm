@@ -1,13 +1,23 @@
+function initOptions(params){
+  if(params.type != 'select') return [];
+  
+  let options = Array.isArray(params.options) ? params.options : []
+  if(options.length == 0) options.push('选项1');
+  
+  return options;
+}
+
 export default class XField{
-  constructor(options){
-    this.type = options.type;
-    this.name = options.name || `field_${Math.random().toString(16).slice(-8)}`
-    this.title = options.title;
+  constructor(params){
+    this.type = params.type;
+    this.name = params.name || `field_${Math.random().toString(16).slice(-8)}`
+    this.title = params.title;
     
-    this.placeholder = options.placeholder;
-    this.defaultValue = options.defaultValue;
+    this.placeholder = params.placeholder;
+    this.defaultValue = params.defaultValue;
     
-    this.required = options.required === true;
+    this.required = params.required === true;
+    this.options = initOptions(params)
 
     // 设计器相关属性
     this.designer = {

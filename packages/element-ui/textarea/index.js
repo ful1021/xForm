@@ -1,5 +1,6 @@
+import {mixin} from '@src/index'
+
 import setting from './setting.vue';
-import preview from './preview.vue';
 import builder from './builder.vue';
 import viewer from './viewer.vue';
 
@@ -10,9 +11,15 @@ export default {
   maxLength: 150,
   component: {
     setting,
-    preview,
     builder,
-    viewer
+    viewer,
+    preview: {
+      name: 'xform-textarea-preview',
+      mixins: [mixin.preview],
+      render(){
+        return <textarea rows="3" class="xform-el-mock" placeholder={this.prettyPlaceholder}/>
+      }
+    }
   },
   validator(field, value){
     return new Promise((resolve, reject) => {

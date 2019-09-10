@@ -19,6 +19,9 @@ export default {
         value = target.checked;
       }
       
+      this.update(prop, value);
+    },
+    update(prop, value){
       this.$emit('update', {prop, value})
     }
   }

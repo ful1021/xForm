@@ -143,7 +143,7 @@ const XFormItem = {
 
     return (
       <div class={className}>
-        <label class="xform-item-label" style={labelStyle} for={field.name}>
+        <label class="xform-item-label" style={labelStyle}>
           <span>{field.title}</span>
           {field.required ? <sup class="xform-star">*</sup> : null}
         </label>

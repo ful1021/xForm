@@ -1,3 +1,5 @@
+import {genPlaceholder} from '../util/form';
+
 export default {
   props: {
     field: {
@@ -8,14 +10,14 @@ export default {
     },
     placeholder: {
       type: String,
-      default(){
-        const field = this.field;
-        if(null == field) return '';
-
-        const prefix = field.required ? '[必填] ' : '';
-        const placeholder = field.placeholder || '';
-        return `${prefix}${placeholder}` || null;
-      }
+      default: null
+    }
+  },
+  computed: {
+    prettyPlaceholder(){
+      if(this.placeholder) return this.placeholder;
+      
+      return genPlaceholder(this.field);
     }
   },
   methods: {

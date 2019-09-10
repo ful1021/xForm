@@ -1,4 +1,4 @@
-import './app.css';
+import './app.scss';
 
 import Vue from 'vue';
 import router from './router';

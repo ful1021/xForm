@@ -1,0 +1,16 @@
+@import './_vars.scss';
+
+.xform-el-mock{
+  width: 100%;
+  padding: 3px 10px; 
+  line-height: 24px;
+  min-height: 32px;
+
+  color: $--xform-el-input-placeholder-color;
+  border: $--xform-el-input-border;
+  border-radius: $--xform-el-input-border-radius;
+
+  &::placeholder {
+    color: $--xform-el-input-placeholder-color;
+  }
+}

@@ -3,7 +3,9 @@
 - 钉钉审批管理中的表单设计器
 - [formbuilder](https://github.com/dobtco/formbuilder)
 
-## 特性
+## 为什么要重复早轮子
+
+## 你这轮子有什么特别
 - 灵活度高，除核心组件外皆可自行替换
 - 自带可视化设计器
 - 提供多样化的配置
@@ -15,7 +17,7 @@
 - XFormItem       提供验证和布局机制的表单项组件
 
 ## 待处理事项
-- [ ] [XFormDesigner] 支持对输出字段的验证
+- [ ] 文档
 - [ ] 集成`ElementUI`
 - [ ] 集成`iView`
 
