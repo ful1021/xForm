@@ -1,11 +1,11 @@
 <template>
   <el-select 
     class="xform-el-select" 
-    :name="field.name" :placeholder="placeholder" 
+    :name="field.name" :placeholder="prettyPlaceholder" 
     :value="value" @input="input"
     clearable 
   >
-    <el-option v-for="o in field.options" :value="o"/>
+    <el-option v-for="option in field.options" :key="option" :value="option"/>
   </el-select>
 </template>
 

@@ -1,5 +1,5 @@
 function initOptions(params){
-  if(params.type != 'select') return [];
+  if(['select', 'checkbox', 'radio'].indexOf(params.type) < 0) return [];
   
   let options = Array.isArray(params.options) ? params.options : []
   if(options.length == 0) options.push('选项1');
@@ -17,7 +17,8 @@ export default class XField{
     this.defaultValue = params.defaultValue;
     
     this.required = params.required === true;
-    this.options = initOptions(params)
+    this.options = initOptions(params);
+    this.setting = params.setting || {};
 
     // 设计器相关属性
     this.designer = {

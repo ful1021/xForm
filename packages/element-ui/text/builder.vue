@@ -1,6 +1,6 @@
 <template>
   <el-input 
-    :name="field.name" :placeholder="placeholder" 
+    :name="field.name" :placeholder="prettyPlaceholder" 
     :value="value" @input="input" 
     clearable
   />

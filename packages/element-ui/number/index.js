@@ -4,15 +4,15 @@ import setting from './setting.vue';
 import builder from './builder.vue';
 
 export default {
-  type: 'select',
-  title: '下拉选择',
+  type: 'number',
+  title: '数字',
   icon: 'iconfont icon-xform-select',
   maxLength: 20,
   component: {
     setting,
     builder,
     preview: {
-      name: 'xform-el-select-preview',
+      name: 'xform-el-number-preview',
       mixins: [mixin.preview],
       render(){
         return (

@@ -1,38 +1,37 @@
 <template>
-  <el-input
-    type="textarea"
+  <el-date-picker
+    class="xform-el-date" type="date"
     :name="field.name" :placeholder="prettyPlaceholder"
     :value="value" @input="input" 
-    :autosize="{minRows: 3, maxRows: 10}"
+    :value-format="formatter"
+    clearable
   />
 </template>
 
 <script>
+// TODO: 支持datetime
 import {mixin} from '@src/index';
 
 export default {
-  name: 'xform-textarea',
+  name: 'xform-el-date',
   mixins: [mixin.builder],
   props: {
     value: {
       type: String,
       default: null
     }
+  },
+  computed: {
+    formatter(){
+      return 'yyyy-MM-dd'
+    }
   }
 }
 </script>
 
-<style lang="scss">
-.xform-textarea{
-  width: 100%;
-  min-height: 30px;
-  line-height: 20px;
-  padding: 4px 5px;
-  border: 1px solid #aaa;
-}
 
-.xform-textarea{
-  resize: vertical;
-  max-height: 360px;
+<style lang="scss">
+.xform-el-date.el-date-editor{
+  width: 100%;
 }
 </style>

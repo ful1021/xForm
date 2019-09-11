@@ -14,3 +14,22 @@
     color: $--xform-el-input-placeholder-color;
   }
 }
+
+.xform-el-input-group{
+  position: relative;
+
+  .xform-el-mock{
+    padding-right: 30px;
+  }
+
+  .xform-el-input-append{
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+  }
+}
+
