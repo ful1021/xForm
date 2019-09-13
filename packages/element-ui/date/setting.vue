@@ -1,6 +1,6 @@
 <template>
   <div class="xform-setting">
-    <h3 class="xform-setting-head">{{ field.title }}</h3>
+    <h3 class="xform-setting-head">日期</h3>
     <section class="xform-setting-group">
       <header>标题：</header>
       <input type="text" class="xform-setting-control" data-prop="title" :value="field.title" @input="updateProp">

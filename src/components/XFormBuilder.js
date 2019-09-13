@@ -65,10 +65,26 @@ const XFormBuilder = {
       if(null == value) return {};
       
       fields.forEach(field => {
-        const prop = field.name;
-        if(!Object.prototype.hasOwnProperty.call(value, prop) && !isEmptyStr(field.defaultValue)){
-          value[prop] = field.defaultValue;
+        let prop = field.name;
+        let propValue = value[prop];
+
+        // 因涉及单选、多选类型转换，在此处理
+        if(field.type == 'select'){
+          if(field.attributes.multiple !== true && Array.isArray(propValue)){
+            propValue = propValue[0];
+          } 
+
+          if(field.attributes.multiple == true && !Array.isArray(propValue) && propValue != null){
+            propValue = [propValue];
+          } 
         }
+
+        // 默认值
+        if(propValue == null && !isEmptyStr(field.defaultValue)){
+          propValue = field.defaultValue;
+        }
+
+        value[prop] = propValue;
       })
 
       return value;

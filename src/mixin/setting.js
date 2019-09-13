@@ -21,6 +21,12 @@ export default {
       
       this.update(prop, value);
     },
+    updateAttrs(prop, value){
+      const attributes = this.field.attributes;
+
+      this.$set(attributes, prop, value);
+      this.update('attributes', attributes);
+    },
     update(prop, value){
       this.$emit('update', {prop, value})
     }

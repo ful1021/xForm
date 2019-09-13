@@ -6,7 +6,7 @@ import builder from './builder.vue';
 export default {
   type: 'date',
   title: '日期',
-  icon: 'iconfont icon-xform-text',
+  icon: 'iconfont icon-xform-date',
   maxLength: 20,
   component: {
     setting,

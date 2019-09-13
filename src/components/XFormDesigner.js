@@ -244,8 +244,7 @@ const XFormDesigner = {
       const props = {field}
       const on = {
         update: event => {
-          const {prop, value} = event;
-          field[prop] = value;
+          field[event.prop] = event.value;
           
           this.$emit('input', this.value);
         }

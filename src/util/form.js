@@ -1,4 +1,4 @@
-export function isSelect(){
+export function isArrayType(field){
 
 }
 

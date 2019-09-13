@@ -3,9 +3,10 @@
     class="xform-el-select" 
     :name="field.name" :placeholder="prettyPlaceholder" 
     :value="value" @input="input"
+    :multiple="field.attributes.multiple"
     clearable 
   >
-    <el-option v-for="option in field.options" :key="option" :value="option"/>
+    <el-option v-for="option in field.options" :key="option.value" :value="option.value" :label="option.label || option.value"/>
   </el-select>
 </template>
 
@@ -17,7 +18,7 @@ export default {
   mixins: [mixin.builder],
   props: {
     value: {
-      type: String,
+      type: [String, Array],
       default: null
     }
   }

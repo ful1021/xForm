@@ -1,6 +1,6 @@
 <template>
   <div class="xform-setting">
-    <h3 class="xform-setting-head">{{ field.title }}</h3>
+    <h3 class="xform-setting-head">下拉选择</h3>
     <section class="xform-setting-group">
       <header>标题：</header>
       <input type="text" class="xform-setting-control" data-prop="title" :value="field.title" @input="updateProp">
@@ -14,11 +14,15 @@
       <el-checkbox :value="field.required" @input="val => update('required', val)">必填</el-checkbox>
     </section>
     <section class="xform-setting-group">
+      <header>属性：</header>
+      <el-checkbox :value="field.attributes.multiple" @input="val => updateAttrs('multiple', val)">多选</el-checkbox>
+    </section>
+    <section class="xform-setting-group">
       <header>选项：</header>
       <div>
-        <div v-for="(o, i) in field.options" :key="i">
-          <input type="text" :value="field.options[i]" @input="updateOption($event, i)" >
-          <button type="button" @click="delOption(i)">删除</button>
+        <div v-for="(option, i) in field.options" :key="i">
+          <input type="text" :value="option.value" @input="updateOption(option)" >
+          <button type="button" @click="delOption(option)">删除</button>
         </div>
       </div>
       <button type="button" @click="addOption">添加选项</button>
@@ -36,19 +40,20 @@ export default {
   methods: {
     addOption(){
       const options = this.field.options;
-      options.push(`选项${options.length + 1}`);
+      options.push({value: `选项${options.length + 1}`});
 
       this.update('options', options)
     },
-    updateOption(event, index){
+    updateOption(option){
       const value = event.target.value;
       const options = this.field.options;
 
-      this.$set(options, index, value);
-      this.update('options', options)
+      this.$set(option, 'value', value);
+      this.update('options', options);
     },
-    delOption(index){
+    delOption(option){
       const options = this.field.options;
+      const index = options.findIndex(o => o == option);
       options.splice(index, 1);
 
       this.update('options', options)

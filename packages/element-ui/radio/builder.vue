@@ -1,8 +1,3 @@
-<template>
-  <el-radio-group class="xform-el-radio" :value="value" @input="input" >
-    <el-radio :label="option" v-for="option in field.options" :key="option"/>
-  </el-radio-group>
-</template>
 
 <script>
 import {mixin} from '@src/index';
@@ -15,12 +10,43 @@ export default {
       type: String,
       default: null
     }
+  },
+  computed: {
+    layout(){
+      const field = this.field;
+      return field.attributes.layout || 'inline';
+    }
+  },
+  methods: {
+    renderOption(option){
+      if(this.layout == 'button') return <el-radio-button label={option.value} key={option.value}>{option.label || option.value}</el-radio-button>;
+
+      const className = [];
+      if(this.layout == 'block'){
+        className.push('xform-el-radio-block');
+      }
+
+      return <el-radio class={className} label={option.value} key={option.value}>{option.label || option.value}</el-radio>
+    }
+  },
+  render(){
+    const options = this.field.options || [];
+    return (
+      <el-radio-group class="xform-el-radio" value={this.value} onInput={this.input}>
+        {options.map(this.renderOption)}
+      </el-radio-group>
+    )
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .xform-el-radio .el-radio{
   line-height: 32px;
+}
+
+.el-radio.xform-el-radio-block{
+  display: block;
+  margin: 0;
 }
 </style>

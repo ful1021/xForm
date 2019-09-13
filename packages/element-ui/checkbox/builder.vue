@@ -1,9 +1,3 @@
-<template>
-  <el-checkbox-group class="xform-el-checkbox" :value="value" @input="input" >
-    <el-checkbox :label="option" v-for="option in field.options" :key="option"/>
-  </el-checkbox-group>
-</template>
-
 <script>
 import {mixin} from '@src/index';
 
@@ -17,6 +11,32 @@ export default {
         return []
       }
     }
+  },
+  computed: {
+    layout(){
+      const field = this.field;
+      return field.attributes.layout || 'inline';
+    }
+  },
+  methods: {
+    renderOption(option){
+      if(this.layout == 'button') return <el-checkbox-button label={option.value} key={option.value}>{option.label || option.value}</el-checkbox-button>;
+
+      const className = [];
+      if(this.layout == 'block'){
+        className.push('xform-el-checkbox-block');
+      }
+
+      return <el-checkbox class={className} label={option.value} key={option.value}>{option.label || option.value}</el-checkbox>
+    }
+  },
+  render(){
+    const options = this.field.options || [];
+    return (
+      <el-checkbox-group class="xform-el-checkbox" value={this.value} onInput={this.input}>
+        {options.map(this.renderOption)}
+      </el-checkbox-group>
+    )
   }
 }
 </script>
@@ -24,5 +44,10 @@ export default {
 <style>
 .xform-el-checkbox .el-checkbox{
   line-height: 32px;
+}
+
+.el-checkbox.xform-el-checkbox-block{
+  display: block;
+  margin: 0;
 }
 </style>

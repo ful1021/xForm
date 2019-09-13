@@ -5,8 +5,8 @@ import builder from './builder.vue';
 
 export default {
   type: 'checkbox',
-  title: '多选框',
-  icon: 'iconfont icon-xform-select',
+  title: '复选框',
+  icon: 'iconfont icon-xform-checkbox',
   maxLength: 20,
   component: {
     setting,

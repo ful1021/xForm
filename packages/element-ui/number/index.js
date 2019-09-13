@@ -6,7 +6,7 @@ import builder from './builder.vue';
 export default {
   type: 'number',
   title: '数字',
-  icon: 'iconfont icon-xform-select',
+  icon: 'iconfont icon-xform-number',
   maxLength: 20,
   component: {
     setting,

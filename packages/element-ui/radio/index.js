@@ -6,7 +6,7 @@ import builder from './builder.vue';
 export default {
   type: 'radio',
   title: '单选框',
-  icon: 'iconfont icon-xform-select',
+  icon: 'iconfont icon-xform-radio',
   maxLength: 20,
   component: {
     setting,
