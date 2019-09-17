@@ -1,17 +1,21 @@
 <template>
-  <div class="xform-setting">
+  <div class="xform-setting xform-setting-column">
     <h3 class="xform-setting-head">单选框</h3>
     <section class="xform-setting-group">
       <header>标题：</header>
-      <input type="text" class="xform-setting-control" data-prop="title" :value="field.title" @input="updateProp">
+      <el-input :value="field.title" @input="update('title', $event)" placeholder="请输入标题..."/>
     </section>
     <section class="xform-setting-group">
       <header>提示：</header>
-      <textarea class="xform-setting-control" data-prop="placeholder" :value="field.placeholder" @input="updateProp" rows="3" placeholder="请输入提示信息..."/>
+      <el-input 
+        type="textarea" :autosize="{minRows: 3, maxRows: 5}" 
+        :value="field.placeholder" @input="update('placeholder', $event)" 
+        placeholder="请输入提示信息..."
+      />
     </section>
     <section class="xform-setting-group">
       <header>验证：</header>
-      <el-checkbox :value="field.required" @input="val => update('required', val)">必填</el-checkbox>
+      <el-checkbox :value="field.required" @input="update('required', $event)">必填</el-checkbox>
     </section>
     <section class="xform-setting-group">
       <header>布局：</header>
@@ -21,16 +25,15 @@
         <el-radio-button label="button">按钮</el-radio-button>
       </el-radio-group>
     </section>
-    <section class="xform-setting-group">
+    <section class="xform-setting-group xform-setting-column-flex">
       <header>选项：</header>
-      <div>
-        <div v-for="(option, i) in field.options" :key="i">
-          <input type="text" :value="option.value" @input="updateOption(option)" >
-          <button type="button" @click="delOption(option)">删除</button>
+      <div class="xform-el-setting-options">
+        <div class="xform-el-setting-option" v-for="(option, i) in field.options" :key="i">
+          <el-input placeholder="请输入选项内容" :value="option.value" @input="updateOption(option, $event)" size="mini"/>
+          <button type="button" class="xform-el-setting-option-del" @click="delOption(option)"><i class="el-icon-minus"/></button>
         </div>
+        <el-button type="text" @click="addOption" size="medium" icon="el-icon-plus">添加选项</el-button>
       </div>
-      <button type="button" @click="addOption">添加选项</button>
-      <!-- <button type="button" @click="batchEdit">批量编辑</button> -->
     </section>
   </div>
 </template>
@@ -48,8 +51,7 @@ export default {
 
       this.update('options', options)
     },
-    updateOption(option){
-      const value = event.target.value;
+    updateOption(option, value){
       const options = this.field.options;
 
       this.$set(option, 'value', value);

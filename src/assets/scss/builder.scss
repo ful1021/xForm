@@ -23,6 +23,7 @@
 }
 
 .xform-item{
+  box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
 
@@ -53,6 +54,7 @@
 }
 
 .xform-item-label{
+  box-sizing: border-box;
   width: $--xform-item-label-width;
   padding: 5px 10px 0 0;  
   line-height: 20px;
@@ -60,6 +62,7 @@
 
 .xform-item-content{
   flex: 1;
+  box-sizing: border-box;
 }
 
 .xform-is-error {

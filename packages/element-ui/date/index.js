@@ -19,7 +19,7 @@ export default {
           <div class="xform-el-input-group">
             <input type="text" class="xform-el-mock" placeholder={this.prettyPlaceholder}/>
             <div class="xform-el-input-append">
-              <i class="iconfont icon-xform-text"></i>
+              <i class="iconfont icon-xform-date"></i>
             </div>
           </div>
         )

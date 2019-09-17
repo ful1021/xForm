@@ -7,7 +7,7 @@
         <router-link to="/viewer" class="nav-link">viewer</router-link>
       </nav>
       <div class="header-right">
-        <button type="button" @click="submit" v-if="component != 'viewer'">查看JSON</button>
+        <button type="button" @click="submit" v-if="showJSONBtn">查看JSON</button>
       </div>
     </div>
 
@@ -24,11 +24,6 @@ import Viewer from './components/Viewer.vue'
 
 export default {
   name: 'app',
-  data(){
-    return {
-      component: 'designer'
-    }
-  },
   methods: {
     submit(){
       let component = this.$refs.component;
@@ -38,9 +33,9 @@ export default {
       }
     }
   },
-  watch: {
-    component(value){
-      this.$router.push(`/${value}`)
+  computed: {
+    showJSONBtn(){
+      return /designer|builder/.test(this.$route.path);
     }
   },
   components: {
@@ -52,10 +47,6 @@ export default {
 </script>
 
 <style lang="scss">
-*{
-  box-sizing: border-box;
-}
-
 .example{
   height: 100vh;
   display: flex;

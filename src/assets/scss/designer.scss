@@ -15,6 +15,7 @@
 }
 
 .xform-designer-fields{
+  box-sizing: border-box;
   width: 320px;
   display: flex;
   flex-flow: row wrap;
@@ -24,6 +25,7 @@
 }
 
 .xform-designer-main{
+  box-sizing: border-box;
   flex: 1;
   height: 100%;
   padding: 10px;
@@ -32,6 +34,7 @@
 }
 
 .xform-designer-list{
+  box-sizing: border-box;
   position: relative;
   max-width: 640px;
   min-height: 320px;
@@ -49,8 +52,8 @@
 .xform-designer-setting{
   min-width: 360px;
   height: 100%;
-  overflow: auto;
   border-left: 1px solid transparent;
+  overflow: hidden;
 }
 
 .xform-designer-setting.xform-is-active{
@@ -64,6 +67,7 @@
 }
 
 .xform-designer-field-content{
+  box-sizing: border-box;
   position: relative;
   width: 145px;
   line-height: 24px;
@@ -197,62 +201,4 @@
     font-size: 15px;
     font-weight: 600;
   }
-}
-
-.xform-setting{
-  width: 360px;
-  padding: 10px;
-}
-
-.xform-setting-head{
-  margin: 0;
-  line-height: 24px;
-  font-size: 16px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #aaa;
-}
-
-.xform-setting-group{
-  margin-top: 10px;
-}
-
-.xform-setting-group > header{
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.xform-setting-control{
-  width: 100%;
-  border: 1px solid #aaa;
-  border-radius: 2px;
-  padding: 5px;
-  line-height: 20px;
-  word-break: break-all;
-}
-
-input.xform-setting-control{
-  height: 30px;
-}
-
-textarea.xform-setting-control{
-  min-width: 100%;
-  max-width: 100%;
-  max-height: 240px;
-}
-
-.xform-setting-checkbox{
-  margin: 0;
-  line-height: 20px;
-}
-
-.xform-setting-checkbox > span{
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 3px;
-}
-
-.xform-setting-checkbox > input[type="checkbox"]{
-  margin: 0;
-  vertical-align: middle;
 }

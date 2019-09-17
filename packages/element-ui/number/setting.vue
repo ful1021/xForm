@@ -3,15 +3,19 @@
     <h3 class="xform-setting-head">数字</h3>
     <section class="xform-setting-group">
       <header>标题：</header>
-      <input type="text" class="xform-setting-control" data-prop="title" :value="field.title" @input="updateProp">
+      <el-input :value="field.title" @input="update('title', $event)" placeholder="请输入标题..."/>
     </section>
     <section class="xform-setting-group">
       <header>提示：</header>
-      <textarea class="xform-setting-control" data-prop="placeholder" :value="field.placeholder" @input="updateProp" rows="3" placeholder="请输入提示信息..."/>
+      <el-input 
+        type="textarea" :autosize="{minRows: 3, maxRows: 5}" 
+        :value="field.placeholder" @input="update('placeholder', $event)" 
+        placeholder="请输入提示信息..."
+      />
     </section>
     <section class="xform-setting-group">
-      <header>验证：</header>
-      <el-checkbox :value="field.required" @input="val => update('required', val)">必填</el-checkbox>
+      <header>属性：</header>
+      <el-checkbox :value="field.required" @input="update('required', $event)">必填</el-checkbox>
     </section>
   </div>
 </template>

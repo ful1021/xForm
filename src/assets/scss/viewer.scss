@@ -6,12 +6,14 @@
 }
 
 .xform-viewer-main{
+  box-sizing: border-box;
   width: 640px;
   margin: 0 auto;
   padding: 0 10px;
 }
 
 .xform-viewer-item{
+  box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
   line-height: 20px;
@@ -49,9 +51,11 @@
 .xform-viewer-label{
   width: $--xform-viewer-item-label-width;
   padding: 5px 10px 0 0;  
+  box-sizing: border-box;
 }
 
 .xform-viewer-content{
   padding: 5px 10px;
   flex: 1;
+  box-sizing: border-box;
 }

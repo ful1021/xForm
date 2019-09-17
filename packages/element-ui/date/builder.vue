@@ -1,6 +1,6 @@
 <template>
   <el-date-picker
-    class="xform-el-date" type="date"
+    class="xform-el-date" :type="type"
     :name="field.name" :placeholder="prettyPlaceholder"
     :value="value" @input="input" 
     :value-format="formatter"
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// TODO: 支持datetime
 import {mixin} from '@src/index';
 
 export default {
@@ -24,6 +23,9 @@ export default {
   computed: {
     formatter(){
       return 'yyyy-MM-dd'
+    },
+    type(){
+      return this.field.attributes.type || 'date'
     }
   }
 }

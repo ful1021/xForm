@@ -96,9 +96,9 @@ const XFormView = {
       }
 
       const component = fieldDef.extension[`${this.mode}_viewer`] || fieldDef.component.viewer;
-
       if(null != component) return this.$createElement(component, {props});
-      return value;
+
+      return Array.isArray(value) ? value.join(', ') : value;
     }
   },
   render(){
