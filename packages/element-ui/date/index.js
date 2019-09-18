@@ -3,6 +3,9 @@ import {mixin} from '@src/index'
 import setting from './setting.vue';
 import builder from './builder.vue';
 
+const DATE_REG = /^\d{4}-\d{1,2}-\d{1,2}$/;
+const DATETIME_REG = /^\d{4}-\d{1,2}-\d{1,2}\s\d{2}:\d{2}:\d{2}$/;
+
 export default {
   type: 'date',
   title: '日期',
@@ -24,6 +27,12 @@ export default {
           </div>
         )
       }
+    }
+  },
+  validator: {
+    test(value, field){
+      const reg = field.type == 'date' ? DATE_REG : DATETIME_REG;
+      return reg.test(value) ? null : '格式有误，请重新选择';
     }
   }
 }

@@ -1,7 +1,5 @@
 export default class XFormFieldDef{
   constructor(options = {}){
-    const ctx = this;
-
     this.type = options.type;
     this.title = options.title;
     this.icon = options.icon;
@@ -11,10 +9,7 @@ export default class XFormFieldDef{
     this.component = options.component || {};
     this.extension = options.extension || {};
 
-    this.validator = function(){
-      if(typeof options.validator != 'function') return Promise.resolve();
-      return options.validator.apply(ctx, arguments)
-    };
+    this.validator = options.validator;
   }
 
   hasRequiredAttrs(){

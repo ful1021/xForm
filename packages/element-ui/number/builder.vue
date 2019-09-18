@@ -7,6 +7,7 @@
 </template>
 
 <script>
+// TODO: 弃用 InputNumber 组件
 import {mixin} from '@src/index';
 
 export default {

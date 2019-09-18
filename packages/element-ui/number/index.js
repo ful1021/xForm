@@ -16,11 +16,18 @@ export default {
       mixins: [mixin.preview],
       render(){
         return (
-          <select class="xform-el-mock">
-            <option disabled selected>{this.prettyPlaceholder}</option>
-          </select>
+          <div class="xform-el-input-group">
+            <input type="text" class="xform-el-mock" placeholder={this.prettyPlaceholder}/>
+            <div class="xform-el-input-append">
+              <i class="iconfont icon-xform-number"></i>
+            </div>
+          </div>
         )
       }
     }
+  },
+  validator: {
+    type: 'number',
+    message: '请输入数字'
   }
 }

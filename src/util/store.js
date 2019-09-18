@@ -75,12 +75,6 @@ function findModeTypes(mode){
   return findProp(state.config, `modes.${mode}`)
 }
 
-/** 获取某字段的验证器 */
-export function findFieldValidator(type){
-  const def = state.fields[type] || {};
-  return def.validator;
-}
-
 /** 查询某mode下所有字段的配置 */
 export function findFieldDefs(mode){
   let types = findModeTypes(mode);
@@ -98,8 +92,7 @@ const Store = {
   setConfig,
   findConfigProp,
   findFieldDef,
-  findFieldDefs,
-  findFieldValidator
+  findFieldDefs
 };
 
 export default Store;

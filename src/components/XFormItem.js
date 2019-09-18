@@ -2,6 +2,7 @@ import * as lang from '../util/lang';
 
 import store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
+import Validator from '../util/validator';
 
 import XField from '../model/XField';
 
@@ -63,10 +64,6 @@ const XFormItem = {
       const field = event && event.detail && event.detail.field || this.$static.field || this.field;      
       return field instanceof XField ? field : new XField(field);
     },
-    getValidator(type){
-      if(typeof this.validation == 'function') return this.validation;
-      return store.findFieldValidator(type);
-    },
     renderErrorMessage(){
       if(null == this.message) return null;
       return <p class='xform-item-message'>{this.message}</p>;
@@ -80,13 +77,9 @@ const XFormItem = {
       }
 
       const field = this.getField(event);
-      if(null == field) return Promise.resolve();
-
-      const validator = this.getValidator(field.type);
-      if(null == validator) return Promise.resolve();
-
       const value = typeof this.$static.value == 'function' ? this.$static.value() : this.$static.value;
-      return validator(field, value, this.changeMessage)
+      
+      return Validator.validate(field, value, this, this.validation)
         .then(() => {
           this.message = null;
           this.status = null;

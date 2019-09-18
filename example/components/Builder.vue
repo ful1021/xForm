@@ -47,9 +47,7 @@ export default {
       })
     },
     update(value){
-      this.model = value;
-
-      
+      this.model = Object.assign({}, this.model, value);
     },
     submit(){
       this.$refs.builder.validate().then(result => {

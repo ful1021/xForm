@@ -22,5 +22,8 @@ export default {
         )
       }
     }
+  },
+  validator: {
+    message: '至少选择一项'
   }
 }
