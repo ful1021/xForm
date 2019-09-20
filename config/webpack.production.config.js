@@ -9,7 +9,8 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = merge(baseConfig, {
   entry: {
-    'xform': ['./src/index.js']
+    'xform': ['./src/index.js'],
+    'xform.element-ui': ['./packages/element-ui/index.js', './packages/element-ui/theme.scss']
   },
   output: {
     publicPath: '/dist/',

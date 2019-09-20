@@ -3,6 +3,7 @@ import './app.scss';
 import Vue from 'vue';
 import router from './router';
 
+// TODO: 按需导入
 import ElementUI from 'element-ui';
 
 import Modal from './components/Modal.vue'

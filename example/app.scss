@@ -1,7 +1,8 @@
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--xform-font-path: '../packages/element-ui/assets/font';
 
 @import "~element-ui/packages/theme-chalk/src/index";
-@import "../packages/element-ui/theme/index.scss";
+@import "../packages/element-ui/theme.scss";
 
 body{
   padding: 0;
