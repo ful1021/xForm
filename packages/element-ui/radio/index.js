@@ -1,7 +1,7 @@
-import {mixin} from '@src/index';
 
 import setting from './setting.vue';
 import builder from './builder.vue';
+import preview from './preview.vue';
 
 export default {
   type: 'radio',
@@ -11,17 +11,7 @@ export default {
   component: {
     setting,
     builder,
-    preview: {
-      name: 'xform-el-select-preview',
-      mixins: [mixin.preview],
-      render(){
-        return (
-          <select class="xform-el-mock">
-            <option disabled selected>{this.prettyPlaceholder}</option>
-          </select>
-        )
-      }
-    }
+    preview
   },
   validator: {}
 }

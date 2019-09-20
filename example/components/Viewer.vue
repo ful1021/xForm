@@ -7,28 +7,19 @@
 </template>
 
 <script>
-import XForm from '../../src/index';
+import localData from '../mixin/localData';
 
 export default {
   name: 'viewer',
   inject: ['fieldKey', 'modelKey'],
+  mixins: [localData],
   data(){
     return {
-      fields: XForm.adapter.toFields(this.getLocalFields()),
+      fields: this.getLocalFields(),
       model: this.getLocalModel()
     }
   },
   methods: {
-    getLocalFields(){
-      const key = this.fieldKey;
-      const str = localStorage.getItem(key);
-      
-      try {
-        return JSON.parse(str) || []
-      } catch (error) {
-        return []
-      }
-    },
     getLocalModel(){
       const key = this.modelKey;
       const str = localStorage.getItem(key);
@@ -41,7 +32,7 @@ export default {
     }
   },
   activated(){
-    this.fields = XForm.adapter.toFields(this.getLocalFields())
+    this.fields = this.getLocalFields()
     this.model = this.getLocalModel()
   }
 }

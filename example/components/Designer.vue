@@ -10,21 +10,21 @@
 </template>
 
 <script>
-import XForm from '../../src/index';
+import localData from '../mixin/localData';
 
 export default {
   name: 'designer',
   inject: ['fieldKey'],
+  mixins: [localData],
   data(){
     return {
       show: false,
-      fields: XForm.adapter.toFields(this.getLocalFields())
+      fields: this.getLocalFields()
     }
   },
   computed: {
     json(){
-      const fields = XForm.adapter.toFields(this.fields)
-      return JSON.stringify(fields, null ,'  ');
+      return JSON.stringify(this.fields, null ,'  ');
     }
   },
   methods: {
@@ -32,22 +32,10 @@ export default {
       this.fields = value;
 
       // 本地存储
-      const key = this.fieldKey;
-      const data = XForm.adapter.toFields(value)
-      localStorage.setItem(key, JSON.stringify(data));
+      this.saveFieldsToLocal(this.fieldKey, value)
     },
     submit(){
       this.show = true;
-    },
-    getLocalFields(){
-      const key = this.fieldKey;
-      const str = localStorage.getItem(key);
-      
-      try {
-        return JSON.parse(str) || []
-      } catch (error) {
-        return []
-      }
     }
   }
 }

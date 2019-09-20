@@ -14,11 +14,12 @@
 </template>
 
 <script>
-import XForm from '../../src/index';
+import localData from '../mixin/localData';
 
 export default {
   name: 'builder',
   inject: ['fieldKey', 'modelKey'],
+  mixins: [localData],
   data(){
     return {
       customField: {
@@ -27,7 +28,7 @@ export default {
         title: '编号'
       },
       show: false,
-      fields: XForm.adapter.toFields(this.getLocalFields()),
+      fields: this.getLocalFields(),
       model: this.getLocalModel()
     }
   },
@@ -57,16 +58,6 @@ export default {
         console.error(err)
       })
     },
-    getLocalFields(){
-      const key = this.fieldKey;
-      const str = localStorage.getItem(key);
-      
-      try {
-        return JSON.parse(str) || []
-      } catch (error) {
-        return []
-      }
-    },
     getLocalModel(){
       const key = this.modelKey;
       const str = localStorage.getItem(key);
@@ -79,7 +70,7 @@ export default {
     }
   },
   activated(){
-    this.fields = XForm.adapter.toFields(this.getLocalFields())
+    this.fields = this.getLocalFields()
   },
   watch: {
     model: {
@@ -91,28 +82,28 @@ export default {
       }
     }
   },
-  components: {
-    'c-text': {
-      name: 'c-text',
-      mixins: [XForm.mixin.builder],
-      props: {
-        value: {
-          type: String,
-          default: null
-        }
-      },
-      render(){
-        const field = this.field;
+  // components: {
+  //   'c-text': {
+  //     name: 'c-text',
+  //     mixins: [XForm.mixin.builder],
+  //     props: {
+  //       value: {
+  //         type: String,
+  //         default: null
+  //       }
+  //     },
+  //     render(){
+  //       const field = this.field;
 
-        return (
-          <input 
-            type="text" id={field.name} name={field.name} 
-            class="xform-text xform-item-control" placeholder={this.placeholder} 
-            value={this.value} onInput={this.inputForDom}/>
-        )
-      }
-    }
-  }
+  //       return (
+  //         <input 
+  //           type="text" id={field.name} name={field.name} 
+  //           class="xform-text xform-item-control" placeholder={this.placeholder} 
+  //           value={this.value} onInput={this.inputForDom}/>
+  //       )
+  //     }
+  //   }
+  // }
 }
 </script>
 

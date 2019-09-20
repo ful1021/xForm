@@ -6,6 +6,10 @@ import Validator from '../util/validator';
 
 import XField from '../model/XField';
 
+/**
+ * TODO:
+ * 1. 支持设置说明 
+ */
 const XFormItem = {
   name: 'xform-item',
   mixins: [NonReactive],

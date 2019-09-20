@@ -68,6 +68,7 @@ const XFormDesigner = {
       const index = this.value.findIndex(f => f == field);
 
       if(index >= 0){
+        this.selectedField = null;
         this.value.splice(index, 1);
         this.$emit('input', this.value);
       }

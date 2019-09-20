@@ -1,8 +1,11 @@
-import {mixin} from '@src/index';
-
 import setting from './setting.vue';
 import builder from './builder.vue';
+import preview from './preview.vue';
 
+/**
+ * TODO:
+ * 1. 支持全选
+ */
 export default {
   type: 'checkbox',
   title: '复选框',
@@ -11,17 +14,7 @@ export default {
   component: {
     setting,
     builder,
-    preview: {
-      name: 'xform-el-select-preview',
-      mixins: [mixin.preview],
-      render(){
-        return (
-          <select class="xform-el-mock">
-            <option disabled selected>{this.prettyPlaceholder}</option>
-          </select>
-        )
-      }
-    }
+    preview
   },
   validator: {
     message: '至少选择一项'
