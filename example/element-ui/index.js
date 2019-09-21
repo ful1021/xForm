@@ -12,6 +12,7 @@ import Radio from 'element-ui/lib/radio';
 import RadioButton from 'element-ui/lib/radio-button';
 import RadioGroup from 'element-ui/lib/radio-group';
 import DatePicker from 'element-ui/lib/date-picker';
+import Tooltip from 'element-ui/lib/tooltip'
 
 const components = [
   Button,
@@ -25,7 +26,8 @@ const components = [
   Radio,
   RadioButton,
   RadioGroup,
-  DatePicker
+  DatePicker,
+  Tooltip
 ];
 
 export default {

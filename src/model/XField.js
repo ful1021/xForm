@@ -14,6 +14,7 @@ export default class XField{
     this.title = params.title;
     
     this.placeholder = params.placeholder;
+    this.tooltip = params.tooltip;
     this.defaultValue = params.defaultValue;
     
     this.required = params.required === true;

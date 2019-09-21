@@ -6,10 +6,6 @@ import Validator from '../util/validator';
 
 import XField from '../model/XField';
 
-/**
- * TODO:
- * 1. 支持设置说明 
- */
 const XFormItem = {
   name: 'xform-item',
   mixins: [NonReactive],
@@ -41,8 +37,13 @@ const XFormItem = {
       default(){
         const params = ['left', 'right', 'top']
         const position = store.findConfigProp('label.position', 'builder.label.position');
+        console.log(position)
         return params.indexOf(position) >= 0 ? position : params[0];
       }
+    },
+    behavior: {
+      type: String,
+      default: 'builder'
     }
   },
   static(){
@@ -122,6 +123,19 @@ const XFormItem = {
       if(error instanceof Error) return error.message;
 
       return error;
+    },
+    renderTooltip(){
+      if(!this.field.tooltip) return null;
+
+      const icon = <i class="iconfont icon-xform-tishi xform-item-tooltip-icon"></i>
+      if(this.behavior == 'designer') return icon;
+
+      return (
+        <el-tooltip >
+          {icon}
+          <pre slot="content" class="xform-item-tooltip-content">{this.field.tooltip}</pre>
+        </el-tooltip>
+      )
     }
   },
   render(){
@@ -142,7 +156,7 @@ const XFormItem = {
       <div class={className}>
         <label class="xform-item-label" style={labelStyle}>
           <span>{field.title}</span>
-          {field.required ? <sup class="xform-star">*</sup> : null}
+          {this.renderTooltip()}
         </label>
         <div class="xform-item-content">
           {this.$slots.default}

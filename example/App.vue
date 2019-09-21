@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss">
-$nav-link-darken: darken($--xform-color-primary, 15%); 
+$nav-link-darken: darken($--xform-color-primary, 18%); 
 
 body{
   font-size: 14px;
@@ -97,10 +97,11 @@ textarea.example-value{
 .nav-link{
   display: block;
   position: relative;
-  width: 120px;
+  width: 100px;
   line-height: 24px;
   padding: 10px 10px 10px 30px;
   color: #fff;
+  text-align: center;
   text-decoration: none;
   transition: all ease .3s;
   background-color: $--xform-color-primary;
@@ -138,8 +139,12 @@ textarea.example-value{
     }
   }
 
-  &:nth-child(1):before{
-    content: none;
+  &:nth-child(1){
+    padding-left: 10px;
+
+    &:before{
+      content: none;
+    }
   }
 
   &:nth-last-child(1):after{

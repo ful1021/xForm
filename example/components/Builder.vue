@@ -14,7 +14,7 @@
       </template>
       <template #bottom>
         <div class="builder-bottom">
-          <el-button type="primary" native-type="submit">提交</el-button>
+          <el-button type="primary" native-type="submit">提 交</el-button>
         </div>
       </template>
     </xform-builder>
@@ -141,6 +141,6 @@ export default {
 
 .builder-bottom{
   padding-top: 10px;
-  padding-left: 120px;
+  text-align: right;
 }
 </style>

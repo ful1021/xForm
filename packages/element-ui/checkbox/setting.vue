@@ -5,14 +5,14 @@
       <header>标题：</header>
       <el-input :value="field.title" @input="update('title', $event)" placeholder="请输入标题..."/>
     </section>
-    <!-- <section class="xform-setting-group">
-      <header>提示：</header>
+    <section class="xform-setting-group">
+      <header>说明：</header>
       <el-input 
         type="textarea" :autosize="{minRows: 3, maxRows: 5}" 
-        :value="field.placeholder" @input="update('placeholder', $event)" 
-        placeholder="请输入提示信息..."
+        :value="field.tooltip" @input="update('tooltip', $event)" 
+        placeholder="请输入说明信息..."
       />
-    </section> -->
+    </section>
     <section class="xform-setting-group">
       <header>属性：</header>
       <el-checkbox :value="field.required" @input="update('required', $event)">必填</el-checkbox>
