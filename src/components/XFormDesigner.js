@@ -239,7 +239,9 @@ const XFormDesigner = {
     },
     /** 渲染设置组件 */
     renderSetting(){
-      if(null == this.selectedField) return null;
+      if(null == this.selectedField) return (
+        <div class="xform-setting-tip">点击字段设置属性</div>
+      );
 
       const field = this.selectedField;
       const props = {field}
@@ -291,9 +293,12 @@ const XFormDesigner = {
           </div>     
         </div>
         <div class="xform-designer-main">
-          {this.renderPreview()}
+          {this.$slots.tool}
+          <div class="xform-designer-scroll">
+            {this.renderPreview()}
+          </div>
         </div>
-        <div class={['xform-designer-setting', null == this.selectedField ? null : 'xform-is-active']}>
+        <div class="xform-designer-setting">
           {this.renderSetting()}
         </div>
         <div class="xform-designer-ghost" key="xform-designer-ghost">

@@ -1,12 +1,24 @@
 <template>
   <div class="builder">
-    <xform-builder :fields="fields" :value="model" @input="update" ref="builder">
-      <!-- <template #top>
-        <xform-item :field="customField" :validation="validateCustomFiled">
+    <xform-builder 
+      :fields="fields" :value="model" @input="update" ref="builder" 
+      @submit="submit" 
+    >
+      <template #top>
+        <header class="builder-header">
+          <strong>笔记本电脑报修单</strong>
+        </header>
+        <!-- <xform-item :field="customField" :validation="validateCustomFiled">
           <c-text :field="customField" v-model="model.no"/>
-        </xform-item>
-      </template> -->
+        </xform-item> -->
+      </template>
+      <template #bottom>
+        <div class="builder-bottom">
+          <el-button type="primary" native-type="submit">提交</el-button>
+        </div>
+      </template>
     </xform-builder>
+   
     <modal title="form json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>
     </modal>
@@ -51,12 +63,7 @@ export default {
       this.model = Object.assign({}, this.model, value);
     },
     submit(){
-      this.$refs.builder.validate().then(result => {
-        console.log(result)
-        if(result.status) this.show = true;
-      }).catch(err => {
-        console.error(err)
-      })
+      this.show = true;
     },
     getLocalModel(){
       const key = this.modelKey;
@@ -107,8 +114,33 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .builder .xform-builder{
   padding: 10px 0;
+}
+
+.builder-header{
+  text-align: center;
+  line-height: 24px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 0;
+  position: relative;
+
+  background-image:linear-gradient(to right, #aaa,#aaa);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  strong{
+    font-weight: 600;    
+    background-color: #fff;
+    padding: 0 10px;
+  }
+}
+
+.builder-bottom{
+  padding-top: 10px;
+  padding-left: 120px;
 }
 </style>

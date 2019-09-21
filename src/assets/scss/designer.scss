@@ -28,16 +28,22 @@
   box-sizing: border-box;
   flex: 1;
   height: 100%;
-  padding: 10px;
-  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
   user-select: none;
+}
+
+.xform-designer-scroll{
+  padding: 10px;
+  flex: 1;
+  overflow: auto;
 }
 
 .xform-designer-list{
   box-sizing: border-box;
   position: relative;
-  max-width: 640px;
   min-height: 320px;
+  max-width: 640px;
   overflow: auto;
   margin: 0 auto;
   padding: 2px;
@@ -54,11 +60,16 @@
   height: 100%;
   border-left: 1px solid transparent;
   overflow: hidden;
-}
-
-.xform-designer-setting.xform-is-active{
   background-color: #fff;
   border-color: #eee;
+}
+
+.xform-setting-tip{
+  padding-top: 180px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 700;
+  color: #9a9a9a;
 }
 
 .xform-designer-field{

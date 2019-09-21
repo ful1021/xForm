@@ -1,6 +1,12 @@
 <template>
   <div class="designer">
     <xform-designer :value="fields" @input="update" ref="designer">
+      <template #tool>
+        <div class="designer-tool">
+          <el-button type="text" icon="el-icon-delete" size="medium" @click="clear">清空</el-button>
+          <el-button type="text" icon="el-icon-circle-check" size="medium" @click="submit">查看JSON</el-button>
+        </div>
+      </template>
       <!-- slot-->
     </xform-designer>
     <modal title="field json value" :show.sync="show">
@@ -34,9 +40,20 @@ export default {
       // 本地存储
       this.saveFieldsToLocal(this.fieldKey, value)
     },
+    clear(){
+      this.update([])
+    },
     submit(){
       this.show = true;
     }
   }
 }
 </script>
+
+<style lang="scss">
+.designer-tool{
+  text-align: right;
+  border-bottom: 1px solid #eee;
+  padding: 0 10px;
+}
+</style>

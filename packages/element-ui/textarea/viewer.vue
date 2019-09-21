@@ -30,5 +30,6 @@ export default {
 <style lang="scss">
 pre.xform-textarea-viewer{
   margin: 0;
+  font-family: inherit;
 }
 </style>

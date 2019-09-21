@@ -22,6 +22,10 @@ const XFormBuilder = {
     mode: {
       type: String,
       default: null
+    },
+    tag: {
+      type: String,
+      default: 'form'
     }
   },
   static(){
@@ -134,18 +138,40 @@ const XFormBuilder = {
       
       const component = fieldDef.extension[`${this.mode}_builder`] || fieldDef.component.builder;
       return null == component ? null : this.$createElement(component, {props, on});
+    },
+    buildBuilderData(tag){
+      let className = 'xform-builder';
+      let on = null;
+
+      if(tag == 'form'){
+        on = {
+          submit: event => {
+            event.preventDefault();
+            
+            this.validate().then(result => {
+              if(result.status) {
+                this.$emit('submit')
+              }
+            })
+          }
+        }
+      }
+      
+      return {'class': className, on};
     }
   },
-  render(){
-    return (
-      <div class="xform-builder">
-        <div class="xform-builder-main">
-          {this.$slots.top}
-          {this.fields.map(this.renderFormItem)}
-          {this.$slots.bottom}
-        </div>
+  render(h){
+    const tag = (this.tag || 'form').toLowerCase();
+    const data = this.buildBuilderData(tag);
+    const main = (
+      <div class="xform-builder-main">
+        {this.$slots.top}
+        {this.fields.map(this.renderFormItem)}
+        {this.$slots.bottom}
       </div>
-    )
+    );
+   
+    return h(tag, data, [main]);
   },
   created(){
     // 补全默认值
