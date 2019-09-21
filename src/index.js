@@ -27,6 +27,7 @@ const XForm = {
   adapter,
   mixin,
   model,
+  register: store.register,
   components
 } 
 

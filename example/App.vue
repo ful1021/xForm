@@ -47,6 +47,30 @@ export default {
 </script>
 
 <style lang="scss">
+body{
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Helvetica,Microsoft YaHei,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+}
+
+textarea{
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
+
+input, textarea{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea.example-value{
+  max-height: calc(100vh - 150px);
+  resize: none;
+  font-size: 14px;
+  font-family: Consolas, Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
 .example{
   height: 100vh;
   display: flex;

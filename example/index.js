@@ -1,17 +1,17 @@
-import './app.scss';
-
 import Vue from 'vue';
 import router from './router';
 
-// TODO: 按需导入
-import ElementUI from 'element-ui';
+import ElementUI from './element-ui/index';
+import XForm from '../src/index';
+import XFormElementUI from '../packages/element-ui';
 
 import Modal from './components/Modal.vue'
-import XForm from '../packages/element-ui';
 import App from './App.vue';
 
-Vue.use(ElementUI, {size: 'small'});
+XForm.register(XFormElementUI.components);
 Vue.component(Modal.name, Modal);
+
+Vue.use(ElementUI, {size: 'small'});
 Vue.use(XForm, {
   modes: {
     
