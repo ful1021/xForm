@@ -1,41 +1,21 @@
-import {cloneDeep} from 'lodash';
+import {clonePlainObject, findProp} from '@src/util/lang';
 
-import XFieldDef from '../model/XFieldDef'
+import XFieldType from '../model/XFieldType'
 import config from '../config';
 
 const state = {
-  config: {},    // 配置
-  fields: {}     // 字段
+  config: {},     // 全局配置
+  types: {}       // 字段类型
 }
 
 /** 设置组件配置 */
 export function setConfig(o = {}){
-  state.config = Object.assign(state.config, cloneDeep(config), cloneDeep(o))
+  state.config = Object.assign(state.config, clonePlainObject(config), clonePlainObject(o))
 }
 
 /**
- * 根据属性路径查找对应的值
- * @param {*} target -- 待查询的目标对象
- * @param {*} path -- 待查询属性的路径 `xxx[.xxx]*`
- * @returns 如果有任一值不存在则返回null
- */
-function findProp(target, path){
-  if(null == path || '' == path) return null;
-
-  let value = target;
-  let props = path.split('.');
-  for(let i = 0; i < props.length; i++){
-    let prop = props[i];
-    if(null == value[prop]) return null;
-    value = value[prop];
-  }
-
-  return value;
-}
-
-/**
- * 查询多个路径下的属性
- * @param  {...string} paths -- 任一个属性路径
+ * 查询多个路径下第一个不为null或undefined的属性
+ * @param  {...string} paths - 任一个属性路径
  * @returns 返回第一个不为null的值
  */
 export function findConfigProp(...paths){
@@ -55,44 +35,40 @@ export function register(...args){
 
   Array.from(arguments)
     .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
-    .map(o => new XFieldDef(o))
-    .filter(f => f.hasRequiredAttrs())
-    .forEach(def => {
-      state.fields[def.type] = def;
+    .map(o => new XFieldType(o))
+    .filter(f => f.available)
+    .forEach(ft => {
+      state.types[ft.type] = ft;
     });
 }
 
 /** 
- * 查询某字段的字段配置
+ * 查询某字段的字段结构
  * @param {string} type -- 字段类型
- * @returns {XFieldDef} 字段类型配置
+ * @returns {XFieldType} 字段类型配置
  */
-export function findFieldDef(type){
-  return state.fields[type]
-}
-
-function findModeTypes(mode){  
-  return findProp(state.config, `modes.${mode}`)
+export function findFieldType(type){
+  return state.types[type]
 }
 
 /** 查询某mode下所有字段的配置 */
-export function findFieldDefs(mode){
-  let types = findModeTypes(mode);
-  let all = Object.keys(state.fields);
+export function findModeTypes(mode){  
+  let types = findProp(state.config, `modes.${mode}`)
+  let all = Object.keys(state.types);
 
   if(Array.isArray(types)){
     all = all.filter(i => types.includes(i))
   }
 
-  return all.map(t => state.fields[t]);
+  return all.map(t => state.types[t]);
 }
 
 const Store = {
   register,
   setConfig,
   findConfigProp,
-  findFieldDef,
-  findFieldDefs
+  findFieldType,
+  findModeTypes
 };
 
 export default Store;

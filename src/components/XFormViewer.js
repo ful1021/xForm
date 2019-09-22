@@ -44,22 +44,14 @@ const XFormView = {
   },
   methods: {
     renderItem(field){
-      const content = this.createComponent(field)
-      const className = {
-        'xform-viewer-item': true,
-        [`xform-viewer-item-${this.labelPosition}`]: true,
-        'xform-is-required': field.required
-      }
-
-      const labelStyle = {
-        width: this.labelWidth
-      };
+      const content = this.createComponent(field);
+      const ft = field.findFieldType();
+      if(ft && ft.custom) return content;
 
       return (
-        <div class={className}>
-          <label class="xform-viewer-label" style={labelStyle}>{field.title}</label>
-          <div class="xform-viewer-content">{content}</div>
-        </div>
+        <xform-item field={field} validation={false} behavior="viewer">
+          {content}
+        </xform-item>
       )
     },
     /**
@@ -89,13 +81,13 @@ const XFormView = {
         return this.$scopedSlots[typedSlot](props);
       }
 
-      const fieldDef = Store.findFieldDef(field.type);
-      if(fieldDef == null){
+      const fieldType = field.findFieldType();
+      if(fieldType == null){
         console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
         return null;
       }
 
-      const component = fieldDef.extension[`${this.mode}_viewer`] || fieldDef.component.viewer;
+      const component = fieldType.extension[`${this.mode}_viewer`] || fieldType.component.viewer;
       if(null != component) return this.$createElement(component, {props});
 
       return Array.isArray(value) ? value.join(', ') : value;

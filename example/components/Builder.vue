@@ -5,9 +5,7 @@
       @submit="submit" 
     >
       <template #top>
-        <header class="builder-header">
-          <strong>笔记本电脑报修单</strong>
-        </header>
+        <header class="builder-header">笔记本电脑报修单</header>
         <!-- <xform-item :field="customField" :validation="validateCustomFiled">
           <c-text :field="customField" v-model="model.no"/>
         </xform-item> -->
@@ -124,19 +122,8 @@ export default {
   line-height: 24px;
   font-size: 20px;
   font-weight: 600;
-  padding: 10px 0;
-  position: relative;
+  padding: 10px 0 20px 0;
 
-  background-image:linear-gradient(to right, #aaa,#aaa);
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: center center;
-
-  strong{
-    font-weight: 600;    
-    background-color: #fff;
-    padding: 0 10px;
-  }
 }
 
 .builder-bottom{

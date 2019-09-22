@@ -37,7 +37,7 @@ const XFormItem = {
       default(){
         const params = ['left', 'right', 'top']
         const position = store.findConfigProp('label.position', 'builder.label.position');
-        console.log(position)
+        
         return params.indexOf(position) >= 0 ? position : params[0];
       }
     },
@@ -125,7 +125,7 @@ const XFormItem = {
       return error;
     },
     renderTooltip(){
-      if(!this.field.tooltip) return null;
+      if(!this.field.tooltip || this.behavior == 'viewer') return null;
 
       const icon = <i class="iconfont icon-xform-tishi xform-item-tooltip-icon"></i>
       if(this.behavior == 'designer') return icon;
@@ -153,7 +153,7 @@ const XFormItem = {
     };
 
     return (
-      <div class={className}>
+      <div class={className} data-behavior={this.behavior}>
         <label class="xform-item-label" style={labelStyle}>
           <span>{field.title}</span>
           {this.renderTooltip()}

@@ -4,6 +4,7 @@
     :name="field.name" :placeholder="prettyPlaceholder"
     :value="value" @input="input" 
     :value-format="formatter"
+    default-time="08:00:00"
     clearable
   />
 </template>
@@ -22,7 +23,7 @@ export default {
   },
   computed: {
     formatter(){
-      return 'yyyy-MM-dd'
+      return this.type == 'date' ? 'yyyy-MM-dd' : 'yyyy-MM-dd HH:mm:ss'
     },
     type(){
       return this.field.attributes.type || 'date'

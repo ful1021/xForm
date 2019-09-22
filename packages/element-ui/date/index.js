@@ -10,7 +10,6 @@ export default {
   type: 'date',
   title: '日期',
   icon: 'iconfont icon-xform-date',
-  maxLength: 20,
   component: {
     setting,
     builder,
@@ -31,7 +30,7 @@ export default {
   },
   validator: {
     test(value, field){
-      const reg = field.type == 'date' ? DATE_REG : DATETIME_REG;
+      const reg = field.attributes.type == 'date' ? DATE_REG : DATETIME_REG;
       return reg.test(value) ? null : '格式有误，请重新选择';
     }
   }

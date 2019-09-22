@@ -1,4 +1,4 @@
-import {cloneDeep} from 'lodash';
+import {clonePlainObject} from '@src/util/lang';
 
 const label = {
   // left, right, top,
@@ -9,7 +9,7 @@ const label = {
 const builder = {
   // 自定义xform-builder的class
   className: null,
-  label: cloneDeep(label)
+  label: clonePlainObject(label)
 }
 
 const config = {

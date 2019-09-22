@@ -9,7 +9,6 @@ export default {
   type: 'text',
   title: '单行文本',
   icon: 'iconfont icon-xform-text',
-  maxLength: MAX_LENGTH,
   component: {
     setting,
     builder,

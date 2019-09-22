@@ -10,7 +10,6 @@ export default {
   type: 'textarea',
   title: '多行文本',
   icon: 'iconfont icon-xform-textarea',
-  maxLength: MAX_LENGTH,
   component: {
     setting,
     builder,

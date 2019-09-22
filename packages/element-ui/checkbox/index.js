@@ -10,7 +10,6 @@ export default {
   type: 'checkbox',
   title: '复选框',
   icon: 'iconfont icon-xform-checkbox',
-  maxLength: 20,
   component: {
     setting,
     builder,

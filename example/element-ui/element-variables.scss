@@ -15,5 +15,6 @@ $--xform-font-path: '../../packages/element-ui/assets/font';
 @import "~element-ui/packages/theme-chalk/src/radio-group.scss";
 @import "~element-ui/packages/theme-chalk/src/date-picker.scss";
 @import "~element-ui/packages/theme-chalk/src/tooltip.scss";
+@import "~element-ui/packages/theme-chalk/src/slider.scss";
 
-@import "../../packages/element-ui/theme.scss";
+@import "../../packages/element-ui/index.scss";

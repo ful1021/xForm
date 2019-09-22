@@ -7,6 +7,7 @@ import Checkbox from './checkbox';
 import Radio from './radio';
 
 import Date from './date';
+import Divider from './divider'
 
 /**
  * TODO:
@@ -20,6 +21,7 @@ export default {
     Select, 
     Checkbox, 
     Radio, 
-    Date
+    Date,
+    Divider
   ]
 }

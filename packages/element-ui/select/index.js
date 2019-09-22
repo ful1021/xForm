@@ -7,7 +7,6 @@ export default {
   type: 'select',
   title: '下拉选择',
   icon: 'iconfont icon-xform-select',
-  maxLength: 20,
   component: {
     setting,
     builder,

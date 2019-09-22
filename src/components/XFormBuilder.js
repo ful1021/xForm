@@ -1,6 +1,4 @@
-import Store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
-
 import {isEmptyStr} from '../util/lang';
 
 const XFormBuilder = {
@@ -94,9 +92,14 @@ const XFormBuilder = {
       return value;
     },
     renderFormItem(field){
+      const content = this.createComponent(field);
+      const ft = field.findFieldType();
+      
+      if(ft && ft.custom) return content;
+
       return (
         <xform-item field={field}>
-          {this.createComponent(field)}
+          {content}
         </xform-item>
       )
     },
@@ -123,8 +126,8 @@ const XFormBuilder = {
         return this.$scopedSlots[typedSlot]({field});
       }
 
-      const fieldDef = Store.findFieldDef(field.type);
-      if(fieldDef == null){
+      const fieldType = field.findFieldType();
+      if(fieldType == null){
         return console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
       }
       
@@ -136,7 +139,7 @@ const XFormBuilder = {
         }
       }
       
-      const component = fieldDef.extension[`${this.mode}_builder`] || fieldDef.component.builder;
+      const component = fieldType.extension[`${this.mode}_builder`] || fieldType.component.builder;
       return null == component ? null : this.$createElement(component, {props, on});
     },
     buildBuilderData(tag){

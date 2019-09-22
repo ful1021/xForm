@@ -4,12 +4,11 @@ const baseConfig = require('./webpack.base.config');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = merge(baseConfig, {
   entry: {
-    'xform': ['./src/index.js'],
+    'xform': ['./src/index.js', './src/index.scss'],
     'xform.element-ui': ['./packages/element-ui/index.js', './packages/element-ui/theme.scss']
   },
   output: {
@@ -22,7 +21,6 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new LodashModuleReplacementPlugin(),
     new OptimizeCSSPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',

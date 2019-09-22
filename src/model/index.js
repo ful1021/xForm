@@ -1,9 +1,9 @@
 import XField from './XField';
-import XFieldDef from './XFieldDef';
+import XFieldType from './XFieldType';
 
 const model = {
   XField,
-  XFieldDef
+  XFieldType
 }
 
 export default model;

@@ -4,7 +4,6 @@ const presets = [
 ];
 
 const plugins = [
-  'lodash',
   '@babel/plugin-proposal-object-rest-spread',
   '@babel/plugin-syntax-jsx'
 ]

@@ -35,6 +35,7 @@ export default {
 </script>
 
 <style lang="scss">
+$--xform-color-primary: #409EFF !default;
 $nav-link-darken: darken($--xform-color-primary, 18%); 
 
 body{

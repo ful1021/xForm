@@ -72,6 +72,7 @@ export default [
     type: 'radio',
     name: 'field_33a15176',
     title: '保修状态',
+    tooltip: '- 保修期内(中国大陆正规渠道购买的产品在保修期内因为产品质量问题导致的故障，且无人为损坏)\n- 人为损坏(人为不当使用或未按说明书要求使用导致的损坏，如：屏幕有裂痕、接口断裂、外壳变形、进液损坏、ROOT、非厂商授权机构维修等)\n- 保质期外(产品已过保修期)',
     required: true,
     options: [
       {
@@ -84,7 +85,6 @@ export default [
         value: '保修期外'
       }
     ],
-    tooltip: '- 保修期内(中国大陆正规渠道购买的产品在保修期内因为产品质量问题导致的故障，且无人为损坏)\n- 人为损坏(人为不当使用或未按说明书要求使用导致的损坏，如：屏幕有裂痕、接口断裂、外壳变形、进液损坏、ROOT、非厂商授权机构维修等)\n- 保质期外(产品已过保修期)',
     attributes: {
       style: 'inline',
       layout: 'inline'
@@ -123,6 +123,37 @@ export default [
     title: '备注',
     placeholder: '如有其他需求，请在此填写',
     required: false,
+    options: [],
+    attributes: {}
+  },
+  {
+    type: 'divider',
+    name: 'field_ba61015f',
+    title: '个人信息',
+    required: false,
+    options: [],
+    attributes: {
+      layout: 'center',
+      type: 'double',
+      top: 50,
+      bottom: 0
+    }
+  },
+  {
+    type: 'text',
+    name: 'field_a874aae7',
+    title: '姓名',
+    placeholder: '请填写姓名，方便我们与您联系',
+    required: true,
+    options: [],
+    attributes: {}
+  },
+  {
+    type: 'text',
+    name: 'field_fa4a9fde',
+    title: '联系方式',
+    placeholder: '电话号码、手机号、邮箱皆可',
+    required: true,
     options: [],
     attributes: {}
   }

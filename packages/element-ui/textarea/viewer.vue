@@ -31,5 +31,6 @@ export default {
 pre.xform-textarea-viewer{
   margin: 0;
   font-family: inherit;
+  white-space: pre-line;
 }
 </style>

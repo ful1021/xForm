@@ -1,24 +1,23 @@
-import store from './store';
 import { isRegExp, isEmptyStr } from '../util/lang';
 
 
 export function validate(field, value, context, external){
   if(null == field || null == field.type) return Promise.resolve();
 
-  const def = store.findFieldDef(field.type);
-  if(null == def) return Promise.resolve();
+  const fieldType = field.findFieldType();
+  if(null == fieldType) return Promise.resolve();
 
   // 如果有外部传入的自定义验证器
-  if(typeof external == 'function') return external(field, value, context, def);
+  if(typeof external == 'function') return external(field, value, context);
   // 如果没有定义验证器，那么默认验证通过
-  if(null == def.validator) return Promise.resolve();
+  if(null == fieldType.validator) return Promise.resolve();
 
   // 如果是是自定义验证器
-  const validator = def.validator;
-  if(typeof validator == 'function') return validator(field, value, context, def);
+  const validator = fieldType.validator;
+  if(typeof validator == 'function') return validator(field, value, context);
   
   // 如果不是自定义验证器，执行默认方法
-  return validateRules(validator, field, value, def);
+  return validateRules(validator, field, value);
 }
 
 /**
@@ -28,11 +27,11 @@ export function validate(field, value, context, external){
  * @param {*} field 
  * @param {*} value 
  */
-export function validateRules(rules, field, value, def){
+export function validateRules(rules, field, value){
   if(!Array.isArray(rules)) rules = [rules];
 
   for(let i = 0; i < rules.length; i++){
-    const message = validateRule(rules[i], field, value, def);
+    const message = validateRule(rules[i], field, value);
     if(null != message) return Promise.reject(message);
   }
 
@@ -52,14 +51,14 @@ export function validateRules(rules, field, value, def){
  * @param {*} field 
  * @param {*} value 
  */
-export function validateRule(rule, field, value, def){
+export function validateRule(rule, field, value){
   // 非必填且为空值时不验证
   if(field.required !== true && isEmptyStr(value)) return null;
 
-  if(typeof rule.test == 'function') return rule.test(value, field, def)
+  if(typeof rule.test == 'function') return rule.test(value, field)
 
   if(null != rule.type) {
-    const typeErr = matchType(rule, value, field);
+    const typeErr = matchType(rule, value);
     if(null !== typeErr) return rule.message || typeErr;
   }
 

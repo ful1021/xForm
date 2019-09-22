@@ -4,7 +4,6 @@ const baseConfig = require('./webpack.base.config');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
@@ -19,7 +18,6 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new LodashModuleReplacementPlugin(),
     new OptimizeCSSPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[hash:8].css',

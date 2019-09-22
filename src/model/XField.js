@@ -1,3 +1,7 @@
+import Store from '../util/store';
+import {clonePlainObject} from '../util/lang';
+import XFieldType from './XFieldType';
+
 function initOptions(params){
   if(['select', 'checkbox', 'radio'].indexOf(params.type) < 0) return [];
   
@@ -19,7 +23,7 @@ export default class XField{
     
     this.required = params.required === true;
     this.options = initOptions(params);
-    this.attributes = params.attributes || {};
+    this.attributes = clonePlainObject(params.attributes || {});
 
     // 设计器相关属性
     this.designer = {
@@ -28,7 +32,15 @@ export default class XField{
 
     Object.defineProperty(this, '_exclude_props', {
       enumerable: false,
-      value: ['designer']
+      value: ['designer', 'storage']
+    });
+
+    Object.defineProperty(this, '_storage', {
+      enumerable: false,
+      value: {
+        // 缓存字段类型对象
+        fieldType: null
+      }
     });
   }
 
@@ -36,13 +48,31 @@ export default class XField{
   toJSON(){
     const exclude = this._exclude_props || [];
     const props = Object.keys(this).filter(k => exclude.indexOf(k) < 0);
-    const json = {};
+    const o = {};
 
     for(let i = 0; i < props.length; i++){
       const prop = props[i];
-      json[prop] = this[prop]
+      o[prop] = this[prop]
     }
 
-    return json;
+    return o;
+  }
+
+  /**
+   * 查询该字段对应的字段类型对象
+   * @returns {XFieldType | null} 不存在返回null
+   */
+  findFieldType(){
+    if(null == this.type) return null;
+
+    // 先查询缓存
+    const storage = this._storage;
+    if(storage.fieldType instanceof XFieldType) return storage.fieldType;
+
+    // 再查询store
+    const ft = Store.findFieldType(this.type);
+    if(null != ft) storage.fieldType = ft;
+
+    return ft;
   }
 }

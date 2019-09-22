@@ -47,11 +47,9 @@ const XFormDesigner = {
       }
     }
   },
-  data(){
-    const fields = Store.findFieldDefs(this.mode);
-    
+  data(){    
     return {
-      fields,
+      fieldTypes: Store.findModeTypes(this.mode),
       selectedField: null
     };
   },
@@ -200,6 +198,7 @@ const XFormDesigner = {
       )
     },
     renderFieldPreview(field){
+      const ft = field.findFieldType();
       const preview = this.createComponent('preview', field, {props: {field}})
       const className = {
         'xform-designer-preview': true,
@@ -210,7 +209,11 @@ const XFormDesigner = {
 
       return (
         <div class={className}>
-          <xform-item class="xform-template" field={field} validation={false} behavior="designer">{preview}</xform-item>
+          {
+            ft && ft.custom 
+              ? preview
+              : <xform-item class="xform-template" field={field} validation={false} behavior="designer">{preview}</xform-item>
+          }
           <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-remove"></i>
           </button>
@@ -244,7 +247,7 @@ const XFormDesigner = {
       );
 
       const field = this.selectedField;
-      const props = {field}
+      const props = {field};
       const on = {
         update: event => {
           field[event.prop] = event.value;
@@ -274,13 +277,13 @@ const XFormDesigner = {
         return this.$scopedSlots[typedSlot]({field});
       }
 
-      const fieldDef = Store.findFieldDef(field.type);
-      if(fieldDef == null){
+      const fieldType = field.findFieldType();
+      if(fieldType == null){
         console.warn(`[xform]: ${field.title}(${field.type}) not implement`)
         return null;
       }
 
-      const component = fieldDef.extension[`${this.mode}_${target}`] || fieldDef.component[target];
+      const component = fieldType.extension[`${this.mode}_${target}`] || fieldType.component[target];
       return this.$createElement(component, attrs);
     }
   },
@@ -289,7 +292,7 @@ const XFormDesigner = {
       <div class="xform-designer">
         <div class="xform-designer-field-panel">
           <div class="xform-designer-fields">
-            {this.fields.map(this.renderField)}
+            {this.fieldTypes.map(this.renderField)}
           </div>     
         </div>
         <div class="xform-designer-main">

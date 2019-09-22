@@ -1,5 +1,3 @@
-import './assets/scss/index.scss';
-
 import store from './util/store';
 import adapter from './util/adapter';
 import mixin from './mixin';
