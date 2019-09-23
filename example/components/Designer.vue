@@ -1,13 +1,12 @@
 <template>
   <div class="designer">
-    <xform-designer :value="fields" @input="update" ref="designer">
+    <xform-designer :value="fields" @input="update" ref="designer" mode="a">
       <template #tool>
         <div class="designer-tool">
           <el-button type="text" icon="el-icon-delete" size="medium" @click="clear">清空</el-button>
           <el-button type="text" icon="el-icon-circle-check" size="medium" @click="submit">查看JSON</el-button>
         </div>
       </template>
-      <!-- slot-->
     </xform-designer>
     <modal title="field json value" :show.sync="show">
       <textarea :value="json" class="example-value" rows="45" readonly/>

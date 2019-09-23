@@ -49,7 +49,6 @@ const XFormDesigner = {
   },
   data(){    
     return {
-      fieldTypes: Store.findModeTypes(this.mode),
       selectedField: null
     };
   },
@@ -182,21 +181,6 @@ const XFormDesigner = {
       document.removeEventListener('mousemove', this.dragging);
       document.removeEventListener('mouseup', this.dragend);
     },
-    
-    renderField(field){
-      return (
-        <div 
-          class="xform-designer-field xform-draggable" 
-          onMousedown={e => this.dragstart(e, field, 'insert')} 
-          onClick={e => this.quickInsert(e, field)}
-        >
-          <div class="xform-designer-field-content xform-template">
-            <i class={field.icon}></i>
-            <span>{field.title}</span>
-          </div>
-        </div>
-      )
-    },
     renderFieldPreview(field){
       const ft = field.findFieldType();
       const preview = this.createComponent('preview', field, {props: {field}})
@@ -212,7 +196,13 @@ const XFormDesigner = {
           {
             ft && ft.custom 
               ? preview
-              : <xform-item class="xform-template" field={field} validation={false} behavior="designer">{preview}</xform-item>
+              : (
+                <xform-item 
+                  class="xform-template" field={field} validation={false} behavior="designer" 
+                  label-position={Store.findConfigProp('designer.label.position')} 
+                  label-width={Store.findConfigProp('designer.label.width')}
+                >{preview}</xform-item>
+              )
           }
           <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-remove"></i>
@@ -285,15 +275,45 @@ const XFormDesigner = {
 
       const component = fieldType.extension[`${this.mode}_${target}`] || fieldType.component[target];
       return this.$createElement(component, attrs);
+    },
+    renderFieldType(field){
+      return (
+        <div 
+          class="xform-designer-field-type-wrap xform-draggable" 
+          onMousedown={e => this.dragstart(e, field, 'insert')} 
+          onClick={e => this.quickInsert(e, field)}
+        >
+          <div class="xform-designer-field-type xform-template">
+            <i class={field.icon}></i>
+            <span>{field.title}</span>
+          </div>
+        </div>
+      )
+    },
+    renderFieldTypePanel(){
+      let mode = Store.findMode(this.mode);   
+      if(mode.length == 0 || typeof mode[0] != 'object') mode = [{types: mode}];
+
+      return mode.map(item => {
+        const title = item.group ? <h3>{item.group}</h3> : null;
+        const types = Store.findFieldTypes(item.types);
+
+        return (
+          <div class="xform-designer-field-type-group">
+            {title}
+            <div class="xform-designer-field-types">
+              {types.map(this.renderFieldType)}
+            </div>
+          </div>
+        )
+      })
     }
   },
   render(){
     return (
       <div class="xform-designer">
-        <div class="xform-designer-field-panel">
-          <div class="xform-designer-fields">
-            {this.fieldTypes.map(this.renderField)}
-          </div>     
+        <div class="xform-designer-panel">
+          {this.renderFieldTypePanel()}  
         </div>
         <div class="xform-designer-main">
           {this.$slots.tool}

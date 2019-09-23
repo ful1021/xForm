@@ -13,10 +13,12 @@ export default {
     builder,
     viewer: builder
   },
-  attributes: {
-    layout: 'center',
-    type: 'solid',
-    top: 0,
-    bottom: 0
+  attributes(){
+    return {
+      layout: 'center',
+      type: 'solid',
+      top: 0,
+      bottom: 0
+    }
   }
 }

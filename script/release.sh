@@ -1,13 +1,13 @@
 #!/bin/bash
 
-git checkout master
-
 # read current version number
 CURRENT_VERSION=$(cat ./package.json | grep 'version' | sed 's/.*"\(.*\).*",/\1/g')
 
 # read new version number
 echo '版本号格式为[major.minor.patch], 输入[n/N]退出'
-while read -p "当前版本号为[$CURRENT_VERSION]，请输入新的版本号:" VERSION; do
+echo "当前版本号为: $CURRENT_VERSION"
+
+while read -p "请输入新的版本号:" VERSION; do
   if [[ $VERSION != $CURRENT_VERSION && $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then 
     break
   fi
@@ -17,12 +17,17 @@ while read -p "当前版本号为[$CURRENT_VERSION]，请输入新的版本号:"
   fi
 done
 
+git checkout master
+echo ''
+
 #build
 echo -e '\nbuild bundle for production'
 npm run build:production -- RELEASE_VERSION=$VERSION
+echo ''
 
 echo -e '\nbuild bundle for expample'
 npm run build:example
+echo ''
 
 # commit
 git add .

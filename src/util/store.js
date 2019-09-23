@@ -1,4 +1,4 @@
-import {clonePlainObject, findProp} from '@src/util/lang';
+import {clonePlainObject, mergePlainObject, findProp} from '@src/util/lang';
 
 import XFieldType from '../model/XFieldType'
 import config from '../config';
@@ -10,7 +10,9 @@ const state = {
 
 /** 设置组件配置 */
 export function setConfig(o = {}){
-  state.config = Object.assign(state.config, clonePlainObject(config), clonePlainObject(o))
+  const original = clonePlainObject(config);
+  const clone = clonePlainObject(o);
+  state.config = mergePlainObject(state.config, original, clone);
 }
 
 /**
@@ -33,7 +35,7 @@ export function findConfigProp(...paths){
 export function register(...args){
   if(args.length <= 0) return;
 
-  Array.from(arguments)
+  args
     .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
     .map(o => new XFieldType(o))
     .filter(f => f.available)
@@ -48,27 +50,36 @@ export function register(...args){
  * @returns {XFieldType} 字段类型配置
  */
 export function findFieldType(type){
-  return state.types[type]
+  return state.types[type];
 }
 
-/** 查询某mode下所有字段的配置 */
-export function findModeTypes(mode){  
-  let types = findProp(state.config, `modes.${mode}`)
-  let all = Object.keys(state.types);
+/** 
+ * 查询某字段的字段结构
+ * @param {...*} args -- 字段类型
+ * @returns {XFieldType[]} 字段类型配置
+ */
+export function findFieldTypes(...args){
+  let types = args
+    .reduce((acc, val) => (Array.isArray(val) ? acc = acc.concat(val) : acc.push(val)) && acc, [])
+    .filter(t => null != t);
 
-  if(Array.isArray(types)){
-    all = all.filter(i => types.includes(i))
-  }
-
-  return all.map(t => state.types[t]);
+  if(types.length == 0) types = Object.keys(state.types);
+  return types.map(t => state.types[t]).filter(t => null != t);
 }
 
-const Store = {
+/** 查询某mode下所有字段的配置, 必定返回数组 */
+export function findMode(prop){  
+  let mode = findProp(state.config, `modes.${prop}`);
+  if(!Array.isArray(mode)) return [];
+  
+  return mode.filter(i => null != i);
+}
+
+export default {
   register,
   setConfig,
   findConfigProp,
   findFieldType,
-  findModeTypes
+  findFieldTypes,
+  findMode
 };
-
-export default Store;

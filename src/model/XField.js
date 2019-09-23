@@ -1,5 +1,4 @@
 import Store from '../util/store';
-import {clonePlainObject} from '../util/lang';
 import XFieldType from './XFieldType';
 
 function initOptions(params){
@@ -23,7 +22,7 @@ export default class XField{
     
     this.required = params.required === true;
     this.options = initOptions(params);
-    this.attributes = clonePlainObject(params.attributes || {});
+    this.attributes = typeof params.attributes == 'function' ? params.attributes() : params.attributes || {};
 
     // 设计器相关属性
     this.designer = {

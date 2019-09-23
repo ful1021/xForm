@@ -1,4 +1,5 @@
 import NonReactive from '../mixin/non-reactive';
+import Store from '../util/store';
 import {isEmptyStr} from '../util/lang';
 
 const XFormBuilder = {
@@ -98,7 +99,11 @@ const XFormBuilder = {
       if(ft && ft.custom) return content;
 
       return (
-        <xform-item field={field}>
+        <xform-item 
+          field={field} 
+          label-position={Store.findConfigProp('builder.label.position')} 
+          label-width={Store.findConfigProp('builder.label.width')}
+        >
           {content}
         </xform-item>
       )

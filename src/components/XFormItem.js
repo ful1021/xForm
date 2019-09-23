@@ -28,7 +28,7 @@ const XFormItem = {
     labelWidth: {
       type: String,
       default(){
-        return store.findConfigProp('viewer.label.width', 'label.width');
+        return store.findConfigProp('label.width');
       }
     },
     /** label位置 */
@@ -36,7 +36,7 @@ const XFormItem = {
       type: String,
       default(){
         const params = ['left', 'right', 'top']
-        const position = store.findConfigProp('label.position', 'builder.label.position');
+        const position = store.findConfigProp('label.position');
         
         return params.indexOf(position) >= 0 ? position : params[0];
       }

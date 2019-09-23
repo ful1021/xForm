@@ -47,9 +47,8 @@ export function isNonIntersect(el, container){
  * @param {number} distance - 移动的距离
  * @param {HTMLElement} container - 容器
  * @param {HTMLElement} ghost - 拖动的元素
- * @param {number} currentIndex - 当前的索引
  */
-export function computeIndex(direction, distance, container, ghost, currentIndex = -1){
+export function computeIndex(direction, distance, container, ghost){
   const doms = Array.from(container.children);
   const rect = container.getBoundingClientRect();
 

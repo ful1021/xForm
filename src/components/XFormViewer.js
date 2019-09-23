@@ -49,7 +49,11 @@ const XFormView = {
       if(ft && ft.custom) return content;
 
       return (
-        <xform-item field={field} validation={false} behavior="viewer">
+        <xform-item 
+          field={field} validation={false} behavior="viewer"
+          label-position={Store.findConfigProp('viewer.label.position')} 
+          label-width={Store.findConfigProp('viewer.label.width')}
+        >
           {content}
         </xform-item>
       )

@@ -1,7 +1,3 @@
-export function isArrayType(field){
-
-}
-
 export function genPlaceholder(field){
   if(null == field) return '';
 

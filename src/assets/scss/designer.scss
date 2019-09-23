@@ -7,21 +7,11 @@
   color: $--xform-text-color-primary;
 }
 
-.xform-designer-field-panel{
+.xform-designer-panel{
   border-right: 1px solid #eee;
   background-color: #fff;
   user-select: none;
   overflow: auto;
-}
-
-.xform-designer-fields{
-  box-sizing: border-box;
-  width: 320px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  
-  padding: 0 10px 10px 10px;
 }
 
 .xform-designer-main{
@@ -68,12 +58,31 @@
   color: #9a9a9a;
 }
 
-.xform-designer-field{
+.xform-designer-field-type-group{
+  h3{
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    padding: 10px 0 0 10px;
+  }
+}
+
+.xform-designer-field-types{
+  box-sizing: border-box;
+  width: 320px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  
+  padding: 0 10px 10px 10px;
+}
+
+.xform-designer-field-type-wrap{
   margin: 10px 0 0 0;
   height: 32px;
 }
 
-.xform-designer-field-content{
+.xform-designer-field-type{
   box-sizing: border-box;
   position: relative;
   width: 145px;

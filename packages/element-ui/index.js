@@ -9,10 +9,6 @@ import Radio from './radio';
 import Date from './date';
 import Divider from './divider'
 
-/**
- * TODO:
- * 1. 添加Divider 分割线
- */
 export default {
   components: [
     Text, 
