@@ -38,6 +38,22 @@ const XFormDesigner = {
     }
   },
   methods: {
+    scroll(event){
+      const {pixelY} = dom.normalizeWheel(event);
+      this.$refs.scroll.scrollTop += pixelY;
+    },
+    chooseField(field){
+      this.selectedField = field;
+      
+      this.$nextTick(() => {
+        const scroll = this.$refs.scroll;
+        const el = this.$refs.list.querySelector('.xform-is-selected');
+
+        if(dom.isHidden(el, scroll)){
+          scroll.scrollTop = el.offsetTop;
+        }
+      })
+    },
     /** 删除字段 */
     remove(event, field){
       if(!confirm('该字段删除后不可恢复，是否继续？')) return;
@@ -49,25 +65,15 @@ const XFormDesigner = {
         this.$emit('input', this.value);
       }
     },
-    /** 快速插入字段 */
-    quickInsert(event, options){
-      const field = new XField(options);
-      const value = this.value.concat(field);
-      
-      this.selectedField = field;
-      this.$emit('input', value)
-    },
     /** 拖拽插入字段 */
     insert(index){
       const dragEvent = this.$static.dragEvent;
-      const field = new XField(dragEvent.fieldType);
+      const field = new XField(dragEvent.target._xform_field_type);
 
       this.value.splice(index, 0, field);
       this.$emit('input', this.value);
-      this.selectedField = field;
 
-      dragEvent.mode = 'sort';
-      dragEvent.inserted = field;
+      return field;
     },
     /** 
      * 拖拽排序
@@ -84,13 +90,13 @@ const XFormDesigner = {
 
       this.$emit('input', arr);
     },
-    dragstart(event, field, fieldType, mode){
+    dragstart(event){
       // 屏蔽非鼠标左键的点击事件
       if(event.button !== 0) return;
-      if(field != null) this.selectedField = field;
 
-      this.$static.dragEvent = this.createDragEvent(event, field, fieldType, mode);
-      if(mode == 'sort') this.$refs.list.insertBefore(this.$refs.line, this.$static.dragEvent.target);
+      const dragEvent = this.createDragEvent(event);
+      this.$static.dragEvent = dragEvent;
+      this.$refs.list.insertBefore(this.$refs.line, dragEvent.mode == 'insert' ? null : dragEvent.target);
 
       // 监听鼠标移动事件
       document.addEventListener('mousemove', this.dragging);
@@ -99,16 +105,16 @@ const XFormDesigner = {
     dragging(event){
       const dragEvent = this.$static.dragEvent;
       const ghost = this.$refs.ghost;
-      if(event.clientY - dragEvent.prevY >> 0 == 0) return;
 
-      const direction = event.clientY - dragEvent.prevY <= 0 ? 'up' : 'down';
       if(!dragEvent.init){
         this.$refs.list.classList.add('xform-designer-silence');
         
         ghost.querySelector('.xform-designer-ghost-template').innerHTML = this.createGhostTemplate(dragEvent);
         ghost.style.display = 'block';
         
-        if(null !== dragEvent.field) dragEvent.field.designer.dragging = true;
+        if(dragEvent.mode == 'sort'){
+          dragEvent.target.classList.add('xform-is-dragging')
+        }
 
         dragEvent.init = true;
       }
@@ -117,42 +123,48 @@ const XFormDesigner = {
       const left = event.clientX - dragEvent.offsetLeft;
       const top = event.clientY - dragEvent.offsetTop;
       ghost.style.transform = `translate(${left}px, ${top}px)`;
+      
+      // 移动距离小于1,不触发计算
+      if(Math.abs(event.clientY - dragEvent.prevY) < 2) return;
+
+      const direction = event.clientY - dragEvent.prevY < 0 ? 'up' : 'down';
       dragEvent.prevY = event.clientY;
 
       // 判断是否有可插入的节点
-      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-draggable');
+      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-droppable');
       const notAllowed = 'xform-designer-not-allowed';
-      if(null == target){
-        return ghost.classList.add(notAllowed);
-      }
+      // 如无匹配点，显示禁止样式
+      if(null == target) return ghost.classList.add(notAllowed);
 
       if(ghost.classList.contains(notAllowed)) {
         ghost.classList.remove(notAllowed);
       }
 
       // 标记当前要插入的位置
-      const referenceNode = direction == 'up' ? target : target.nextElementSibling;
-      target.parentNode.insertBefore(this.$refs.line, referenceNode)
+      const line = this.$refs.line;
+      const list = this.$refs.list;
+      const referenceNode = target == list ? null : direction == 'up' ? target : target.nextElementSibling;
+
+      if(referenceNode == line || (null != referenceNode && referenceNode.previousElementSibling == line)) return;
+      list.insertBefore(line, referenceNode);
     },
     dragend(event){
       const dragEvent = this.$static.dragEvent;
-      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-draggable');
-      if(null != target){
-        const newIndex = Array.from(this.$refs.list.children).findIndex(item => item == this.$refs.line);
+      const newIndex = Array.from(this.$refs.list.children).findIndex(item => item == this.$refs.line);
+      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-droppable');
 
-        if(dragEvent.mode == 'sort'){
-          const oldIndex = this.value.indexOf(dragEvent.field);
-  
-          this.sort(oldIndex, newIndex)
-        }
-  
-        if(dragEvent.mode == 'insert'){
-          this.insert(newIndex)
-        }
+      if(dragEvent.mode == 'sort' && null != target){
+        const field = dragEvent.target._xform_field;
+        const oldIndex = this.value.indexOf(field);
+
+        this.sort(oldIndex, newIndex);
+        this.chooseField(field)
+        dragEvent.target.classList.remove('xform-is-dragging');
       }
 
-      if(null != dragEvent.field) {
-        dragEvent.field.designer.dragging = false
+      if(dragEvent.mode == 'insert' && (!dragEvent.init || null != target)){
+        const field = this.insert(newIndex);
+        this.chooseField(field)
       }
 
       this.$refs.list.classList.remove('xform-designer-silence')
@@ -164,28 +176,29 @@ const XFormDesigner = {
       document.removeEventListener('mouseup', this.dragend);
     },
     createGhostTemplate(dragEvent){
+      const target = dragEvent.target;
       if(dragEvent.mode == 'insert'){
-        return dragEvent.target.querySelector('.xform-template').outerHTML;
+        return target.querySelector('.xform-template').outerHTML;
       }
 
-      const fieldType = dragEvent.field.findFieldType();
+      const field = target._xform_field;
+      const fieldType = field.findFieldType();
       return `
         <div class="xform-designer-field-type">
           <i class="${fieldType.icon}"></i>
-          <span>${dragEvent.field.title}</span>
+          <span>${field.title}</span>
         </div>
       `;
     },
-    createDragEvent(event, field, fieldType, mode){
+    createDragEvent(event){
       const target = event.target.closest('.xform-draggable');
+      const mode = target._xform_mode;
       const rect = target.getBoundingClientRect();
 
       return {
         init: false,
         mode, // 拖拽模式: sort, insert
         target, // 拖拽的dom元素
-        field,
-        fieldType,
         prevY: event.clientY,
         offsetLeft: mode == 'insert' ? event.clientX - rect.left : 72,
         offsetTop: mode == 'insert' ? event.clientY - rect.top : 17
@@ -198,32 +211,34 @@ const XFormDesigner = {
       const className = {
         'xform-designer-preview': true,
         'xform-draggable': true,
-        'xform-is-selected': this.selectedField == field,
-        'xform-is-dragging': field.designer.dragging
+        'xform-droppable': true,
+        'xform-is-selected': this.selectedField == field
       }
 
       const domProps = {
         _xform_field: field,
-        _xform_index: this.value.indexOf(field)
+        _xform_mode: 'sort'
       }
 
       return (
-        <div class={className} domProps={domProps}>
-          {
-            ft && ft.custom 
-              ? preview
-              : (
-                <xform-item 
-                  class="xform-template" field={field} validation={false} behavior="designer" 
-                  label-position={Store.findConfigProp('designer.label.position')} 
-                  label-width={Store.findConfigProp('designer.label.width')}
-                >{preview}</xform-item>
-              )
-          }
+        <div class={className} domProps={domProps} key={field.name}>
+          <div class="xform-designer-preview-mock">
+            {
+              ft && ft.custom 
+                ? preview
+                : (
+                  <xform-item 
+                    class="xform-template" field={field} validation={false} behavior="designer" 
+                    label-position={Store.findConfigProp('designer.label.position')} 
+                    label-width={Store.findConfigProp('designer.label.width')}
+                  >{preview}</xform-item>
+                )
+            }
+          </div>
           <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-remove"></i>
           </button>
-          <div class="xform-designer-cover" onMousedown={e => this.dragstart(e, field, null, 'sort')}></div>
+          <div class="xform-designer-cover" onMousedown={this.dragstart} onClick={() => this.chooseField(field)}></div>
         </div>
       )
     },
@@ -241,8 +256,9 @@ const XFormDesigner = {
       );
 
       return (
-        <div class="xform-designer-list" ref="list">
+        <div class="xform-designer-list xform-droppable" ref="list">
           {content}
+          <span class="xform-designer-preview-line xform-droppable" ref="line" key="xform-line"/>
         </div>
       )
     },
@@ -293,11 +309,15 @@ const XFormDesigner = {
       return this.$createElement(component, attrs);
     },
     renderFieldType(fieldType){
+      const domProps = {
+        _xform_field_type: fieldType,
+        _xform_mode: 'insert'
+      }
+
       return (
         <div 
           class="xform-designer-field-type-wrap xform-draggable" 
-          onMousedown={e => this.dragstart(e, null, fieldType, 'insert')} 
-          onClick={e => this.quickInsert(e, fieldType)}
+          domProps={domProps} onMousedown={this.dragstart}
         >
           <div class="xform-designer-field-type xform-template">
             <i class={fieldType.icon}></i>
@@ -326,7 +346,6 @@ const XFormDesigner = {
     }
   },
   render(){
-    console.log('render')
     return (
       <div class="xform-designer">
         <div class="xform-designer-panel">
@@ -334,15 +353,14 @@ const XFormDesigner = {
         </div>
         <div class="xform-designer-main">
           {this.$slots.tool}
-          <div class="xform-designer-scroll">
+          <div class="xform-designer-scroll" ref="scroll">
             {this.renderPreview()}
           </div>
         </div>
         <div class="xform-designer-setting">
           {this.renderSetting()}
         </div>
-        <div class="xform-designer-preview-line" ref="line" key="xform-line" ></div>
-        <div class="xform-designer-ghost" ref="ghost" key="xform-ghost">
+        <div class="xform-designer-ghost" ref="ghost" key="xform-ghost" onWheel={this.scroll}>
           <div class="xform-designer-ghost-template"></div>
           <div class="xform-designer-cover"></div>
         </div>

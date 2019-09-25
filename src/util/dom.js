@@ -6,8 +6,8 @@
 */
 export function isHidden(el, container){
   return (
-    el.offsetTop + el.offsetHeight < container.scrollTop ||
-    el.offsetParent < container.scrollTop + container.offsetHeight
+    el.offsetTop < container.scrollTop ||
+    el.offsetTop > container.scrollTop + container.offsetHeight
   )
 }
 
@@ -32,4 +32,16 @@ export function findElementFromPoint(x, y, selector){
   }
 
   return null;
+}
+
+/**
+ * 统一浏览器之间wheel事件的差异
+ * @see https://github.com/basilfx/normalize-wheel
+ * @param {Event} event - 事件对象
+ */
+export function normalizeWheel(event){
+  const {deltaX, deltaY} = event;
+  const unit = event.deltaMode == 0 ? 1 : event.deltaMode == 1 ? 40 : 800;
+
+  return {pixelX: deltaX * unit, pixelY: deltaY * unit};
 }
