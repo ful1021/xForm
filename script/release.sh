@@ -36,4 +36,4 @@ npm version $VERSION --message "release: $VERSION"
 git push
 
 # publish
-npm publish
+#npm publish

@@ -5,7 +5,7 @@ import builder from './builder.vue';
 export default {
   type: 'divider',
   title: '分割线',
-  icon: 'iconfont icon-xform-number',
+  icon: 'iconfont icon-xform-divider',
   custom: true,
   component: {
     setting,
