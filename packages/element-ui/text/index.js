@@ -28,7 +28,7 @@ export default {
       }
     }
   },
-  validator:{
+  validator: {
     max: MAX_LENGTH
   }
 }

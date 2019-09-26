@@ -2,7 +2,7 @@
   <el-date-picker
     class="xform-el-date" :type="type"
     :name="field.name" :placeholder="prettyPlaceholder"
-    :value="value" @input="input" 
+    :value="fmtValue" @input="input" 
     :value-format="formatter"
     default-time="08:00:00"
     clearable
@@ -27,11 +27,16 @@ export default {
     },
     type(){
       return this.field.attributes.type || 'date'
+    },
+    fmtValue(){
+      let value = this.value;
+      if(this.type == 'datetime' && null != value && value.length == '10') value += ' 00:00:00';
+
+      return value;
     }
   }
 }
 </script>
-
 
 <style lang="scss">
 .xform-el-date.el-date-editor{

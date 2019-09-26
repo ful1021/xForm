@@ -8,7 +8,7 @@ import * as dom from '../util/dom';
 
 const XFormDesigner = {
   name: 'xform-designer',
-  mixins:[NonReactive],
+  mixins: [NonReactive],
   props: {
     value: {
       type: Array,

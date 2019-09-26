@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     json(){
-      return JSON.stringify(this.model, null ,'  ');
+      return JSON.stringify(this.model, null, '  ');
     }
   },
   methods: {

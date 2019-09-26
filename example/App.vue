@@ -21,11 +21,6 @@ import Viewer from './components/Viewer.vue'
 
 export default {
   name: 'app',
-  computed: {
-    showJSONBtn(){
-      return /designer|builder/.test(this.$route.path);
-    }
-  },
   components: {
     [Designer.name]: Designer,
     [Builder.name]: Builder,

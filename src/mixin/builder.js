@@ -42,7 +42,7 @@ export default {
     this.dispatch('xform.builder.field.remove', {field: this.field})
   },
   watch: {
-    value:{
+    value: {
       deep: true,
       handler() {
         this.dispatch('xform.builder.validate', {field: this.field});

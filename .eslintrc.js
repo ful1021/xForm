@@ -16,18 +16,30 @@ module.exports = {
   },
   plugins: ["vue"],
   rules: {
-    "indent": ["error", 2],
-    "quotes": ["error", "single"],
+    //Best Practices
     "no-else-return": ["error"],
-    "no-multi-spaces": ["error"],
+    "no-empty-function": "error",
 
     // Possible Errors
     "require-atomic-updates": "off",
 
     // Variables
     "no-unused-vars": ["error", { "argsIgnorePattern": "h|event"}],
-    "no-delete-var": ["error"],
     "no-multi-spaces": "off",
+    "no-use-before-define": ["error", { "functions": false }],
+
+    // Stylistic Issues
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "spaced-comment": ["warn", "always"], // 注释之前 跟一个空格
+    "comma-spacing": ["error", { "before": false, "after": true }], // 逗号间距
+    "computed-property-spacing": ["error", "never"], // 禁止属性内的空格
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "comma-spacing": "warn",
+    "key-spacing": "warn",
+
+    // ECMAScript 6
+    "no-duplicate-imports": "error",
 
     // Vue
     "vue/max-attributes-per-line": "off",

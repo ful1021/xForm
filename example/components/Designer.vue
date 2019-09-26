@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     json(){
-      return JSON.stringify(this.fields, null ,'  ');
+      return JSON.stringify(this.fields, null, '  ');
     }
   },
   methods: {

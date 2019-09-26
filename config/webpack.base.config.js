@@ -29,7 +29,7 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader',
         options: IS_PRODUCTION ? {
-          name:'font/[name].[ext]'
+          name: 'font/[name].[ext]'
         } : undefined
       },
       {
@@ -37,7 +37,7 @@ module.exports = {
         loader: 'url-loader',
         options: IS_PRODUCTION ? {
           limit: 4096,
-          path:'',
+          path: '',
           name: 'img/[name].[ext]',
         } : undefined
       }

@@ -25,7 +25,7 @@ export function findElementFromPoint(x, y, selector){
   const result = elementsFromPoint.call(document, x, y);
   if(null == result) return null;
 
-  const elements = Array.isArray(result) ? result : Array.prototype.slice.call(elements);
+  const elements = Array.isArray(result) ? result : Array.prototype.slice.call(result);
   
   for(let i = 0; i < elements.length; i++){
     if(elements[i].matches(selector)) return elements[i]
