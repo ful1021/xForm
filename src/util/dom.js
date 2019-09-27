@@ -15,10 +15,10 @@ export function isHidden(el, container){
  * 查找左边点下第一个符合的元素
  * @param {number} x - 坐标点的水平坐标值
  * @param {number} y - 坐标点的垂向坐标值
- * @param {string} selector - 选择器
+ * @param {string[]} selectors - 目标选择器
  * @returns {HTMLElement | null} 
  */
-export function findElementFromPoint(x, y, selector){
+export function findElementFromPoint(x, y, selectors){
   const elementsFromPoint = document.elementsFromPoint || document.msElementsFromPoint;
   if(typeof elementsFromPoint !== 'function') return null;
 
@@ -28,7 +28,8 @@ export function findElementFromPoint(x, y, selector){
   const elements = Array.isArray(result) ? result : Array.prototype.slice.call(result);
   
   for(let i = 0; i < elements.length; i++){
-    if(elements[i].matches(selector)) return elements[i]
+    const element = elements[i]
+    if(selectors.some(selector => element.matches(selector))) return element;
   }
 
   return null;

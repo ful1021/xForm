@@ -6,6 +6,9 @@ import XField from '../model/XField';
 
 import * as dom from '../util/dom';
 
+const GHOST_NOT_ALLOW_CLASS = 'xform-designer-not-allowed';
+const MATCH_PATHS = ['.xform-designer-mark', '.xform-droppable', '.xform-designer-list', '.xform-designer-zone'];
+
 const XFormDesigner = {
   name: 'xform-designer',
   mixins: [NonReactive],
@@ -96,7 +99,6 @@ const XFormDesigner = {
 
       const dragEvent = this.createDragEvent(event);
       this.$static.dragEvent = dragEvent;
-      this.$refs.list.insertBefore(this.$refs.line, dragEvent.mode == 'insert' ? null : dragEvent.target);
 
       // 监听鼠标移动事件
       document.addEventListener('mousemove', this.dragging);
@@ -131,43 +133,56 @@ const XFormDesigner = {
       dragEvent.prevY = event.clientY;
 
       // 判断是否有可插入的节点
-      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-droppable');
-      const notAllowed = 'xform-designer-not-allowed';
-      // 如无匹配点，显示禁止样式
-      if(null == target) return ghost.classList.add(notAllowed);
-
-      if(ghost.classList.contains(notAllowed)) {
-        ghost.classList.remove(notAllowed);
+      const mark = this.$refs.mark;
+      const list = this.$refs.list;
+      const zone = this.$refs.zone;
+      const target = dom.findElementFromPoint(event.clientX, event.clientY, MATCH_PATHS);
+     
+      // 如果target为null说明在容器外
+      if(null == target){
+        zone.appendChild(mark)
+        return ghost.classList.add(GHOST_NOT_ALLOW_CLASS);
       }
 
-      // 标记当前要插入的位置
-      const line = this.$refs.line;
-      const list = this.$refs.list;
-      const referenceNode = target == list ? null : direction == 'up' ? target : target.nextElementSibling;
+      ghost.classList.remove(GHOST_NOT_ALLOW_CLASS);
 
-      if(referenceNode == line || (null != referenceNode && referenceNode.previousElementSibling == line)) return;
-      list.insertBefore(line, referenceNode);
+      if(target == zone) {
+        return !list.contains(mark) && list.appendChild(mark);
+      }
+      if(target == list) return;
+
+      const referenceNode = direction == 'up' ? target : target.nextElementSibling;
+      if(referenceNode == mark || (null != referenceNode && referenceNode.previousElementSibling == mark)) return;
+
+      list.insertBefore(mark, referenceNode);
     },
     dragend(event){
       const dragEvent = this.$static.dragEvent;
-      const newIndex = Array.from(this.$refs.list.children).findIndex(item => item == this.$refs.line);
-      const target = dom.findElementFromPoint(event.clientX, event.clientY, '.xform-droppable');
+      const newIndex = (
+        dragEvent.mode == 'insert' && !dragEvent.init
+          ? this.value.length
+          : Array.from(this.$refs.list.children).findIndex(item => item == this.$refs.mark)
+      );
 
-      if(dragEvent.mode == 'sort' && null != target){
-        const field = dragEvent.target._xform_field;
-        const oldIndex = this.value.indexOf(field);
-
-        this.sort(oldIndex, newIndex);
-        this.chooseField(field)
-        dragEvent.target.classList.remove('xform-is-dragging');
+      if(newIndex >= 0){
+        if(dragEvent.mode == 'sort'){
+          const field = dragEvent.target._xform_field;
+          const oldIndex = this.value.indexOf(field);
+  
+          this.sort(oldIndex, newIndex);
+          this.chooseField(field)
+        }
+  
+        if(dragEvent.mode == 'insert'){
+          const field = this.insert(newIndex);
+          this.chooseField(field)
+        }
       }
 
-      if(dragEvent.mode == 'insert' && (!dragEvent.init || null != target)){
-        const field = this.insert(newIndex);
-        this.chooseField(field)
-      }
-
-      this.$refs.list.classList.remove('xform-designer-silence')
+      dragEvent.target.classList.remove('xform-is-dragging');
+      
+      this.$refs.list.classList.remove('xform-designer-silence');
+      this.$refs.zone.appendChild(this.$refs.mark);
       this.$refs.ghost.style.display = 'none';
       this.$static.dragEvent = null;
 
@@ -222,19 +237,17 @@ const XFormDesigner = {
 
       return (
         <div class={className} domProps={domProps} key={field.name}>
-          <div class="xform-designer-preview-mock">
-            {
-              ft && ft.custom 
-                ? preview
-                : (
-                  <xform-item 
-                    class="xform-template" field={field} validation={false} behavior="designer" 
-                    label-position={Store.findConfigProp('designer.label.position')} 
-                    label-width={Store.findConfigProp('designer.label.width')}
-                  >{preview}</xform-item>
-                )
-            }
-          </div>
+          {
+            ft && ft.custom 
+              ? preview
+              : (
+                <xform-item 
+                  class="xform-template" field={field} validation={false} behavior="designer" 
+                  label-position={Store.findConfigProp('designer.label.position')} 
+                  label-width={Store.findConfigProp('designer.label.width')}
+                >{preview}</xform-item>
+              )
+          }
           <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
             <i class="iconfont icon-xform-remove"></i>
           </button>
@@ -244,21 +257,16 @@ const XFormDesigner = {
     },
     /** 渲染预览组件 */
     renderPreview(){
-      const content = (
-        this.isEmpty 
-          ? (
+      return (
+        <div class="xform-designer-zone" ref="zone">
+          <div class="xform-designer-list" ref="list">{this.value.map(this.renderFieldPreview)}</div>
+          <div class="xform-designer-mark" ref="mark" key="xform-mark"/>
+          { this.isEmpty && (
             <div class="xform-designer-preview-tip">
               <img src={XFormTip}/>
               <p>请将左侧控件拖动到此处</p>
             </div>
-          )
-          : this.value.map(this.renderFieldPreview)
-      );
-
-      return (
-        <div class="xform-designer-list xform-droppable" ref="list">
-          {content}
-          <span class="xform-designer-preview-line xform-droppable" ref="line" key="xform-line"/>
+          ) }
         </div>
       )
     },
