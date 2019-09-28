@@ -26,9 +26,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-divider-preview{
-  padding: 8px;
-}
-</style>

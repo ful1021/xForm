@@ -1,4 +1,13 @@
-@import './_vars.scss';
+@import './common/vars.scss';
+
+@import './checkbox.scss';
+@import './date.scss';
+@import './divider.scss';
+@import './number.scss';
+@import './radio.scss';
+@import './select.scss';
+@import './text.scss';
+@import './textarea.scss';
 
 .xform-setting{
   box-sizing: border-box;
@@ -100,6 +109,7 @@
   margin-left: 10px;
   text-align: center;
   cursor: pointer;
+  outline: none;
   transition: all ease .15s;
 
   i{

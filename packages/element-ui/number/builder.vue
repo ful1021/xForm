@@ -21,13 +21,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-number{
-  width: 100%;
-
-  & .el-input__inner{
-    text-align: left;
-  }
-}
-</style>

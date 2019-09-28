@@ -37,14 +37,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-checkbox-preview .el-checkbox{
-  line-height: 32px;
-}
-
-.el-checkbox.xform-el-checkbox-preview-block{
-  display: block;
-  margin: 0;
-}
-</style>

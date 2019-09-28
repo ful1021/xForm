@@ -24,9 +24,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-select{
-  width: 100%;
-}
-</style>

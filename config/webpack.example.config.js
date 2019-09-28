@@ -27,5 +27,8 @@ module.exports = merge(baseConfig, {
       template: './example/index.html',
       filename: 'index.html',
     })
-  ]
+  ],
+  performance: {
+    hints: false
+  }
 })

@@ -37,14 +37,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-radio-preview .el-radio{
-  line-height: 32px;
-}
-
-.el-radio.xform-el-radio-preview-block{
-  display: block;
-  margin: 0;
-}
-</style>

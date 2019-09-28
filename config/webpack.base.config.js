@@ -16,6 +16,10 @@ module.exports = {
         test: /\.m?js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+        // exclude: function(modulePath) {
+        //   return /node_modules/.test(modulePath) &&
+        //       !/node_modules\/MY_MODULE/.test(modulePath);
+        // }
       },
       {
         test: /\.css$/,

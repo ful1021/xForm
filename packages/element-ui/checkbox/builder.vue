@@ -40,14 +40,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.xform-el-checkbox .el-checkbox{
-  line-height: 32px;
-}
-
-.el-checkbox.xform-el-checkbox-block{
-  display: block;
-  margin: 0;
-}
-</style>

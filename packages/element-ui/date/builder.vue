@@ -37,9 +37,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.xform-el-date.el-date-editor{
-  width: 100%;
-}
-</style>

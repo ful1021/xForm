@@ -20,14 +20,17 @@ done
 git checkout master
 echo ''
 
-#build
+# build
 echo -e '\nbuild bundle for production'
 npm run build:production -- RELEASE_VERSION=$VERSION
-echo ''
 
+# build es 2015 version
+echo -e '\nbuild bundle for production:ES2015'
+npm run build:production -- RELEASE_VERSION=$VERSION RELEASE_TARGET=ES2015
+
+# build example
 echo -e '\nbuild bundle for expample'
 npm run build:example
-echo ''
 
 # commit
 git add .
