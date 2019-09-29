@@ -1,10 +1,10 @@
+import XField from '../model/XField';
+
 export default {
   props: {
     field: {
-      type: Object,
-      default(){
-        return {}
-      }
+      type: XField,
+      default: null
     }
   },
   methods: {
@@ -22,6 +22,7 @@ export default {
       this.update(prop, value);
     },
     updateAttrs(prop, value){
+      if(null == this.field) return;
       const attributes = this.field.attributes;
 
       this.$set(attributes, prop, value);

@@ -8,7 +8,10 @@ const state = {
   types: {}       // 字段类型
 }
 
-/** 设置组件配置 */
+/**
+ * 设置全局配置
+ * @param {object} o - 配置对象 
+ */
 export function setConfig(o = {}){
   const original = clonePlainObject(config);
   const clone = clonePlainObject(o);
@@ -16,8 +19,8 @@ export function setConfig(o = {}){
 }
 
 /**
- * 查询多个路径下第一个不为null或undefined的属性
- * @param  {...string} paths - 任一个属性路径
+ * 查询多个路径下第一个不为null或undefined的配置
+ * @param  {...string} paths - 任意个配置路径
  * @returns 返回第一个不为null的值
  */
 export function findConfigProp(...paths){
@@ -67,12 +70,16 @@ export function findFieldTypes(...args){
   return types.map(t => state.types[t]).filter(t => null != t);
 }
 
-/** 查询某mode下所有字段的配置, 必定返回数组 */
-export function findMode(prop){  
-  let mode = findProp(state.config, `modes.${prop}`);
+/**
+ * 查询某mode下所有字段的配置, 必定返回数组 
+ * @param {string} mode - mode name
+ * @returns {XFieldType[]} 
+ */
+export function findMode(mode){  
+  const types = findProp(state.config, `modes.${mode}`);
   if(!Array.isArray(mode)) return [];
   
-  return mode.filter(i => null != i);
+  return types.filter(i => null != i);
 }
 
 export default {

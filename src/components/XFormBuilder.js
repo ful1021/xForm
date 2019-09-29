@@ -57,12 +57,12 @@ const XFormBuilder = {
         })
     },
     addField(event){
-      let {field, validate} = event.detail;
-      this.$static.validators[field.name] = validate;
+      const {key, validate} = event.detail;
+      this.$static.validators[key] = validate;
     },
     removeField(){
-      let {field} = event.detail;
-      delete this.$static.validators[field.name];
+      const {key} = event.detail;
+      delete this.$static.validators[key];
     },
     fillDefaultValue(value, fields){
       if(null == value) return {};

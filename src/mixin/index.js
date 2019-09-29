@@ -3,7 +3,6 @@ import setting from './setting';
 import builder from './builder';
 import preview from './preview';
 
-
 export default {
   nonReactive,
   setting,

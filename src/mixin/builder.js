@@ -1,12 +1,11 @@
-import {genPlaceholder} from '../util/form';
+import XField from '../model/XField';
+import {genPlaceholder, dispatchEvent} from '../util/component';
 
 export default {
   props: {
     field: {
-      type: Object,
-      default(){
-        return {}
-      }
+      type: XField,
+      default: null
     },
     placeholder: {
       type: String,
@@ -21,31 +20,21 @@ export default {
     }
   },
   methods: {
-    inputForDom(event){
-      this.input(event.target.value)
-    },
-    input(value){
-      this.$emit('input', value)
-    },
-    getValue(){
-      return this.value;
-    },
-    dispatch(name, detail, async = false){
-      let event = new CustomEvent(name, {detail, bubbles: true, cancelable: true})
-      async ? this.$nextTick(() => this.$el.dispatchEvent(event)) : this.$el.dispatchEvent(event);
+    input(event){
+      this.$emit('input', event);
     }
   },
   mounted(){
-    this.dispatch('xform.builder.field.add', {value: this.getValue, field: this.field}, true)
+    this.field && dispatchEvent(this.$el, 'xform.builder.field.add', {key: this.field.name, context: this}, true)
   },
   beforeDestroy(){
-    this.dispatch('xform.builder.field.remove', {field: this.field})
+    this.field && dispatchEvent(this.$el, 'xform.builder.field.remove', {key: this.field.name})
   },
   watch: {
     value: {
       deep: true,
       handler() {
-        this.dispatch('xform.builder.validate', {field: this.field});
+        dispatchEvent(this.$el, 'xform.builder.validate');
       }
     }
   }

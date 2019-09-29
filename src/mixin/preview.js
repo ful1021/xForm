@@ -1,12 +1,11 @@
-import {genPlaceholder} from '../util/form';
+import XField from '../model/XField';
+import {genPlaceholder} from '../util/component';
 
 export default {
   props: {
     field: {
-      type: Object,
-      default(){
-        return {}
-      }
+      type: XField,
+      default: null
     },
     placeholder: {
       type: String,

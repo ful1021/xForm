@@ -10,6 +10,7 @@ function initOptions(params){
   return options;
 }
 
+/** 描述字段的类型 */
 export default class XField{
   constructor(params){
     this.type = params.type;

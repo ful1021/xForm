@@ -11,10 +11,8 @@ const XFormItem = {
   mixins: [NonReactive],
   props: {
     field: {
-      type: Object,
-      default(){
-        return {}
-      }
+      type: XField,
+      default: null
     },
     /** 
      * 是否启用验证，默认值为`true`
@@ -48,8 +46,8 @@ const XFormItem = {
   },
   static(){
     return {
-      field: null,
-      value: null
+      key: null,
+      context: null
     }
   },
   data(){
@@ -65,9 +63,12 @@ const XFormItem = {
     }
   },
   methods: {
-    getField(event){
-      const field = event && event.detail && event.detail.field || this.$static.field || this.field;      
+    getField(){
+      const field = this.field || this.$static.context.field;      
       return field instanceof XField ? field : new XField(field);
+    },
+    getValue(){
+      return this.$static.context.value;
     },
     renderErrorMessage(){
       if(null == this.message) return null;
@@ -81,9 +82,8 @@ const XFormItem = {
         return event.stopPropagation();
       }
 
-      const field = this.getField(event);
-      const value = typeof this.$static.value == 'function' ? this.$static.value() : this.$static.value;
-      
+      const field = this.getField();
+      const value = this.getValue();
       return Validator.validate(field, value, this, this.validation)
         .then(() => {
           this.message = null;
@@ -107,16 +107,16 @@ const XFormItem = {
 
       event.detail.validate = this.validate;
 
-      this.$static.value = event.detail.value;
-      this.$static.field = event.detail.field;
+      this.$static.key = event.detail.key;
+      this.$static.context = event.detail.context;
     },
     removeField(event){
       if(!this.isNeedValidation){
         return event.stopPropagation();
       }
 
-      this.$static.value = null;
-      this.$static.field = null;
+      this.$static.key = null;
+      this.$static.context = null;
     },
     parseError(error){
       if(null == error) return null;
@@ -125,7 +125,7 @@ const XFormItem = {
       return error;
     },
     renderTooltip(){
-      if(!this.field.tooltip || this.behavior == 'viewer') return null;
+      if(null == this.field || null == this.field.tooltip || this.behavior == 'viewer') return null;
 
       const icon = <i class="iconfont icon-xform-tishi xform-item-tooltip-icon"></i>
       if(this.behavior == 'designer') return icon;

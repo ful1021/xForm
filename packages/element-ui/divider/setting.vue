@@ -5,14 +5,14 @@
       <header>标题：</header>
       <el-input :value="field.title" @input="update('title', $event)" placeholder="请输入标题..."/>
     </section>
-    <section class="xform-setting-group">
+    <!-- <section class="xform-setting-group">
       <header>布局：</header>
       <el-radio-group :value="field.attributes.layout || 'left'" @input="updateAttrs('layout', $event)">
         <el-radio-button label="left">左对齐</el-radio-button>
         <el-radio-button label="center">居中</el-radio-button>
         <el-radio-button label="right">右对齐</el-radio-button>
       </el-radio-group>
-    </section>
+    </section> -->
     <section class="xform-setting-group xform-el-divider-setting-types">
       <header>样式：</header>
       <el-radio-group :value="field.attributes.type || 'solid'" @input="updateAttrs('type', $event)">
