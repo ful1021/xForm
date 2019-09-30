@@ -12,6 +12,7 @@
       </template>
       <template #bottom>
         <div class="builder-bottom">
+          <el-button type="text" @click="hidden">隐藏</el-button>
           <el-button type="primary" native-type="submit">提 交</el-button>
         </div>
       </template>
@@ -48,6 +49,9 @@ export default {
     }
   },
   methods: {
+    hidden(){
+      this.fields = this.fields.filter(f => f.type != 'textarea');
+    },
     validateCustomFiled(field, value, changeMessage){
       return new Promise((resolve, reject) => {
         changeMessage('正在验证...')

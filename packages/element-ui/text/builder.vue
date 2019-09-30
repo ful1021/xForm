@@ -1,5 +1,6 @@
 <template>
   <el-input 
+    v-xform:validate="field.name"
     :name="field.name" :placeholder="prettyPlaceholder" 
     :value="value" @input="input" 
     clearable

@@ -1,6 +1,7 @@
 <template>
   <el-input-number 
     class="xform-el-number"
+    v-xform:validate="field.name"
     :value="value" @input="input" 
     controls-position="right" :placeholder="prettyPlaceholder"
   />

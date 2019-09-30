@@ -1,3 +1,4 @@
+import directive from './directive'
 import store from './util/store';
 import adapter from './util/adapter';
 import mixin from './mixin';
@@ -16,6 +17,8 @@ const install = function(Vue, options = {}){
     const component = components[key];
     Vue.component(component.name, component);
   })
+
+  Vue.directive('xform', directive)
 }
 
 const XForm = {

@@ -1,6 +1,7 @@
 <template>
   <el-select 
     class="xform-el-select" 
+    v-xform:validate="field.name"
     :name="field.name" :placeholder="prettyPlaceholder" 
     :value="value" @input="input"
     :multiple="field.attributes.multiple"

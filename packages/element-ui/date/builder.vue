@@ -1,6 +1,7 @@
 <template>
   <el-date-picker
     class="xform-el-date" :type="type"
+    v-xform:validate="field.name"
     :name="field.name" :placeholder="prettyPlaceholder"
     :value="fmtValue" @input="input" 
     :value-format="formatter"

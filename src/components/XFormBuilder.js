@@ -57,11 +57,11 @@ const XFormBuilder = {
         })
     },
     addField(event){
-      const {key, validate} = event.detail;
+      const {key, validate} = event;
       this.$static.validators[key] = validate;
     },
-    removeField(){
-      const {key} = event.detail;
+    removeField(event){
+      const {key} = event;
       delete this.$static.validators[key];
     },
     fillDefaultValue(value, fields){
@@ -100,7 +100,7 @@ const XFormBuilder = {
 
       return (
         <xform-item 
-          field={field} 
+          field={field} key={field.name}
           label-position={Store.findConfigProp('builder.label.position')} 
           label-width={Store.findConfigProp('builder.label.width')}
         >
@@ -185,14 +185,13 @@ const XFormBuilder = {
     // 补全默认值
     const value = this.fillDefaultValue(this.value, this.fields);
     this.$emit('input', value)
+
+    this.$on('xform.builder.field.add', this.addField);
+    this.$on('xform.builder.field.remove', this.removeField);
   },
-  mounted(){
-    this.$el.addEventListener('xform.builder.field.add', this.addField);
-    this.$el.addEventListener('xform.builder.field.remove', this.removeField);
-  },
-  beforeDestroy(){
-    this.$el.removeEventListener('xform.builder.field.add', this.addField);
-    this.$el.removeEventListener('xform.builder.field.remove', this.removeField);
+  destroyed(){
+    this.$off('xform.builder.field.add', this.addField);
+    this.$off('xform.builder.field.remove', this.removeField);
   }
 }
 

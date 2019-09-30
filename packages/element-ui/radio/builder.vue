@@ -31,8 +31,19 @@ export default {
   },
   render(){
     const options = this.field.options || [];
+    const data = {
+      'class': 'xform-el-radio',
+      directives: [{
+        name: 'xform',
+        arg: 'validate',
+        value: this.field.name
+      }],
+      on: {input: this.input},
+      props: {value: this.value}
+    }
+
     return (
-      <el-radio-group class="xform-el-radio" value={this.value} onInput={this.input}>
+      <el-radio-group {...data}>
         {options.map(this.renderOption)}
       </el-radio-group>
     )

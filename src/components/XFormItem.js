@@ -1,4 +1,5 @@
 import * as lang from '../util/lang';
+import { closest } from '../util/component'
 
 import store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
@@ -78,9 +79,7 @@ const XFormItem = {
       this.message = lang.isEmptyStr(message) ? null : message;
     },
     validate(event){
-      if(!this.isNeedValidation){
-        return event.stopPropagation();
-      }
+      if(!this.isNeedValidation) return;
 
       const field = this.getField();
       const value = this.getValue();
@@ -101,18 +100,25 @@ const XFormItem = {
         })
     },
     addField(event){
-      if(!this.isNeedValidation){
-        return event.stopPropagation();
+      if(!this.isNeedValidation) return;
+      
+      const {key, context} = event;
+      const builder = this.$static.builder
+
+      this.$static.key = key;
+      this.$static.context = context;
+
+      if(null != builder){
+        builder.$emit('xform.builder.field.add', {key, validate: this.validate})
       }
-
-      event.detail.validate = this.validate;
-
-      this.$static.key = event.detail.key;
-      this.$static.context = event.detail.context;
     },
     removeField(event){
-      if(!this.isNeedValidation){
-        return event.stopPropagation();
+      const key = event.key;
+      if(!this.isNeedValidation || key != this.$static.key) return;
+
+      const builder = this.$static.builder;
+      if(null != builder){
+        builder.$emit('xform.builder.field.remove', {key})
       }
 
       this.$static.key = null;
@@ -165,18 +171,20 @@ const XFormItem = {
       </div>
     )
   },
-  mounted(){
+  created(){
+    this.$static.builder = closest(this, 'xform-builder')
+
     if(this.isNeedValidation) {
-      this.$el.addEventListener('xform.builder.validate', this.validate);
-      this.$el.addEventListener('xform.builder.field.add', this.addField);
-      this.$el.addEventListener('xform.builder.field.remove', this.removeField);
+      this.$on('xform.builder.field.add', this.addField);
+      this.$on('xform.builder.field.remove', this.removeField);
+      this.$on('xform.builder.validate', this.validate);
     }
   },
-  beforeDestroy(){
+  destroyed(){
     if(this.isNeedValidation) {
-      this.$el.removeEventListener('xform.builder.validate', this.validate);
-      this.$el.removeEventListener('xform.builder.field.add', this.addField);
-      this.$el.removeEventListener('xform.builder.field.remove', this.removeField);
+      this.$off('xform.builder.validate', this.validate);
+      this.$off('xform.builder.field.add', this.addField);
+      this.$off('xform.builder.field.remove', this.removeField);
     }
   }
 }

@@ -32,8 +32,19 @@ export default {
   },
   render(){
     const options = this.field.options || [];
+    const data = {
+      'class': 'xform-el-checkbox',
+      directives: [{
+        name: 'xform',
+        arg: 'validate',
+        value: this.field.name
+      }],
+      on: {input: this.input},
+      props: {value: this.value}
+    }
+    
     return (
-      <el-checkbox-group class="xform-el-checkbox" value={this.value} onInput={this.input}>
+      <el-checkbox-group {...data}>
         {options.map(this.renderOption)}
       </el-checkbox-group>
     )
