@@ -1,6 +1,7 @@
 <template>
   <div class="example">
     <div class="header">
+      <div class="logo">xForm<small>v{{ version }}</small></div>
       <nav class="nav">
         <router-link to="/designer" class="nav-link"><strong>1. </strong>设计表单</router-link>
         <router-link to="/builder" class="nav-link"><strong>2. </strong>填写表单</router-link>
@@ -8,19 +9,23 @@
       </nav>
     </div>
 
-    <keep-alive>
-      <router-view class="main" ref="component"/>
-    </keep-alive>
+    <router-view class="main" ref="component"/>
   </div>
 </template>
 
 <script>
 import Designer from './components/Designer.vue';
 import Builder from './components/Builder.vue';
-import Viewer from './components/Viewer.vue'
+import Viewer from './components/Viewer.vue';
+import xForm from '../src/index'
 
 export default {
   name: 'app',
+  computed: {
+    version(){
+      return xForm.version;
+    }
+  },
   components: {
     [Designer.name]: Designer,
     [Builder.name]: Builder,
@@ -153,6 +158,21 @@ textarea.example-value{
 }
 
 .header-right{
+  position: relative;
   padding-right: 10px;
+}
+
+.logo{
+  position: absolute;
+  left: 20px;
+  font-weight: 600; 
+  font-size: 24px;
+  color: #fff;
+
+  small{
+    font-weight: 400;
+    font-size: 13px;
+    margin-left: 4px;
+  }
 }
 </style>

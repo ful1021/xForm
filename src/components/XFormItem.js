@@ -47,8 +47,12 @@ const XFormItem = {
   },
   static(){
     return {
+      // 待验证组件的key，以此来标识组件
       key: null,
-      context: null
+      // 待验证组件实例
+      context: null,
+      // xform-builder 实例
+      builder: null
     }
   },
   data(){

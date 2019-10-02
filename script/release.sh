@@ -17,8 +17,11 @@ while read -p "请输入新的版本号:" VERSION; do
   fi
 done
 
-git checkout master
+# git checkout master
 echo ''
+
+# update entry version
+node script/version.js RELEASE_VERSION=$VERSION
 
 # build
 echo -e '\nbuild bundle for production'
@@ -35,7 +38,7 @@ npm run build:example
 # commit
 git add .
 git commit -m "build: $VERSION"
-npm version $VERSION --message "release: $VERSION"
+#npm version $VERSION --message "release: $VERSION"
 git push
 
 # publish
