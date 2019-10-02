@@ -1,6 +1,8 @@
 import XForm from '@src/index';
 import defaultFields from '../data/fields';
 
+const XField = XForm.model.XField;
+
 export default {
   methods: {
     getLocalFields(){
@@ -10,7 +12,7 @@ export default {
       try {
         const fields = JSON.parse(str);
         if(Array.isArray(fields) && fields.length > 0){
-          return XForm.adapter.toFields(fields)
+          return fields.map(f => f instanceof XField ? f : new XField(f))
         }
       } catch (error) {
         console.log(error)
@@ -21,7 +23,7 @@ export default {
     getDefaultFields(){
       // 本地存储
       const key = this.fieldKey;
-      const data = XForm.adapter.toFields(defaultFields)
+      const data = defaultFields.map(f => f instanceof XField ? f : new XField(f))
       this.saveFieldsToLocal(key, data)
   
       return data;

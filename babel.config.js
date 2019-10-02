@@ -3,7 +3,7 @@ const presets = [
     modules: false,
     useBuiltIns: false,
     targets: {
-      esmodules: process.env.RELEASE_TARGET == 'ES2015' 
+      esmodules: process.env.RELEASE_TARGET == 'ES2015' || process.env.NODE_ENV == 'development'
     }
   }],
   ['@vue/babel-preset-jsx']

@@ -76,10 +76,10 @@ export function findFieldTypes(...args){
  * @returns {XFieldType[]} 
  */
 export function findMode(mode){  
-  const types = findProp(state.config, `modes.${mode}`);
-  if(!Array.isArray(mode)) return [];
-  
-  return types.filter(i => null != i);
+  const arr = findProp(state.config, `modes.${mode}`);
+  if(!Array.isArray(arr)) return [];
+
+  return arr.filter(i => null != i);
 }
 
 export default {

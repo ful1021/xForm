@@ -12,7 +12,7 @@
       </template>
       <template #bottom>
         <div class="builder-bottom">
-          <el-button type="text" @click="hidden">隐藏</el-button>
+          <!-- <el-button type="text" @click="hidden">隐藏</el-button> -->
           <el-button type="primary" native-type="submit">提 交</el-button>
         </div>
       </template>

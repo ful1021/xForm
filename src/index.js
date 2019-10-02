@@ -1,6 +1,5 @@
 import directive from './directive'
 import store from './util/store';
-import adapter from './util/adapter';
 import mixin from './mixin';
 import model from './model';
 
@@ -26,7 +25,6 @@ const XForm = {
   version: '0.4.1',
   install,
   store,
-  adapter,
   mixin,
   model,
   register: store.register,
@@ -39,7 +37,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export {
   store,
-  adapter,
   mixin,
   model,
   components
