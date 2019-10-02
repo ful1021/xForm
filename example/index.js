@@ -8,7 +8,7 @@ import XFormElementUI from '../packages/element-ui';
 import Modal from './components/Modal.vue'
 import App from './App.vue';
 
-XForm.register(XFormElementUI.components);
+XForm.use(XFormElementUI);
 Vue.component(Modal.name, Modal);
 
 Vue.use(ElementUI, {size: 'small'});

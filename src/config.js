@@ -6,7 +6,16 @@ function createLabel(){
   }
 }
 
+function createIcons(){
+  return {
+    designerRemove: '',
+    designerCopy: '',
+    builderTooltip: ''
+  }
+}
+
 export default {
+  icons: createIcons(),
   modes: {},
   label: createLabel(),
   designer: {

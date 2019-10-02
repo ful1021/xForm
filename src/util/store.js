@@ -4,8 +4,19 @@ import XFieldType from '../model/XFieldType'
 import config from '../config';
 
 const state = {
-  config: {},     // 全局配置
+  config: clonePlainObject(config),     // 全局配置
   types: {}       // 字段类型
+}
+
+/**
+ * 使用一个字段库
+ * @param {object} lib - 字段库 
+ * @param {object[]} lib.types - 字段类型
+ * @param {object} lib.config - 配置
+ */
+export function use(lib){
+  setConfig(lib.config);
+  register(lib.types);
 }
 
 /**
@@ -13,9 +24,8 @@ const state = {
  * @param {object} o - 配置对象 
  */
 export function setConfig(o = {}){
-  const original = clonePlainObject(config);
   const clone = clonePlainObject(o);
-  state.config = mergePlainObject(state.config, original, clone);
+  state.config = mergePlainObject(state.config, clone);
 }
 
 /**
@@ -83,6 +93,7 @@ export function findMode(mode){
 }
 
 export default {
+  use,
   register,
   setConfig,
   findConfigProp,

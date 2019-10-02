@@ -10,7 +10,7 @@ import Date from './date';
 import Divider from './divider'
 
 export default {
-  components: [
+  types: [
     Text, 
     Textarea, 
     Number, 
@@ -19,5 +19,12 @@ export default {
     Radio, 
     Date,
     Divider
-  ]
+  ],
+  config: {
+    icons: {
+      designerRemove: 'el-icon-close',
+      designerCopy: 'el-icon-copy-document',
+      builderTooltip: 'el-icon-info'
+    }
+  }
 }

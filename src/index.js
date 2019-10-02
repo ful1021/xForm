@@ -24,10 +24,10 @@ const XForm = {
   name: 'xForm',
   version: '0.4.1',
   install,
+  use: store.use,
   store,
   mixin,
   model,
-  register: store.register,
   components
 } 
 

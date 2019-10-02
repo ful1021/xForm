@@ -38,24 +38,41 @@ const XFormDesigner = {
     /** 字段是否为空 */
     isEmpty(){
       return !Array.isArray(this.value) || this.value.length == 0;
+    },
+    icons(){
+      return Store.findConfigProp('icons');
     }
   },
   methods: {
+    showSelected(){
+      const scroll = this.$refs.scroll;
+      const el = this.$refs.list.querySelector('.xform-is-selected');
+
+      if(dom.isHidden(el, scroll)){
+        scroll.scrollTop = el.offsetTop;
+      }
+    },
     scroll(event){
       const {pixelY} = dom.normalizeWheel(event);
       this.$refs.scroll.scrollTop += pixelY;
     },
     chooseField(field){
       this.selectedField = field;
-      
-      this.$nextTick(() => {
-        const scroll = this.$refs.scroll;
-        const el = this.$refs.list.querySelector('.xform-is-selected');
+      this.$nextTick(this.showSelected)
+    },
+    /**
+     * 复制字段
+     * @param {*} event 
+     * @param {XField} field 
+     */
+    copy(event, field){
+      const copy = field.copy();
+      const index = this.value.indexOf(field);
 
-        if(dom.isHidden(el, scroll)){
-          scroll.scrollTop = el.offsetTop;
-        }
-      })
+      this.value.splice(index + 1, 0, copy);
+      this.$emit('input', this.value);
+
+      this.chooseField(copy);
     },
     /** 删除字段 */
     remove(event, field){
@@ -248,9 +265,14 @@ const XFormDesigner = {
                 >{preview}</xform-item>
               )
           }
-          <button type="button" class="xform-designer-delete" onClick={e => this.remove(e, field)}>
-            <i class="iconfont icon-xform-remove"></i>
-          </button>
+          <div class="xform-designer-operate">
+            <button type="button" title="复制" onClick={e => this.copy(e, field)}>
+              <i class={this.icons.designerCopy}></i>
+            </button>
+            <button type="button" title="删除" onClick={e => this.remove(e, field)}>
+              <i class={this.icons.designerRemove}></i>
+            </button>
+          </div>
           <div class="xform-designer-cover" onMousedown={this.dragstart} onClick={() => this.chooseField(field)}></div>
         </div>
       )

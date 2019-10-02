@@ -1,7 +1,7 @@
 import * as lang from '../util/lang';
 import { closest } from '../util/component'
 
-import store from '../util/store';
+import Store from '../util/store';
 import NonReactive from '../mixin/non-reactive';
 import Validator from '../util/validator';
 
@@ -27,7 +27,7 @@ const XFormItem = {
     labelWidth: {
       type: String,
       default(){
-        return store.findConfigProp('label.width');
+        return Store.findConfigProp('label.width');
       }
     },
     /** label位置 */
@@ -35,7 +35,7 @@ const XFormItem = {
       type: String,
       default(){
         const params = ['left', 'right', 'top']
-        const position = store.findConfigProp('label.position');
+        const position = Store.findConfigProp('label.position');
         
         return params.indexOf(position) >= 0 ? position : params[0];
       }
@@ -65,6 +65,9 @@ const XFormItem = {
     isNeedValidation(){
       const validation = this.validation;
       return (typeof validation == 'boolean' && validation) || typeof validation == 'function';
+    },
+    icons(){
+      return Store.findConfigProp('icons');
     }
   },
   methods: {
@@ -137,7 +140,7 @@ const XFormItem = {
     renderTooltip(){
       if(null == this.field || null == this.field.tooltip || this.behavior == 'viewer') return null;
 
-      const icon = <i class="iconfont icon-xform-tishi xform-item-tooltip-icon"></i>
+      const icon = <i class={[this.icons.builderTooltip, 'xform-item-tooltip-icon']}></i>
       if(this.behavior == 'designer') return icon;
 
       return (

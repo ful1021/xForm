@@ -17,5 +17,13 @@
 - XFormViewer     基于JSON的表单展示组件
 - XFormItem       提供验证和布局机制的表单项组件
 
+## 路线图
+- [x] 支持字段复制
+- [ ] 新的字段类型
+  - [ ] 说明文字
+  - [ ] 附件
+- [ ] 编写文档
+- [ ] 集成[`iView`](https://github.com/iview/iview)
+
 ## License
 [MIT](LICENSE)

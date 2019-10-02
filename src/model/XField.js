@@ -75,4 +75,15 @@ export default class XField{
 
     return ft;
   }
+
+  /** 
+   * 复制该对象, `name`字段不复制
+   * @returns {XField}
+   */
+  copy(){
+    const data = JSON.parse(JSON.stringify(this))
+    delete data.name;
+
+    return new XField(data);
+  }
 }

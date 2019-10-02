@@ -7,6 +7,7 @@ process.argv.slice(2).forEach(item => {
   }
 })
 
+// 更新src/index.js中的version
 const filePath = path.resolve(__dirname, '../src/index.js');
 const file = fs.readFileSync(filePath).toString();
 const newJS = file.replace(/const\s+XForm\s+=\s+\{[\s\S]*version:\s*'(.*)'[^\\}]*\}/, function(match, $1){
