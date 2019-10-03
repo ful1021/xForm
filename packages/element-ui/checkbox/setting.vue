@@ -19,7 +19,7 @@
     </section>
     <section class="xform-setting-group">
       <header>布局：</header>
-      <el-radio-group :value="field.attributes.layout || 'inline'" @input="val => updateAttrs('layout', val)">
+      <el-radio-group :value="field.attributes.layout || 'inline'" @input="updateAttrs('layout', $event)">
         <el-radio-button label="inline">行内</el-radio-button>
         <el-radio-button label="block">换行</el-radio-button>
         <el-radio-button label="button">按钮</el-radio-button>

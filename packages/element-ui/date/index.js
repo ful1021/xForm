@@ -14,7 +14,7 @@ export default {
     setting,
     builder,
     preview: {
-      name: 'xform-el-text-date',
+      name: 'xform-el-date-preview',
       mixins: [mixin.preview],
       render(){
         return (

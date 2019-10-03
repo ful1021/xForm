@@ -12,7 +12,7 @@
 import {mixin} from '@src/index';
 
 export default {
-  name: 'xform-textarea',
+  name: 'xform-el-textarea',
   mixins: [mixin.builder],
   props: {
     value: {

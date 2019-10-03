@@ -1,13 +1,12 @@
 import Text from './text';
 import Textarea from './textarea';
 import Number from './number';
-
 import Select from './select';
 import Checkbox from './checkbox';
 import Radio from './radio';
-
 import Date from './date';
-import Divider from './divider'
+import Divider from './divider';
+import Info from './info'
 
 export default {
   types: [
@@ -18,7 +17,8 @@ export default {
     Checkbox, 
     Radio, 
     Date,
-    Divider
+    Divider,
+    Info
   ],
   config: {
     icons: {

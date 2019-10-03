@@ -5,15 +5,15 @@ module.exports = {
     return [
       isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
       'css-loader',
-      isProduction ? 'postcss-loader' : null,
-    ].filter(loader => null != loader);
+      'postcss-loader'
+    ]
   },
   genScssLoader(isProduction){
     return [
       isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
       'css-loader',
-      isProduction ? 'postcss-loader' : null,
+      'postcss-loader',
       'sass-loader'
-    ].filter(loader => null != loader);
+    ];
   }
 }

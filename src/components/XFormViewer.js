@@ -44,6 +44,8 @@ const XFormView = {
   },
   methods: {
     renderItem(field){
+      if(field.attributes.viewer === false) return null;
+      
       const content = this.createComponent(field);
       const ft = field.findFieldType();
       if(ft && ft.custom) return content;

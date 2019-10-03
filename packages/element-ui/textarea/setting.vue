@@ -28,7 +28,7 @@
 import {mixin} from '@src/index';
 
 export default {
-  name: 'xform-textarea-setting',
+  name: 'xform-el-textarea-setting',
   mixins: [mixin.setting]
 }
 </script>

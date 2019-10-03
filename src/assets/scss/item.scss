@@ -58,8 +58,11 @@
 }
 
 .xform-item-content{
-  flex: 1;
   box-sizing: border-box;
+  width: 0;
+  flex: 1;
+  line-height: 24px;
+  min-height: 32px;
 }
 
 i.xform-item-tooltip-icon{

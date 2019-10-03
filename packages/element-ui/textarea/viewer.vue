@@ -5,7 +5,7 @@
 <script>
 
 export default {
-  name: 'xform-text-viewer',
+  name: 'xform-el-text-viewer',
   props: {
     field: {
       type: Object,

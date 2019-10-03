@@ -76,7 +76,6 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  
   padding: 0 10px 10px 10px;
 }
 
@@ -207,6 +206,7 @@
   z-index: 19;
   background-color: #fff;
   box-shadow: 0 0 12px rgba(125, 125, 125, 0.25);
+  user-select: none;
 
   .xform-item{
     padding: 8px;

@@ -41,6 +41,13 @@
       "unicode_decimal": 58990
     },
     {
+      "icon_id": "5288577",
+      "name": "段落说明",
+      "font_class": "info",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
       "icon_id": "5881136",
       "name": "单行文本",
       "font_class": "text",

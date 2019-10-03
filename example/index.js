@@ -20,8 +20,8 @@ Vue.use(XForm, {
         types: ['text', 'textarea', 'number', 'select', 'radio', 'checkbox', 'date']
       },
       {
-        group: '高级字段',
-        types: ['divider']
+        group: '辅助字段',
+        types: ['divider', 'info']
       }
     ],
     b: ['text', 'textarea', 'number', 'select']

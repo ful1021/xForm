@@ -15,7 +15,7 @@ export default {
     builder,
     viewer,
     preview: {
-      name: 'xform-textarea-preview',
+      name: 'xform-el-textarea-preview',
       mixins: [mixin.preview],
       render(){
         return <textarea rows="3" class="xform-el-mock" placeholder={this.prettyPlaceholder}/>
