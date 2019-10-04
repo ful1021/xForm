@@ -29,6 +29,10 @@ module.exports = {
         test: /\.scss$/,
         use: util.genScssLoader(IS_PRODUCTION)
       },
+      {
+        test: /\.less$/,
+        use: util.genLessLoader(IS_PRODUCTION)
+      },
       { // 处理字体
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader',

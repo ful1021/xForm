@@ -10,7 +10,7 @@ function createIcons(){
   return {
     designerRemove: '',
     designerCopy: '',
-    builderTooltip: ''
+    builderHelp: ''
   }
 }
 

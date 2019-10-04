@@ -138,15 +138,15 @@ const XFormItem = {
       return error;
     },
     renderTooltip(){
-      if(null == this.field || null == this.field.tooltip || this.behavior == 'viewer') return null;
+      if(null == this.field || null == this.field.help || this.behavior == 'viewer') return null;
 
-      const icon = <i class={[this.icons.builderTooltip, 'xform-item-tooltip-icon']}></i>
+      const icon = <i class={[this.icons.builderHelp, 'xform-item-help-icon']}></i>
       if(this.behavior == 'designer') return icon;
 
       return (
         <el-tooltip >
           {icon}
-          <pre slot="content" class="xform-item-tooltip-content">{this.field.tooltip}</pre>
+          <pre slot="content" class="xform-item-help-content">{this.field.help}</pre>
         </el-tooltip>
       )
     }

@@ -15,5 +15,13 @@ module.exports = {
       'postcss-loader',
       'sass-loader'
     ];
+  },
+  genLessLoader(isProduction){
+    return [
+      isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+      'css-loader',
+      'postcss-loader',
+      'less-loader'
+    ];
   }
 }

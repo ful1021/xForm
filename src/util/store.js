@@ -16,7 +16,7 @@ const state = {
  */
 export function use(lib){
   setConfig(lib.config);
-  register(lib.types);
+  register(Object.keys(lib.types).map(key => lib.types[key]));
 }
 
 /**

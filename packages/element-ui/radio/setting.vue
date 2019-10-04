@@ -6,10 +6,10 @@
       <el-input :value="field.title" @input="update('title', $event)" placeholder="请输入标题..."/>
     </section>
     <section class="xform-setting-group">
-      <header>说明：</header>
+      <header>帮助：</header>
       <el-input 
         type="textarea" :autosize="{minRows: 3, maxRows: 5}" 
-        :value="field.tooltip" @input="update('tooltip', $event)" 
+        :value="field.help" @input="update('help', $event)" 
         placeholder="请输入说明信息..."
       />
     </section>

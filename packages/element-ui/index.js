@@ -9,22 +9,22 @@ import Divider from './divider';
 import Info from './info'
 
 export default {
-  types: [
-    Text, 
-    Textarea, 
-    Number, 
-    Select, 
-    Checkbox, 
-    Radio, 
-    Date,
-    Divider,
-    Info
-  ],
+  types: {
+    [Text.type]: Text, 
+    [Textarea.type]: Textarea, 
+    [Number.type]: Number, 
+    [Select.type]: Select, 
+    [Checkbox.type]: Checkbox, 
+    [Radio.type]: Radio, 
+    [Date.type]: Date,
+    [Divider.type]: Divider,
+    [Info.type]: Info
+  },
   config: {
     icons: {
       designerRemove: 'el-icon-close',
       designerCopy: 'el-icon-copy-document',
-      builderTooltip: 'el-icon-info'
+      builderHelp: 'el-icon-info'
     }
   }
 }

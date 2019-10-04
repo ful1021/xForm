@@ -44,6 +44,8 @@
     "eslint-plugin-vue": "^5.2.3",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
@@ -60,10 +62,15 @@
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.1"
   },
-  "browserslist": [
-    "> 1% in CN",
-    "ie >= 11",
-    "chrome >= 49"
-  ],
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": {
+    "development":  [
+      "since 2018-06-01"
+    ],
+    "production": [
+      "> 1% in CN",
+      "ie >= 11",
+      "chrome >= 49"
+    ]
+  }
 }
