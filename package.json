@@ -64,7 +64,7 @@
   },
   "dependencies": {},
   "browserslist": {
-    "development":  [
+    "development": [
       "since 2018-06-01"
     ],
     "production": [

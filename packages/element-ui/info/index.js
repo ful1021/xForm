@@ -1,11 +1,13 @@
 import {mixin, model} from '@src/index';
-
+import icon from '../../common/svg/info.svg';
 import setting from './setting.vue';
 
 export default {
   type: 'info',
   title: '说明文字',
-  icon: 'iconfont icon-xform-info',
+  icon(h){
+    return <img class="xform-icon" src={icon}/>
+  },
   component: {
     setting,
     preview: {

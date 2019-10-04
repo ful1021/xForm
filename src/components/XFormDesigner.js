@@ -344,14 +344,13 @@ const XFormDesigner = {
         _xform_mode: 'insert'
       }
 
+      const icon = typeof fieldType.icon == 'function' ? fieldType.icon(this.$createElement) : <i class={[fieldType.icon, 'xform-icon']}/>;
+
       return (
-        <div 
-          class="xform-designer-field-type-wrap xform-draggable" 
-          domProps={domProps} onMousedown={this.dragstart}
-        >
-          <div class="xform-designer-field-type xform-template">
-            <i class={fieldType.icon}></i>
+        <div class="xform-designer-field-type-wrap xform-draggable" domProps={domProps} onMousedown={this.dragstart}>
+          <div class="xform-designer-field-type xform-template">            
             <span>{fieldType.title}</span>
+            {icon}
           </div>
         </div>
       )

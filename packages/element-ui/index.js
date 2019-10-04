@@ -6,7 +6,7 @@ import Checkbox from './checkbox';
 import Radio from './radio';
 import Date from './date';
 import Divider from './divider';
-import Info from './info'
+import Info from './info';
 
 export default {
   types: {

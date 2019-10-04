@@ -1,4 +1,5 @@
 import {mixin} from '@src/index'
+import icon from '../../common/svg/date.svg';
 
 import setting from './setting.vue';
 import builder from './builder.vue';
@@ -9,7 +10,9 @@ const DATETIME_REG = /^\d{4}-\d{1,2}-\d{1,2}\s\d{2}:\d{2}:\d{2}$/;
 export default {
   type: 'date',
   title: '日期',
-  icon: 'iconfont icon-xform-date',
+  icon(h){
+    return <img class="xform-icon" src={icon}/>
+  },
   component: {
     setting,
     builder,

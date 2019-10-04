@@ -1,4 +1,5 @@
 import {mixin} from '@src/index';
+import icon from '../../common/svg/number.svg';
 
 import setting from './setting.vue';
 import builder from './builder.vue';
@@ -6,7 +7,9 @@ import builder from './builder.vue';
 export default {
   type: 'number',
   title: '数字',
-  icon: 'iconfont icon-xform-number',
+  icon(h){
+    return <img class="xform-icon" src={icon}/>
+  },
   component: {
     setting,
     builder,

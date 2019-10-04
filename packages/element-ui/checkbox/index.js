@@ -1,3 +1,5 @@
+import icon from '../../common/svg/checkbox.svg';
+
 import setting from './setting.vue';
 import builder from './builder.vue';
 import preview from './preview.vue';
@@ -9,7 +11,9 @@ import preview from './preview.vue';
 export default {
   type: 'checkbox',
   title: '复选框',
-  icon: 'iconfont icon-xform-checkbox',
+  icon(h){
+    return <img class="xform-icon" src={icon}/>
+  },
   component: {
     setting,
     builder,

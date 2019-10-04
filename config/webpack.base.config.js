@@ -36,12 +36,13 @@ module.exports = {
       { // 处理字体
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader',
+        exclude: /packages\/common\/svg/,
         options: IS_PRODUCTION ? {
           name: 'font/[name].[ext]'
         } : undefined
       },
       {
-        test: /\.(png|jpe?g)(\?.*)?$/,
+        test: /\.(png|jpe?g|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: IS_PRODUCTION ? {
           limit: 4096,

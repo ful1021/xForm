@@ -1,4 +1,5 @@
 import {mixin} from '@src/index'
+import icon from '../../common/svg/textarea.svg';
 
 import setting from './setting.vue';
 import builder from './builder.vue';
@@ -9,7 +10,9 @@ const MAX_LENGTH = 150;
 export default {
   type: 'textarea',
   title: '多行文本',
-  icon: 'iconfont icon-xform-textarea',
+  icon(h){
+    return <img class="xform-icon" src={icon}/>
+  },
   component: {
     setting,
     builder,
