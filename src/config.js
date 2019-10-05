@@ -27,6 +27,10 @@ export default {
   viewer: {
     label: createLabel()
   },
+  validator: {
+    // 实时验证
+    immediate: true
+  },
   formatter(field, model){
     return model[field.name]
   }

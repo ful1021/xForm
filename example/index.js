@@ -25,6 +25,9 @@ Vue.use(XForm, {
       }
     ],
     b: ['text', 'textarea', 'number', 'select']
+  },
+  validator: {
+    immediate: true
   }
 });
 
