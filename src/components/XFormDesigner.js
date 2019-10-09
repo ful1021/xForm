@@ -210,15 +210,23 @@ const XFormDesigner = {
     createGhostTemplate(dragEvent){
       const target = dragEvent.target;
       if(dragEvent.mode == 'insert'){
-        return target.querySelector('.xform-template').outerHTML;
+        return target.matches('.xform-template') ? target.outerHTML : target.querySelector('.xform-template').outerHTML;
       }
 
       const field = target._xform_field;
       const fieldType = field.findFieldType();
+      const el = this.$el.querySelector(`.xform-designer-field-type[data-field-type="${fieldType.type}"]`);
+
+      let icon = null;
+      if(null !== el){
+        const iconEl = el.querySelector('.xform-icon');
+        if(null != iconEl) icon = iconEl.outerHTML;
+      }
+
       return `
         <div class="xform-designer-field-type">
-          <i class="${fieldType.icon}"></i>
-          <span>${field.title}</span>
+          <strong>${field.title}</strong>
+          ${icon}
         </div>
       `;
     },
@@ -344,12 +352,13 @@ const XFormDesigner = {
         _xform_mode: 'insert'
       }
 
+      // TODO: 改进icon, 支持vnode、html、class
       const icon = typeof fieldType.icon == 'function' ? fieldType.icon(this.$createElement) : <i class={[fieldType.icon, 'xform-icon']}/>;
 
       return (
-        <div class="xform-designer-field-type-wrap xform-draggable" domProps={domProps} onMousedown={this.dragstart}>
-          <div class="xform-designer-field-type xform-template">            
-            <span>{fieldType.title}</span>
+        <div class="xform-designer-field-type-wrap">
+          <div class="xform-designer-field-type xform-draggable xform-template" domProps={domProps} onMousedown={this.dragstart} data-field-type={fieldType.type}>            
+            <strong>{fieldType.title}</strong>
             {icon}
           </div>
         </div>

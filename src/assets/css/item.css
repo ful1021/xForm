@@ -2,29 +2,28 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
+}
 
-  & + .xform-item{
-    margin-top: 10px;
-  }
+.xform-item + .xform-item{
+  margin-top: 10px;
+}
 
-  &.xform-template{
-    padding: 8px;
-  }
+.xform-item.xform-template{
+  padding: 8px;
+}
   
-  &.xform-is-required .xform-item-label{
-    font-weight: 700;
-
-    & > span:before{
-      content: "*";
-      position: absolute;
-      top: 0;
-      left: -10px;
-      color: $--xform-color-danger;
-      font-size: 18px;
-      line-height: 1;
-      font-weight: 700;
-    }
-  }
+.xform-item.xform-is-required .xform-item-label{
+  font-weight: 700;
+}
+.xform-item.xform-is-required .xform-item-label > span:before{
+  content: "*";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  color: var(--xform-color-danger);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
 }
 
 .xform-item-left .xform-item-label{
@@ -37,24 +36,24 @@
 
 .xform-item-top{
   flex-direction: column;
+}
 
-  & .xform-item-label{
-    width: auto !important;
-    padding-bottom: 5px;
-    //padding: 8px 0 5px 0;
-  }
+.xform-item-top .xform-item-label{
+  width: auto !important;
+  padding-bottom: 5px;
+  padding: 8px 0 5px 0;
+  
 }
 
 .xform-item-label{
   box-sizing: border-box;
-  width: $--xform-item-label-width;
+  width: 120px;
   padding: 5px 10px 0 10px;  
   line-height: 20px;
   word-break: break-all;
-
-  & > span{
-    position: relative;
-  }
+}
+.xform-item-label > span{
+  position: relative;
 }
 
 .xform-item-content{
@@ -82,20 +81,17 @@ pre.xform-item-help-content{
   overflow: auto;
 }
 
-.xform-is-error {
-  .xform-item-control{
-    border-color: $--xform-color-danger;
-  }
- 
-  .xform-item-message{
-    color: $--xform-color-danger;
-  }
+.xform-is-error .xform-item-control{
+  border-color: var(--xform-color-danger);
+}
+
+.xform-is-error .xform-item-message{
+  color: var(--xform-color-danger);
 }
 
 .xform-item-message{
-  color: $--xform-text-color-secondary;
+  color: #606266;
   font-size: 12px;
   line-height: 20px;
   margin: 0;
 }
-
